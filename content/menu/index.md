@@ -2,7 +2,7 @@
 headless: true
 ---
 
-- **Shortcodes**
+- **Ejemplo**
 - **Integrantes**
     - **[Johan Rodríguez](https://github.com/jorodriguezal)**
     - **[Alejandra Jiménez](https://github.com/malejaj)**
