@@ -2,7 +2,7 @@
 headless: true
 ---
 
-- **Ejemplo**
+- **Computación Visual**
 - **Integrantes**
     - **[Johan Rodríguez](https://github.com/jorodriguezal)**
     - **[Alejandra Jiménez](https://github.com/malejaj)**
