@@ -2,12 +2,8 @@
 headless: true
 ---
 
-- **Computación Visual**
-- **Integrantes**
-    - **[Johan Rodríguez](https://github.com/jorodriguezal)**
-    - **[Alejandra Jiménez](https://github.com/malejaj)**
-    - **[Tania Castillo](https://github.com/tvcastillod)**
-- [p5]({{< relref "/docs/shortcodes/p5" >}})
+- **Shortcodes**
+- [xd]({{< relref "/docs/shortcodes/p5" >}})
 - [Buttons]({{< relref "/docs/shortcodes/buttons" >}})
 - [Columns]({{< relref "/docs/shortcodes/columns" >}})
 - [Hints]({{< relref "/docs/shortcodes/hints" >}})
