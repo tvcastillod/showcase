@@ -3,6 +3,7 @@ headless: false
 ---
 
 - **Shortcodes**
+- [Integrantes]({{< relref "/docs/shortcodes/integrantes" >}})
 - [xd]({{< relref "/docs/shortcodes/p5" >}})
 - [Buttons]({{< relref "/docs/shortcodes/buttons" >}})
 - [Columns]({{< relref "/docs/shortcodes/columns" >}})
