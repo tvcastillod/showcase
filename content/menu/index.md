@@ -3,6 +3,6 @@ headless: false
 ---
 
 - **Computación Visual**
-- [Integrantes]({{< relref "/docs/shortcodes/integrantes" >}})
+- [Integrantes]({{< relref "/docs/secciones/integrantes" >}})
 
 <br />
