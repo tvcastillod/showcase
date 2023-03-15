@@ -262,11 +262,19 @@ imagen con daltonismo de tipo Deuteranopia:
 <br>
 
 
-## Conclusiones
+## Conclusiones y trabajo futuro
 
+<blockquote>
+
+<p align="justify">
 Mediante este simple ejercicio de simulación se pudieron evidenciar las dificultades que pueden tener las personas con distintos tipos de daltonismo en su día a día. Esto se debe a que, al no poder distinguir ciertos colores, pueden tener dificultades para identificar objetos, personas, etc. Esto puede generar problemas en la vida cotidiana, como por ejemplo, en la conducción de vehículos, en la lectura de señales de tránsito, en la lectura de libros, etc. Por lo que este tipo de ejercicios nos ayudan a comprender mejor la problemática que enfrentan las personas con daltonismo y a generar soluciones que puedan ayudar a mejorar su calidad de vida.
-
+</p>
 <br>
+
+<p align="justify">
+Además, aunque esta herramienta permite la identificación del problema, no es una solución definitiva, ya que, el siquiente paso sería generar una herramienta que permita la transformación de las imágenes de manera automática, para que las personas con daltonismo puedan visualizarlas sin dificultades.
+</p>
+</blockquote>
 
 ## Referencias
 
