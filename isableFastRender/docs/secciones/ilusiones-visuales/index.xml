@@ -8,11 +8,11 @@
     <language>en-us</language><atom:link href="http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title></title>
-      <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</link>
+      <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/introducci%C3%B3n/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</guid>
-      <description>Pixelamos un video#1.Antecedentes#2. Método#3.Ejercicio#Exercise Develop a terrain visualization application. Check out the 3D terrain generation with Perlin noise coding trainl tutorial .4. Resultados#5. Fragmentos de código#</description>
+      <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/introducci%C3%B3n/</guid>
+      <description>Introducción#En este primer informe académico se aborda el tema de ilusiones visuales, centrándose en cinco subtemas específicos: Coloración, Bandas de Mach, Enmascaramiento, Coherencia Espacial y Percepción de Profundidad. El objetivo principal de esta serie de ejercicios es explorar el proceso de percepción y representación de imágenes visuales en el cerebro humano y cómo ciertos patrones, colores y formas pueden engañar a nuestro sistema visual, generando ilusiones que no corresponden a la realidad.</description>
     </item>
     
     <item>
@@ -26,11 +26,29 @@
     
     <item>
       <title></title>
+      <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/coloraci%C3%B3n/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/coloraci%C3%B3n/</guid>
+      <description>Antecedentes#La percepción del color#La percepción del color humana es una de las más complejas de las que se tiene conocimiento. Es un proceso que se lleva a cabo en el cerebro, y que se basa en la estimación de la longitud de onda de la luz que llega a los ojos. La longitud de onda de la luz visible oscila entre 380 y 750 nanómetros (nm).</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</guid>
+      <description>Pixelamos un video#1.Antecedentes#2. Método#3.Ejercicio#Exercise Develop a terrain visualization application. Check out the 3D terrain generation with Perlin noise coding trainl tutorial .4. Resultados#5. Fragmentos de código#</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/percepci%C3%B3n-de-profundidad/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/percepci%C3%B3n-de-profundidad/</guid>
-      <description>Usando pistas monoculares para la percepción de profundidad#4. Resultados#</description>
+      <description>Antecedentes#Percepción de la profundidad#La percepción de profundidad es la habilidad de nuestro sistema visual para percibir la distancia relativa entre los objetos en un espacio tridimensional. Esta habilidad es importante para la percepción espacial y la navegación en el mundo real.Pistas monoculares Las pistas monoculares son claves visuales que le permiten a nuestro sistema visual percibir la profundidad usando información de un solo ojo (a diferencia de las pistas binoculares, que facilitan la percepción de profundidad).</description>
     </item>
     
   </channel>
