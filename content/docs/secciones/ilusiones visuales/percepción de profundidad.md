@@ -1,5 +1,5 @@
 ---
-weight: 1
+weight: 4
 ---
 
 # Usando pistas monoculares para la percepción de profundidad 

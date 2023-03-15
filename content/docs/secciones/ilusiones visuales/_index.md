@@ -1,6 +1,6 @@
 ---
 bookCollapseSection: true
 ---
-## Ejercicios de ilusiones visuales
+## Primer reporte académico - Ilusiones visuales
 
 {{<section>}}
