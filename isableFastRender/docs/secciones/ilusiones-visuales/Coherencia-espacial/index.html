@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/showcase/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=showcase/livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Pixelamos un video#1.Antecedentes#La técnica de pixelar imágenes ha sido utilizada desde hace décadas en diversos campos, como la fotografía, el cine, los videojuegos y el arte digital. Consiste en reducir la resolución de una imagen al agrupar los píxeles en bloques más grandes, dando como resultado una imagen con un aspecto más &#34;borroso&#34;.En los últimos años, ha surgido un enfoque denominado &#34;Spatial coherence&#34; (coherencia espacial), que se enfoca en preservar la información visual de la imagen original, mientras se reduce la resolución.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
+<meta property="og:description" content="Pixelamos un video#1.Antecedentes#La técnica de pixelar imágenes ha sido utilizada desde hace décadas en diversos campos, como la fotografía, el cine, los videojuegos y el arte digital. Consiste en reducir la resolución de una imagen al agrupar los píxeles en bloques más grandes, dando como resultado una imagen con un aspecto más &#34;borroso&#34;.En los últimos años, ha surgido un enfoque denominado &#34;Spatial coherence&#34; (coherencia espacial), que se enfoca en preservar la información visual de la imagen original, mientras se reduce la resolución." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/" /><meta property="article:section" content="docs" />
+
+
+<title>Coherencia Espacial | Computación Visual</title>
+<link rel="manifest" href="/showcase/manifest.json">
+<link rel="icon" href="/showcase/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/showcase/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
+  <script defer src="/showcase/flexsearch.min.js"></script>
+  <script defer src="/showcase/en.search.min.8ac3dde09b25b3ec47d10434653092c3e69647b0691574c10c638d4705890f6d.js" integrity="sha256-isPd4Jsls&#43;xH0QQ0ZTCSw&#43;aWR7BpFXTBDGONRwWJD20=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/showcase/"><span>Computación Visual</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Secciones</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-812d2262a05fbae8105f136b96854c26" class="toggle" checked />
+    <label for="section-812d2262a05fbae8105f136b96854c26" class="flex justify-between">
+      <a href="/showcase/docs/secciones/ilusiones-visuales/" class="">Ilusiones Visuales</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/showcase/docs/secciones/ilusiones-visuales/bandas-mach/" class="">Bandas Mach</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/" class="active">Coherencia Espacial</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/showcase/docs/secciones/ilusiones-visuales/percepci%C3%B3n-de-profundidad/" class="">Percepción De Profundidad</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b487fddfe213dc98103a22e30f20cced" class="toggle"  />
+    <label for="section-b487fddfe213dc98103a22e30f20cced" class="flex justify-between">
+      <a href="/showcase/docs/secciones/integrantes/" class="">Integrantes</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/showcase/docs/secciones/integrantes/Johan-Steeb-Rodr%C3%ADguez-Alarc%C3%B3n/" class="">Johan Steeb Rodríguez Alarcón</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/showcase/docs/secciones/integrantes/Mar%C3%ADa-Alejandra-Jim%C3%A9nez-Herrera/" class="">María Alejandra Jiménez Herrera</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/showcase/docs/secciones/integrantes/Tania-Valentina-Castillo-Delgado/" class="">Tania Valentina Castillo Delgado</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6afa5302a62ba217d5088de37992068a" class="toggle"  />
+    <label for="section-6afa5302a62ba217d5088de37992068a" class="flex justify-between">
+      <a href="/showcase/docs/secciones/p5/" class="">P5</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/showcase/docs/secciones/p5/iframe/" class="">Iframe</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/showcase/docs/secciones/p5/div/" class="">Div</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/showcase/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Coherencia Espacial</strong>
+
+  <label for="toc-control">
+    
+    <img src="/showcase/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pixelamos-un-video">Pixelamos un video</a>
+      <ul>
+        <li><a href="#1antecedentes">1.Antecedentes</a></li>
+        <li><a href="#2-método">2. Método</a></li>
+        <li><a href="#3ejercicio">3.Ejercicio</a></li>
+        <li><a href="#4-resultados">4. Resultados</a>
+          <ul>
+            <li><a href="#coloraveraging">ColorAveraging</a></li>
+            <li><a href="#spatialcoherence">SpatialCoherence</a></li>
+          </ul>
+        </li>
+        <li><a href="#5-fragmentos-de-código">5. Fragmentos de código</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="pixelamos-un-video">
+  Pixelamos un video
+  <a class="anchor" href="#pixelamos-un-video">#</a>
+</h1>
+<h2 id="1antecedentes">
+  1.Antecedentes
+  <a class="anchor" href="#1antecedentes">#</a>
+</h2>
+<blockquote>
+<p style = 'text-align: justify;'>
+La técnica de pixelar imágenes ha sido utilizada desde hace décadas en diversos campos, como la fotografía, el cine, los videojuegos y el arte digital. Consiste en reducir la resolución de una imagen al agrupar los píxeles en bloques más grandes, dando como resultado una imagen con un aspecto más "borroso".
+<br>
+En los últimos años, ha surgido un enfoque denominado "Spatial coherence" (coherencia espacial), que se enfoca en preservar la información visual de la imagen original, mientras se reduce la resolución. En lugar de simplemente promediar los colores de cada bloque de píxeles, como se hace en la técnica de "color averaging", la técnica de "spatial coherence" utiliza un solo color arbitrario para cada bloque, con el objetivo de mantener la coherencia visual en toda la imagen.
+<br>
+Esta técnica ha ganado popularidad en el ámbito del arte digital y la creación de gráficos por ordenador, ya que permite crear imágenes con un aspecto único y creativo, mientras se reduce la cantidad de información necesaria para representar la imagen. En esta página se tratará de comparar estas dos técnicas para una imagen o video
+</p>
+</blockquote>
+<br>
+<h2 id="2-método">
+  2. Método
+  <a class="anchor" href="#2-m%c3%a9todo">#</a>
+</h2>
+<p>Para el desarrollo del ejercicio de hace uso de esta teoría ya descrita anteriormente de utiliza p5.js y se manejar imágenes y videos , para la técnica ColorAveraging se hace una media de los colores de cada bloque de píxeles determinado por un scrollbar y rápidamente se puede sacar el promedio de los nuevos bloques de pixeles para el siguiente fotograma del video. Para la técnica SpatialCoherence se utiliza un solo color arbitrario para cada bloque, con el objetivo de mantener la coherencia visual en toda la imagen.</p>
+<h2 id="3ejercicio">
+  3.Ejercicio
+  <a class="anchor" href="#3ejercicio">#</a>
+</h2>
+<blockquote class="book-hint info">
+  Implement a pixelator video application and perform a benchmark of the results (color avg vs spatial coherence). How would you assess the visual quality of the results?
+</blockquote>
+
+<h2 id="4-resultados">
+  4. Resultados
+  <a class="anchor" href="#4-resultados">#</a>
+</h2>
+<blockquote>
+<p style = 'text-align: justify;'>
+<h3 id="coloraveraging">
+  ColorAveraging
+  <a class="anchor" href="#coloraveraging">#</a>
+</h3>
+<p>En primer lugar se tiene el video que se puede observar en la siguiente imagen,en el cual se puede variar la cantidad  de  bloques de pixeles con un scrollbar, y se puede observar que al aumentar el tamaño de los bloques de pixeles(disminuir la cantidad de bloques), la imagen se vuelve más borrosa, y al disminuir el tamaño de los bloques de pixeles(aumentar la cantidad de bloques), la imagen se vuelve más nítida.
+este programa no consume tantos recursos por lo que corre bien con un video de alta calidad.</p>
+</blockquote>
+</p>
+
+
+
+
+
+
+
+
+<iframe
+  id="Pixelator"
+  style="width:640px; height:360px"
+  srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js></script>
+            
+            
+            
+            
+            
+            <script src=/showcase/sketches/spatial_coherence/Pixelator.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "
+></iframe>
+
+<h3 id="spatialcoherence">
+  SpatialCoherence
+  <a class="anchor" href="#spatialcoherence">#</a>
+</h3>
+<blockquote>
+<p style = 'text-align: justify;'>
+En segundo lugar para esta parte del ejercicio no se ha logrado el programa con un video ya que es muy pesado y se queda sin recursos fácilmente,por lo que se ha hecho con una imagen, en la cual se puede observar que al aumentar el tamaño de los bloques de pixeles(disminuir la cantidad de bloques), la imagen se vuelve más borrosa, y al disminuir el tamaño de los bloques de pixeles(aumentar la cantidad de bloques), la imagen se vuelve más nítida.
+Para comparar los métodos se puede observar ambios programas con una imágen
+</blockquote>
+</p>
+<p>color averaging</p>
+
+
+
+
+
+
+
+
+<iframe
+  id="pix_image"
+  style="width:640px; height:360px"
+  srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js></script>
+            
+            
+            
+            
+            
+            <script src=/showcase/sketches/spatial_coherence/pix_image.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "
+></iframe>
+
+<p>spatial coherence</p>
+
+
+
+
+
+
+
+
+<iframe
+  id="spatial_coherence"
+  style="width:640px; height:360px"
+  srcdoc="
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js></script>
+            <script src=https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/addons/p5.sound.min.js></script>
+            
+            
+            
+            
+            
+            <script src=/showcase/sketches/spatial_coherence/spatial_coherence.js></script>
+          </head>
+          <body>
+          </body>
+        </html>
+      "
+></iframe>
+
+<h2 id="5-fragmentos-de-código">
+  5. Fragmentos de código
+  <a class="anchor" href="#5-fragmentos-de-c%c3%b3digo">#</a>
+</h2>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#pixelamos-un-video">Pixelamos un video</a>
+      <ul>
+        <li><a href="#1antecedentes">1.Antecedentes</a></li>
+        <li><a href="#2-método">2. Método</a></li>
+        <li><a href="#3ejercicio">3.Ejercicio</a></li>
+        <li><a href="#4-resultados">4. Resultados</a>
+          <ul>
+            <li><a href="#coloraveraging">ColorAveraging</a></li>
+            <li><a href="#spatialcoherence">SpatialCoherence</a></li>
+          </ul>
+        </li>
+        <li><a href="#5-fragmentos-de-código">5. Fragmentos de código</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
