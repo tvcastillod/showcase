@@ -217,18 +217,31 @@ Con esto, se pudo simular el daltonismo en distintas imágenes, como se puede ob
 
 <br>
 
+{{< details title="Comparativa de imágenes" open=false >}}
+<br>
+
 Paisaje original:
+
+<br>
+
 ![](/showcase/img/protanopia-1.jpg)
+
+
 
 
 <br>
 
 Paisaje con daltonismo de tipo Protanopia:
+
+<br>
+
 ![](/showcase/img/protanopia-2.jpg)
 
 <br>
 
 Paisaje con daltonismo de tipo Deuteranopia:
+
+<br>
 
 ![](/showcase/img/deutoranopia-1.png)
 
@@ -236,11 +249,15 @@ Paisaje con daltonismo de tipo Deuteranopia:
 
 Paisaje con daltonismo de tipo Tritanopia:
 
+<br>
+
 ![](/showcase/img/tritanopia-1.png)
 
 <br>
 
 Paisaje con daltonismo de tipo Achromatopsia:
+
+<br>
 
 ![](/showcase/img/achromatopsia-1.png)
 
@@ -268,6 +285,8 @@ imagen con daltonismo de tipo Deuteranopia:
 ![](/showcase/img/deuteranopia-2.png)
 
 <br>
+
+{{< /details >}}
 
 
 ## Conclusiones y trabajo futuro
