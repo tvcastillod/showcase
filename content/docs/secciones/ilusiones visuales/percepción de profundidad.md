@@ -39,24 +39,44 @@ Utilizar la pistas monoculares para representar una escena tridimensional en un 
 
 <blockquote>
 <p style='text-align: justify;'>
-
 Para la realización de este ejercicio se representó una escena simple, que consta de una carretera, una acera y una serie de árboles ubicados a distintas distancias, la cual se puede desplazar tanto horizontal como verticalmente. Además, se pusieron líneas de referencia para poder visualizar la profundidad de la escena.
-
+</p>
 
 <br>
 
 Con estos elementos se utilizaron distintas pistas monoculares, las cuales fueron:
 
-1. **Tamaño relativo de los objetos**: Se estableció un tamaño relativo entre los objetos, de tal manera que el objeto más cercano se viera más grande y el más lejano más pequeño. Esto se logró con las líneas de referencia, las cuales se colocaron a diferentes distancias de la cámara, y con los árboles, los cuales se colocaron a diferentes distancias de la carretera.
+<ol>
+<li>
+<p style='text-align: justify;'>
+ <b>Tamaño relativo de los objetos</b>: Se estableció un tamaño relativo entre los objetos, de tal manera que el objeto más cercano se viera más grande y el más lejano más pequeño. Esto se logró con las líneas de referencia, las cuales se colocaron a diferentes distancias de la cámara, y con los árboles, los cuales se colocaron a diferentes distancias de la carretera.
+</p>
 
+</li>
 
-2. **Superposición de objetos**: Se colocaron los árboles de tal manera que se superpongan entre sí, de tal manera que el árbol más cercano se vea más grande que el más lejano.
+<br>
+<li>
+<p style='text-align: justify;'>
+ <b>Superposición de objetos</b>: Se colocaron los árboles de tal manera que se superpongan entre sí, de tal manera que el árbol más cercano se vea más grande que el más lejano.
+</p>
 
-3. **Gradiente de la perspectiva**: Las líneas de la carretera, ya que son paralelas y se alejan de la cámara, tienden a converger en un punto en el horizonte.
+</li>
+<br>
+<li>
+<p style='text-align: justify;'>
+ <b>Gradiente de la perspectiva</b>: Las líneas de la carretera, ya que son paralelas y se alejan de la cámara, tienden a converger en un punto en el horizonte.
+</p>
 
-4. **Movimiento Paralaje**: Al moverse la cámara, los árboles se mueven a diferentes velocidades, de tal manera que los árboles más cercanos se mueven más rápido que los más lejanos.
+</li>
+<br>
+<li>
+<p style='text-align: justify;'>
+ <b>Movimiento Paralaje</b>: Al moverse la cámara, los árboles se mueven a diferentes velocidades, de tal manera que los árboles más cercanos se mueven más rápido que los más lejanos.
+</p>
 
-
+</li>
+<br>
+</ol>
 <p>
 
 </blockquote>
@@ -78,11 +98,18 @@ Para destacar, en el código se plantearon dos variables que permiten modificar 
     let finalLine;
     let XDeviation;
 ```
-Estas corresponden, respectivamente, al punto donde se dibuja el horizonte y la distancia horizontal entre la cámara y la carretera; y pueden ser modificadas en tiempo de ejecución por medio de sliders.
 
 <br>
 
+<p style='text-align: justify;'>
+Estas corresponden, respectivamente, al punto donde se dibuja el horizonte y la distancia horizontal entre la cámara y la carretera; y pueden ser modificadas en tiempo de ejecución por medio de sliders.
+</p>
+
+<br>
+
+<p style='text-align: justify;'>
 Además, las distintas funciones que dibujan los objetos de la escena, como la carretera, la acera y los árboles, realizan sus cálculos de posición y tamaño en función de estas variables, de tal manera que se pueda modificar el punto de vista de la escena: 
+</p>
 
 <br>
 

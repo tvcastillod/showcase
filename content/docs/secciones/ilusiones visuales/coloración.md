@@ -76,7 +76,10 @@ Además se tienen las versiones más leves de estos tipos de daltonismo, que son
 # Ejercicio realizado
 
 {{< hint info >}}
+
+<p style='text-align: justify;'>
 Mediante el mapeo de colores, se puede simular el daltonismo. Para ello, se analizan los colores que se encuentran en la imagen, y se reemplazan por los colores que se encuentran en la paleta de colores del daltonismo.
+</p>
 {{< /hint >}}
 
 ## Método utilizado
@@ -113,7 +116,9 @@ Se implementó el ejercicio en el lenguaje de programación JavaScript, utilizan
 
 {{< hint info >}}
 
+<p style='text-align: justify;'>
 En este, se tiene una imagen inicial de referencia con la que se pueden ver fácilmente las diferencias entre los tipos de daltonismo. También se cuenta con un desplegable que permite seleccionar el tipo de daltonismo que se desea simular y un botón que permite cargar una imagen distinta.
+</p>
 
 {{< /hint >}}
 
@@ -241,7 +246,10 @@ Paisaje con daltonismo de tipo Achromatopsia:
 
 <br>
 
+
+<p align="justify">
 Si vemos un caso más extremo, podemos observar que esto puede generar dificultades para la identificación de distintos elementos en la imagen, como se puede observar en el siguiente ejemplo:
+</p>
 
 <br>
 
