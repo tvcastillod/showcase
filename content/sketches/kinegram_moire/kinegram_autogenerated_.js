@@ -4,17 +4,17 @@ let vel = 0,
 var currentOption = 1;
 
 function setup() {
-  createCanvas(600, 400);
+  createCanvas(600, 330);
   canvas1 = createGraphics(150, 150);
   canvas2 = createGraphics(150, 150);
-  checkbox = createCheckbox("run", false);
-  checkbox.position(10, 340);
-  checkbox2 = createCheckbox("show lines", false);
-  checkbox2.position(10, 360);
+  checkbox = createCheckbox("Correr animación", false);
+  checkbox.position(10, 280);
+  checkbox2 = createCheckbox("Mostrar patrón de líneas", false);
+  checkbox2.position(10, 300);
   sel = createSelect();
   sel.position(170, 10);
-  sel.option("Wheel");
-  sel.option("Circles");
+  sel.option("Rueda");
+  sel.option("Circulos");
   sel.changed(mySelectEvent);
 }
 
@@ -22,7 +22,7 @@ function draw() {
   background(220);
   canvas1.background("yellow");
   textSize(13);
-  text("Frames", 15, 185);
+  text("Fotogramas", 15, 185);
   if (currentOption == 1) {
     drawWheel(canvas1, 0);
     image(canvas1, 0, 0);
@@ -33,11 +33,9 @@ function draw() {
     }
   }
   t = 0;
-
   var [nFrames, tStep, strokeW, space, plus] = [4, 1, 6, 2, 0];
   if (currentOption == 2)
     [nFrames, tStep, strokeW, space, plus] = [4, 20, 6, 2, 0];
-  //var [nFrames, tStep, strokeW, space, plus] = [13,0.06,9,1,2];
   frames = [];
   for (let y = 0; y < nFrames; y += 1) {
     if (currentOption == 1) drawWheel(canvas1, t);
@@ -58,7 +56,6 @@ function draw() {
     k += 1;
   }
 
-  // slit pattern
   if (checkbox2.checked())
     drawLines(320, 90 + vel, strokeW, strokeW + space + plus);
   if (checkbox.checked()) vel += 0.8 * dir;
@@ -69,15 +66,13 @@ function draw() {
 
 function mySelectEvent() {
   let item = sel.value();
-  if (item == "Wheel") {
+  if (item == "Rueda") {
     currentOption = 1;
   } else {
-    if (item == "Circles") {
-      currentOption = 2;
-    }
+    if (item == "Circulos") currentOption = 2;
   }
 }
-
+// patrón de líneas superpuestas
 function drawLines(beginX, beginY, strokeW, space) {
   for (let i = beginY; i < beginY + 200; i += space) {
     line(beginX, i, beginX + 250, i);
@@ -85,7 +80,7 @@ function drawLines(beginX, beginY, strokeW, space) {
   strokeWeight(strokeW);
   strokeCap(SQUARE);
 }
-
+// dibujo de la rueda
 function drawWheel(canvas, t) {
   posX = rad = canvas.width;
   posY = canvas.height;
@@ -153,7 +148,7 @@ function drawWheel(canvas, t) {
   canvas.fill("white");
   canvas.ellipse(posX / 2, posY / 2, 20);
 }
-
+// dibujo de los círculos
 function drawCircles(canvas, t) {
   posX = rad = canvas.width;
   posY = canvas.height;
