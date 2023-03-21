@@ -79,6 +79,18 @@ Con estos elementos se utilizaron distintas pistas monoculares, las cuales fuero
 </ol>
 <p>
 
+<p style='text-align: justify;'>
+Además, se usaron herramientas de <b> Inteligencia Artificial </b> para apoyar distintas tareas relacionadas con la realización de este ejercicio. Estas fueron:
+</p>
+
+<ol>
+
+<li> <b> <a href="https://chat.openai.com/chat"> ChatGPT</a></b>: para tener una base de la función principal de transformación de los píxeles y para consultas sobre los conceptos tratados. </li>
+
+<li> <b> <a href="https://github.com/features/copilot"> Github Copilot</a></b>: para automatización de tareas repetitivas como ajuste de párrafos, títulos, imágenes y fuente de los textos.  </li>
+<br>
+</ol>
+
 </blockquote>
 
 
@@ -248,7 +260,13 @@ El ejercicio permitió comprender la forma en que el cerebro humano interpreta l
 <br>
 
 <p align="justify">
-Finalmente, también se hace evidente las facilidades y ventajas de la computación visual para implementar y experimentar con diferentes escenarios de este tipo y así poder comprender mejor estos fenómenos y pensar en sus posibles aplicaciones en los distintos campos de la computación, como lo pueden ser la robótica, la inteligencia artificial o la realidad virtual.
+Además, también se hace evidente las facilidades y ventajas de la computación visual para implementar y experimentar con diferentes escenarios de este tipo y así poder comprender mejor estos fenómenos y pensar en sus posibles aplicaciones en los distintos campos de la computación, como lo pueden ser la robótica, la inteligencia artificial o la realidad virtual.
+</p>
+
+<br>
+
+<p align="justify">
+Finalmente, la Inteligencia Artificial puede ser una herramienta muy útil a la hora de realizar tareas repetitivas en la redacción de documentos, ajuste de los elementos de la página, generación de código para resolver problemas de programación básicos y mucho más. Por lo que representa una gran ayuda en la realización de trabajos como este.
 </p>
 </blockquote>
 
@@ -256,4 +274,5 @@ Finalmente, también se hace evidente las facilidades y ventajas de la computaci
 
 1. https://visualcomputing.github.io/docs/visual_illusions/depth_perception/
 2. https://es.wikipedia.org/wiki/Percepci%C3%B3n_de_profundidad
-
+3. https://chat.openai.com/chat
+4. https://github.com/features/copilot
