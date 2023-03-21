@@ -2,13 +2,11 @@
 weight: 1
 ---
 
-# Fenómeno de Masking (enmascaramiento)
+# Fenómeno de Masking (enmascaramiento) y Kinegramas
 
-<p style="text-align: justify">El masking visual es un fenómeno de percepción visual que se produce cuando la visibilidad de una imagen (objetivo) se ve reducida por la presencia de otra imagen (máscara).</p>
-<br>
-<p style="text-align: justify">Implementación de kinegramas y patrones de Moiré como acercamiento al fenómeno visual de 'masking'.</p>
+<p style="text-align: justify">El masking visual es un fenómeno de percepción visual que se produce cuando la visibilidad de una imagen (objetivo) se ve reducida por la presencia de otra imagen (máscara). A continuación se realizará la implementación de un kinegrama como acercamiento al fenómeno visual de 'masking'.</p>
 
-## Kinegramas
+## Kinegrama
 
 <p style="text-align: justify">La palabra kinegrama proviene de "kine", que significa "en movimiento", y "-gram", que significa "dibujo". Consiste en un efecto de animación creado por el movimiento de una superposición transparente a rayas a través de una imagen entrelazada. Cuando la rejilla lineal superpuesta se desplaza por la imagen entrelazada, la imagen inferior parece animarse. Esta técnica se originó en la década de 1890 y la publicación más antigua conocida es un "Motograph Moving Picture Book" de Bliss, Sands & Co, la cual contiene patrones, que dan efecto moiré cuando la transparencia de la banda se mueve a través de la creación de una ilusión de movimiento como el movimiento ondulante del vapor o el giro de las ruedas de un coche.</p>
 
@@ -19,37 +17,30 @@ Un kinegrama se compone de dos partes:
 ### Una patrón de rayas superpuesta
 
 <p style="text-align: justify"> Primero definimos un patrón de rayas con un grosor y un espaciado entre líneas predeterminado, por ejemplo: </p>
-<p align = "center"><img src = "/showcase/img/grid_lines.png" alt="" width="300"></p>
-<p align = "center">Fig.1 - patrón de rayas horizontales de grosor 4px y espaciado de 2px</p>
+<p align = "center"><img src = "/showcase/img/grid_lines.png" alt="" width="300"><br>Fig.1 - patrón de rayas horizontales de grosor 4px y espaciado de 2px</p>
 
 ### Una imagen subyacente con un patrón de rayas
 
 <p style="text-align: justify">Para generar esta imagen lo primero que necesitamos son imágenes de una secuencia de animación, por ejemplo:</p>
 
-<p align = "center"><img src="/showcase/img/animal_3_sequence.png" alt= “” width="400"></p>
-<p align = "center">Fig.2 - secuencias de imágenes que forman una animación</p>
+<p align = "center"><img src="/showcase/img/animal_3_sequence.png" alt= “” width="400"><br>Fig.2 - secuencias de imágenes que forman una animación</p>
 
 <p style="text-align: justify">Para cada una de las imágenes(fotogramas) de la secuencia debemos realizar el siguiente procedimiento: dividimos la imagen en tiras de tamaño el espacio definido para el patrón de rayas, en este caso de 2px</p>
 
-<p align = "center"><img src="/showcase/img/anim1_paso1.png" alt= “” width="300"></p>
-<p align = "center">Fig.3 - imagen 1 de la secuencia divida en tiras de 2px</p>
+<p align = "center"><img src="/showcase/img/anim1_paso1.png" alt= “” width="300"><br>Fig.3 - imagen 1 de la secuencia divida en tiras de 2px</p>
 
 <p style="text-align: justify">De esta división, únicamente necesitamos una porción de la imagen, en este caso como la secuencia se compone de 3 fotogramas, debemos tomar tiras cada 3 divisiones comenzando desde 1, por ejemplo, si numeramos cada tira desde 1 hasta el número total de tiras, solo tomamos las tiras 1,4,7,10,13,... y así sucesivamente </p>
 
-<p align = "center"><img src="/showcase/img/anim1_paso2-5.png" alt= “” width="85%"></p>
-<p align = "center">Fig.4 - imagen 1 dividida</p>
+<p align = "center"><img src="/showcase/img/anim1_paso2-5.png" alt= “” width="85%"><br>Fig.4 - imagen 1 dividida</p>
 
-<p style="text-align: justify">Para la segunda imagen tomaríamos las tiras 2,5,8,11,14,... y para el tercer fotograma las tiras 3,6,9,12,15,... lo cual nos da como resultado las imágnes de la figura 5. En general para el fotograma número k se toman las tiras j tales que j(mod n)=k. Finalmente, superponemos todos las imágenes con el patrón de líneas creado, obteniendo como resultado la figura 6. </p>
+<p style="text-align: justify">Para la segunda imagen tomaríamos las tiras 2,5,8,11,14,... y para el tercer fotograma las tiras 3,6,9,12,15,... lo cual nos da como resultado las imágnes de la figura 5. En general para el fotograma número k se toman las tiras j tales que j(mod n)=k, con n el número total de fotogramas. Finalmente, superponemos todos las imágenes con el patrón de líneas creado, obteniendo como resultado la figura 6. </p>
 
-<p align = "center"><img src="/showcase/img/animal_strip_sequence.png" alt= “” width="90%"></p>
-<p align = "center">Fig.5 - fotogramas con el patrón de líneas</p>
+<p align = "center"><img src="/showcase/img/animal_strip_sequence.png" alt= “” width="90%"><br>Fig.5 - fotogramas con el patrón de líneas</p>
 
-<p align = "center"><img src="/showcase/img/animal_strip_final.png" alt= “” width="300"></p>
-<p align = "center">Fig.6 - imagen final con el patrón del kinegrama</p>
+<p align = "center"><img src="/showcase/img/animal_strip_final.png" alt= “” width="300"><br>Fig.6 - imagen final con el patrón del kinegrama</p>
 
-<p style="text-align: justify">El siguiente programa genera un kinegrama dados los fotogramas de una animación y los parámetros de grosor de las líneas del patrón superpuesto y el espaciado entre estas. Se debe cargar y añadir cada fotograma en el orden correspondiente a la animación, para visualizar la animación final, marcar las opciones de correr animación y mostrar patrón de rayas.
-
-Para ver en movimiento el patrón anterior, guarde la imagen y subala como un fotograma a la aplicación, ajuste el grosor de la línea en 4 y espacio entre línea a 2.</p>
+<p style="text-align: justify">El siguiente programa genera un kinegrama dados los fotogramas de una animación y los parámetros de grosor de las líneas del patrón superpuesto y el espaciado entre estas. Se debe cargar y añadir cada fotograma en el orden correspondiente a la animación, para visualizar la animación final, marcar las opciones de correr animación y mostrar patrón de rayas.</p>
+<p style="text-align: justify">Para ver en movimiento el patrón anterior, guarde la imagen y subala como un fotograma a la aplicación, ajuste el grosor de la línea en 4 y espacio entre línea a 2.</p>
 {{< hint info >}}
 
 <p style='text-align: justify;'>
@@ -352,6 +343,8 @@ Otro detalle interesante es la forma del patrón superpuesto, pues este no neces
 <p align="center" float="left">
   <img src="/showcase/img/kine_horse.gif" width="200" />
   <img src="/showcase/img/kine_circular.gif" width="200" /> 
+  <br>
+  Fig.7 - Ejemplo de kinegramas con un patrón de líneas diferente
 </p>
 {{< /hint >}}
 
