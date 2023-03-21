@@ -360,13 +360,4 @@ Otro detalle interesante es la forma del patrón superpuesto, pues este no neces
 1. Enevoldsen, Keith. "Kinegrams". From https://thinkzone.wlonk.com/Kinegram/Kinegram.htm
 2. Bach, Michael. "Kinegram (“Scanimation”)" From https://michaelbach.de/ot/mot-scanimation/index.html
 3. Sarcone, Gianni A. "Kinegrams, Art in Motion." From Sarcone’s Studio -- A Sarcone & Waeber Web Resource. http://giannisarcone.com/Kinegrams.html
-
-## Patrones de Moiré
-
-Es un patrón de interferencia que se forma cuando se superponen dos rejillas de líneas, ya sean rectas o curvas, con un cierto ángulo​ o cuando tales rejillas tienen tamaños ligeramente diferentes.
-
-{{< p5-iframe sketch="/showcase/sketches/kinegram_moire/moire_pattern.js" width="625" height="425" >}}
-
-## Referencias
-
-1. Wikipedia contributors. "Moiré pattern". From https://en.wikipedia.org/wiki/Moir%C3%A9_pattern
+4. Wikipedia contributors. "Barrier-grid animation and stereography". From https://en.wikipedia.org/wiki/Barrier-grid_animation_and_stereography
