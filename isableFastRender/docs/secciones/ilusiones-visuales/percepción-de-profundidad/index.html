@@ -97,6 +97,19 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <a href="/showcase/docs/secciones/ilusiones-visuales/fen%C3%B3meno-de-masking/" class="">Fenómeno De Masking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
     <a href="/showcase/docs/secciones/ilusiones-visuales/introducci%C3%B3n/" class="">Introducción</a>
   
 
@@ -385,22 +398,35 @@ Las pistas monoculares son claves visuales que le permiten a nuestro sistema vis
 </h2>
 <blockquote>
 <p style='text-align: justify;'>
-<p>Para la realización de este ejercicio se representó una escena simple, que consta de una carretera, una acera y una serie de árboles ubicados a distintas distancias, la cual se puede desplazar tanto horizontal como verticalmente. Además, se pusieron líneas de referencia para poder visualizar la profundidad de la escena.</p>
+Para la realización de este ejercicio se representó una escena simple, que consta de una carretera, una acera y una serie de árboles ubicados a distintas distancias, la cual se puede desplazar tanto horizontal como verticalmente. Además, se pusieron líneas de referencia para poder visualizar la profundidad de la escena.
+</p>
 <br>
 <p>Con estos elementos se utilizaron distintas pistas monoculares, las cuales fueron:</p>
 <ol>
 <li>
-<p><strong>Tamaño relativo de los objetos</strong>: Se estableció un tamaño relativo entre los objetos, de tal manera que el objeto más cercano se viera más grande y el más lejano más pequeño. Esto se logró con las líneas de referencia, las cuales se colocaron a diferentes distancias de la cámara, y con los árboles, los cuales se colocaron a diferentes distancias de la carretera.</p>
+<p style='text-align: justify;'>
+ <b>Tamaño relativo de los objetos</b>: Se estableció un tamaño relativo entre los objetos, de tal manera que el objeto más cercano se viera más grande y el más lejano más pequeño. Esto se logró con las líneas de referencia, las cuales se colocaron a diferentes distancias de la cámara, y con los árboles, los cuales se colocaron a diferentes distancias de la carretera.
+</p>
 </li>
+<br>
 <li>
-<p><strong>Superposición de objetos</strong>: Se colocaron los árboles de tal manera que se superpongan entre sí, de tal manera que el árbol más cercano se vea más grande que el más lejano.</p>
+<p style='text-align: justify;'>
+ <b>Superposición de objetos</b>: Se colocaron los árboles de tal manera que se superpongan entre sí, de tal manera que el árbol más cercano se vea más grande que el más lejano.
+</p>
 </li>
+<br>
 <li>
-<p><strong>Gradiente de la perspectiva</strong>: Las líneas de la carretera, ya que son paralelas y se alejan de la cámara, tienden a converger en un punto en el horizonte.</p>
+<p style='text-align: justify;'>
+ <b>Gradiente de la perspectiva</b>: Las líneas de la carretera, ya que son paralelas y se alejan de la cámara, tienden a converger en un punto en el horizonte.
+</p>
 </li>
+<br>
 <li>
-<p><strong>Movimiento Paralaje</strong>: Al moverse la cámara, los árboles se mueven a diferentes velocidades, de tal manera que los árboles más cercanos se mueven más rápido que los más lejanos.</p>
+<p style='text-align: justify;'>
+ <b>Movimiento Paralaje</b>: Al moverse la cámara, los árboles se mueven a diferentes velocidades, de tal manera que los árboles más cercanos se mueven más rápido que los más lejanos.
+</p>
 </li>
+<br>
 </ol>
 <p>
 </blockquote>
@@ -444,9 +470,14 @@ Las pistas monoculares son claves visuales que le permiten a nuestro sistema vis
 <p>Para destacar, en el código se plantearon dos variables que permiten modificar el punto de vista de la escena:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">finalLine</span>;
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">XDeviation</span>;
-</span></span></code></pre></div><p>Estas corresponden, respectivamente, al punto donde se dibuja el horizonte y la distancia horizontal entre la cámara y la carretera; y pueden ser modificadas en tiempo de ejecución por medio de sliders.</p>
+</span></span></code></pre></div><br>
+<p style='text-align: justify;'>
+Estas corresponden, respectivamente, al punto donde se dibuja el horizonte y la distancia horizontal entre la cámara y la carretera; y pueden ser modificadas en tiempo de ejecución por medio de sliders.
+</p>
 <br>
-<p>Además, las distintas funciones que dibujan los objetos de la escena, como la carretera, la acera y los árboles, realizan sus cálculos de posición y tamaño en función de estas variables, de tal manera que se pueda modificar el punto de vista de la escena:</p>
+<p style='text-align: justify;'>
+Además, las distintas funciones que dibujan los objetos de la escena, como la carretera, la acera y los árboles, realizan sus cálculos de posición y tamaño en función de estas variables, de tal manera que se pueda modificar el punto de vista de la escena: 
+</p>
 <br>
 <details ><summary>Función que dibuja cada árbol</summary>
   <div class="markdown-inner">

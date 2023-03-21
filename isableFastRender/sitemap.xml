@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/fen%C3%B3meno-de-masking/</loc>
+  </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/introducci%C3%B3n/</loc>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/integrantes/Johan-Steeb-Rodr%C3%ADguez-Alarc%C3%B3n/</loc>
@@ -10,7 +12,7 @@
     <lastmod>2023-03-13T23:26:14-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/</loc>
-    <lastmod>2023-03-15T09:33:40-05:00</lastmod>
+    <lastmod>2023-03-20T20:49:48-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/coloraci%C3%B3n/</loc>
   </url><url>
@@ -23,7 +25,7 @@
     <lastmod>2023-03-13T23:26:14-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</loc>
-    <lastmod>2023-03-15T09:33:40-05:00</lastmod>
+    <lastmod>2023-03-20T20:49:48-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/percepci%C3%B3n-de-profundidad/</loc>
   </url><url>
