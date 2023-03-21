@@ -120,7 +120,7 @@ function pixelateSpatialCoherence(originalImg) {
 </p>
 <br>
 <p align="justify">
-2. Como se puede observar en los ejercicios el Pixerl averaging es más rápido que el spatial coherence, pero el spatial coherence es más preciso y se puede observar que la imagen se ve más nítida que la del pixel averaging, por lo que se puede concluir que el spatial coherence es mejor que el pixel averaging. 
+2. Como se puede observar en los ejercicios el Pixel averaging es más rápido que el spatial coherence, pero el spatial coherence es más preciso y se puede observar que la imagen se ve más nítida que la del pixel averaging, por lo que se puede concluir que el spatial coherence es mejor que el pixel averaging. 
 </p>
 <br>
 <p align="justify">
