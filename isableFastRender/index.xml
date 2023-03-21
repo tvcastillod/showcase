@@ -111,5 +111,14 @@ p5-div markdown{{&amp;lt; p5-div sketch=&amp;#34;/showcase/sketches/scintillati
       <description> Computación Visual Integrantes </description>
     </item>
     
+    <item>
+      <title></title>
+      <link>http://localhost:1313/showcase/sketches/spatial_coherence/videos/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/showcase/sketches/spatial_coherence/videos/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

@@ -17,7 +17,7 @@ Develop a terrain visualization application. Check out the 3D terrain generation
 {{< /hint >}}
 
 ## 4. Resultados
-{{<p5-iframe sketch="/showcase/sketches/spatial_coherence/Mach.js" width="600" height="600" >}}
+{{<p5-iframe sketch="/showcase/sketches/Mach_band/Mach.js" width="600" height="600" >}}
 
 
 ## 5. Fragmentos de código

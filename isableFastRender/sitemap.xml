@@ -10,7 +10,7 @@
     <lastmod>2023-03-13T23:26:14-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/</loc>
-    <lastmod>2023-03-14T23:44:35-05:00</lastmod>
+    <lastmod>2023-03-15T09:33:40-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/coloraci%C3%B3n/</loc>
   </url><url>
@@ -23,7 +23,7 @@
     <lastmod>2023-03-13T23:26:14-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</loc>
-    <lastmod>2023-03-14T23:44:35-05:00</lastmod>
+    <lastmod>2023-03-15T09:33:40-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/percepci%C3%B3n-de-profundidad/</loc>
   </url><url>
@@ -42,13 +42,17 @@
     <loc>http://localhost:1313/showcase/menu/</loc>
     <lastmod>2023-03-13T23:26:14-05:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/showcase/sketches/spatial_coherence/videos/</loc>
+  </url><url>
     <loc>http://localhost:1313/showcase/categories/</loc>
   </url><url>
     <loc>http://localhost:1313/showcase/docs/</loc>
-    <lastmod>2023-03-14T23:44:35-05:00</lastmod>
+    <lastmod>2023-03-15T09:33:40-05:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/showcase/</loc>
     <lastmod>2023-03-13T23:26:14-05:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/showcase/sketches/</loc>
   </url><url>
     <loc>http://localhost:1313/showcase/tags/</loc>
   </url>
