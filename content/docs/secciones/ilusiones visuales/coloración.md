@@ -3,7 +3,6 @@ weight: 2
 ---
 
 # Antecedentes
-
 ## La percepción del color
 <blockquote>
 
@@ -71,6 +70,7 @@ Además se tienen las versiones más leves de estos tipos de daltonismo, que son
 
 ![](/showcase/img/daltonismo_types.png)
 
+
 </blockquote>
 
 # Ejercicio realizado
@@ -85,6 +85,8 @@ Mediante el mapeo de colores, se puede simular el daltonismo. Para ello, se anal
 ## Método utilizado
 
 <blockquote>
+
+<h3> Mapeo de colores para simular daltonismo </h3>
 <p style='text-align: justify;'>
 En primer lugar, se sabe que, al igual que como se mencionó anteriormente, el color se puede dividir en tres bandas: roja, verde y azul. Este método es utilizado por los computadores para representar los colores, usando formatos como RGB, por lo cual, se facilita el análisis de los colores de la imagen.
 </p>
@@ -102,9 +104,29 @@ Además, se han planteado las matrices de transformación de colores, que permit
 Finalmente, se recorre la imagen pixel por pixel, y se obtiene el color de cada uno de estos. Luego, se transforma el color a la paleta de colores del daltonismo ejegido, y se reemplaza el color original por el nuevo color.
 </p>
 
+<h3> Evaluación de efectividad de filtros de color de Windows </h3>
+
+<p style='text-align: justify;'>
+<b>Microsoft Windows</b>, en todas sus versiones, es uno de los sistemas operativos más utilizados en el mundo. En este, se pueden encontrar <b>filtros de color</b> que permiten que las personas con distintos tipos de daltonismo puedan ver mejor las <b>diferencias entre los colores que les causan confusión</b>. Para evaluar la efectividad de estos filtros, se utilizaron imágenes de referencia, a estas se les aplicó el filtro de color de Windows 11 y luego se les realizó la simulación de daltonismo con el método planteado anteriormente a todos los pares de imágenes para poder ver las diferencias entre la percepción de los colores sin el filtro y con el filtro.
+</p>
+
+<p style='text-align: justify;'>
+Además, se usaron herramientas de <b> Inteligencia Artificial </b> para apoyar distintas tareas relacionadas con la realización de este ejercicio. Estas fueron:
+</p>
+
+<ol>
+<li> <b> <a href="https://chat.openai.com/chat"> ChatGPT</a></b>: para tener una base de la función principal de transformación de los píxeles y para consultas sobre los conceptos tratados. </li>
+<li> <b> <a href="https://github.com/features/copilot"> Github Copilot</a></b>: para automatización de tareas repetitivas como ajuste de párrafos, títulos, imágenes y fuente de los textos.  </li>
+<li> <b> <a href="https://stablediffusionweb.com/#demo"> Stable Diffusion</a></b>: para la generación de imágenes que cumplan ciertas características útiles para el experimento. </li>
+
+</ol>
+
+
 </blockquote>
 
 ## Resultados
+
+### Mapeo de colores para simular daltonismo
 
 Se implementó el ejercicio en el lenguaje de programación JavaScript, utilizando la librería p5.js. Se puede ver el resultado a continuación:
 
@@ -181,7 +203,7 @@ var colorMats = {
 
 <br>
 
-El código para la transformación de los colores se puede observar en el siguiente código:
+El código para la transformación de los colores se puede observar a continuación:
 
 {{< details title="Transformación de los colores" open=false >}}
 ```javascript
@@ -288,6 +310,104 @@ imagen con daltonismo de tipo Deuteranopia:
 
 {{< /details >}}
 
+### Filtros de color de Windows aplicados a las imágenes
+
+Estos fueron los resultados de pasar las imágenes confusas por los filtros de color de Windows y luego por el simulador de daltonismo:
+
+<br>
+
+{{< details title="Filtros de color de Windows" open=false >}}
+<br>
+
+Deuteranopia:
+
+<br>
+
+Imagen original:
+
+<br>
+
+![](/showcase/img/deut_win.png)
+
+<br>
+
+Imagen con daltonismo de tipo Deuteranopia:
+
+<br>
+
+![](/showcase/img/deut_win_2.jpg)
+
+<br>
+
+Imagen con daltonismo de tipo Deuteranopia y filtro de color de Windows:
+
+<br>
+
+![](/showcase/img/deut_win_3.jpg)
+
+<br>
+
+Tritanopia:
+
+<br>
+
+Imagen original:
+
+<br>
+
+![](/showcase/img/trit_win.jpg)
+
+<br>
+
+Imagen con daltonismo de tipo Tritanopia:
+
+<br>
+
+![](/showcase/img/trit_win_2.jpg)
+
+<br>
+
+Imagen con daltonismo de tipo Tritanopia y filtro de color de Windows:
+
+<br>
+
+![](/showcase/img/trit_win_3.jpg)
+
+<br>
+
+Protanopia:
+
+<br>
+
+Imagen original:
+
+<br>
+
+![](/showcase/img/prot_win.jpg)
+
+<br>
+
+Imagen con daltonismo de tipo Protanopia:
+
+<br>
+
+![](/showcase/img/prot_win_2.jpg)
+
+<br>
+
+Imagen con daltonismo de tipo Protanopia y filtro de color de Windows:
+
+<br>
+
+![](/showcase/img/prot_win_3.jpg)
+
+<br>
+
+<p align="justify">
+Como se puede observar, los filtros de color de Windows en cierta medida ayudan a mejorar la visibilidad de las imágenes confusas, pero no son una solución definitiva para el problema, ya que no logran eliminar por completo la confusión en algunos casos.
+
+{{< /details >}}
+
 
 ## Conclusiones y trabajo futuro
 
@@ -301,6 +421,18 @@ Mediante este simple ejercicio de simulación se pudieron evidenciar las dificul
 <p align="justify">
 Además, aunque esta herramienta permite la identificación del problema, no es una solución definitiva, ya que, el siquiente paso sería generar una herramienta que permita la transformación de las imágenes de manera automática, para que las personas con daltonismo puedan visualizarlas sin dificultades.
 </p>
+
+<br>
+
+<p align="justify">
+También se pudo evidenciar que, aunque los filtros de color de Windows ayudan a mejorar la visibilidad de las imágenes confusas, ampliando el contraste entre colores que pueden resultar conflictivos, no son una solución definitiva para el problema. Se requiere de herramientas más sofisticadas o más directas, como por ejemplo, las gafas de colores que se utilizan para la corrección de daltonismo, además de una mayor conciencia de los diseñadores y desarrolladores de interfaces de usuario para que tomen en cuenta a las personas con daltonismo a la hora de diseñar sus interfaces.
+</p>
+
+<br>
+
+<p align="justify">
+Finalmente, la Inteligencia Artificial puede ser una herramienta muy útil a la hora de realizar tareas repetitivas en la redacción de documentos, ajuste de los elementos de la página, generación de código para resolver problemas de programación básicos, generación de imágenes que cumplan con los requisitos que se requieran en el experimento y mucho más. Por lo que representa una gran ayuda en la realización de trabajos como este.
+</p>
 </blockquote>
 
 ## Referencias
@@ -308,6 +440,12 @@ Además, aunque esta herramienta permite la identificación del problema, no es 
 1. https://es.wikipedia.org/wiki/Daltonismo
 2. https://visualcomputing.github.io/docs/visual_illusions/coloring/
 3. https://gist.github.com/Lokno/df7c3bfdc9ad32558bb7
+4. https://www.es.colorlitelens.com/informacion-correccion-del-daltonismo.html#scientificbackground
+5. https://chat.openai.com/chat
+6. https://github.com/features/copilot
+7. https://stablediffusionweb.com/#demo
+   
+
 
 
 
