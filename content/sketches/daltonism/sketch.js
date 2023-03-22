@@ -1,58 +1,120 @@
-let img; // imagen original
-let newImg; // imagen transformada
-let dropdown;
+let img; //imagen original
+let newImg; //imagen transformada
+let slider;
+let pxs = new Array(256); //arreglo de cantidad de cada pixel
+let modified = false;
+let thr = 50; //valor del umbral
+let maxval = 255;
+let cur_thr;
 
-var colorMats = {
-  Normal: [
-    [1, 0, 0],
-    [0, 1, 0],
-    [0, 0, 1],
-  ],
-  Protanopia: [
-    [0.567, 0.433, 0.0],
-    [0.558, 0.442, 0.0],
-    [0.0, 0.242, 0.758],
-  ],
-  Protanomaly: [
-    [0.817, 0.183, 0.0],
-    [0.333, 0.667, 0.0],
-    [0.0, 0.125, 0.875],
-  ],
-  Deuteranopia: [
-    [0.625, 0.375, 0.0],
-    [0.7, 0.3, 0.0],
-    [0.0, 0.3, 0.7],
-  ],
-  Deuteranomaly: [
-    [0.8, 0.2, 0.0],
-    [0.258, 0.742, 0.0],
-    [0.0, 0.142, 0.858],
-  ],
-  Tritanopia: [
-    [0.95, 0.05, 0.0],
-    [0.0, 0.433, 0.567],
-    [0.0, 0.475, 0.525],
-  ],
-  Tritanomaly: [
-    [0.967, 0.033, 0.0],
-    [0.0, 0.733, 0.267],
-    [0.0, 0.183, 0.817],
-  ],
-  Achromatopsia: [
-    [0.299, 0.587, 0.114],
-    [0.299, 0.587, 0.114],
-    [0.299, 0.587, 0.114],
-  ],
-  Achromatomaly: [
-    [0.618, 0.32, 0.062],
-    [0.163, 0.775, 0.062],
-    [0.163, 0.32, 0.516],
-  ],
-};
+function preload() {
+  img = loadImage("grises.png");
+}
+
+function setup() {
+  createCanvas(600, 500);
+  background("#C0DDEB");
+  input = createFileInput(handleFile);
+  input.position(10, height - 190);
+  slider = createSlider(0, 250, 50, 25);
+  slider.position(10, height - 30);
+  slider.style("width", "150px");
+  text("thresholding value", 170, height - 15);
+  text("  0     50  100  150  200   250", 10, height - 35);
+  cur_thr = slider.value();
+  modified = true;
+}
+
+function dst(x, y) {
+  //calcula el pixel destino
+  if (src(x, y) > thr) {
+    //condición thresholding
+    return color(maxval, maxval, maxval);
+  } else {
+    return color(0, 0, 0);
+  }
+}
+
+function src(x, y) {
+  //obtiene el pixel original
+  px = img.get(x, y)[0];
+  return px;
+}
+
+function updateImg() {
+  newImg = createGraphics(img.width, img.height);
+  newImg.loadPixels();
+  for (let i = 0; i <= img.width; i++) {
+    for (let j = 0; j <= img.height; j++) {
+      newImg.set(i, j, dst(i, j));
+    }
+  }
+  newImg.updatePixels();
+  image(newImg, width / 2, 0);
+  getPixelInfo();
+}
+
+function draw() {
+  if (img != null && img.width > 10) {
+    if (img.width > 300 || img.height > 300) {
+      /*si el tamaño de la imagen es muy grande,
+      se hace un reajuste*/
+      if (img.width - img.height < 50 || img.width <= img.height) {
+        imgW = (300 * img.width) / img.height;
+        imgH = 300;
+      } else {
+        imgW = 300;
+        imgH = (300 * img.height) / img.width;
+      }
+      img.resize(imgW, imgH);
+      getPixelInfo();
+    }
+    image(img, 0, 0);
+    thr = slider.value();
+    if (modified == true || thr != cur_thr) {
+      /*actualiza la imagen filtrada sólo cuando se modifica el
+      valor del umbral o cuando se sube una nueva imagen,evitando
+      así la repetición de cálculos en cada llamada a draw()*/
+      updateImg();
+      modified = false;
+      cur_thr = slider.value();
+    }
+  }
+  fill("#C0DDEB");
+  noStroke();
+  rect(width / 2 + img.width, 0, width / 2 - img.width, width / 2);
+  rect(img.width, 0, width / 2 - img.width, width / 2);
+  rect(width / 2, img.height, img.width, width / 2 - img.height);
+  rect(0, img.height, img.width, width / 2 - img.height);
+
+  //gráfica de pixeles
+  noStroke();
+  fill("#FFF5A2");
+  rect(width / 2, 300, 300, 200);
+  let sp = "         ";
+  fill(50);
+  text(
+    "  0" + sp + "  50" + sp + " 100" + sp + "150" + sp + "200" + sp + "250",
+    width / 2 + 10,
+    height - 25
+  );
+  fill("red");
+  graph();
+  noStroke();
+  fill("black");
+  translate(width / 2 + 12, height - 90);
+  rotate(-HALF_PI);
+  text("cantidad", 0, 0);
+  translate(-80, 100);
+  rotate(HALF_PI);
+  text("valor del pixel", 0, 0);
+}
 
 function handleFile(file) {
   if (file.type === "image") {
-    img = loadImage(file.data, drawImage);
+    modified = true;
+    img = loadImage(file.data);
+    img.filter(GRAY); // convierte la imagen a escala de grises
   } else {
     alert("El archivo seleccionado no es una imagen.");
   }
@@ -60,51 +122,30 @@ function handleFile(file) {
 
 function drawImage() {
   background(220);
-  image(img, 0, 0);
+  image(img, 100, 100);
 }
 
-let matrix = colorMats.Deuteranopia;
-
-function preload() {
-  img = loadImage("/showcase/sketches/daltonism/visionTest.png");
-}
-
-function setup() {
-  input = createFileInput(handleFile);
-  input.position(200, 10);
-  dropdown = createSelect();
-  dropdown.position(10, 10);
-  for (let tipo in colorMats) {
-    dropdown.option(tipo);
-  }
-  createCanvas(img.width, img.height);
-}
-
-function draw() {
-  if (img.width > 800 || img.height > 800) {
-    img.resize(800, Math.floor(800 * (img.height / img.width)));
-  }
-  resizeCanvas(img.width, img.height);
-  let val = dropdown.value();
-  matrix = colorMats[val];
-  newImg = createImage(img.width, img.height);
-  newImg.loadPixels();
-  img.loadPixels();
-  for (let x = 0; x < img.width; x++) {
-    for (let y = 0; y < img.height; y++) {
-      let index = (x + y * img.width) * 4;
-      let r = img.pixels[index];
-      let g = img.pixels[index + 1];
-      let b = img.pixels[index + 2];
-      let newR = matrix[0][0] * r + matrix[0][1] * g + matrix[0][2] * b;
-      let newG = matrix[1][0] * r + matrix[1][1] * g + matrix[1][2] * b;
-      let newB = matrix[2][0] * r + matrix[2][1] * g + matrix[2][2] * b;
-      newImg.pixels[index] = newR;
-      newImg.pixels[index + 1] = newG;
-      newImg.pixels[index + 2] = newB;
-      newImg.pixels[index + 3] = img.pixels[index + 3];
+function getPixelInfo() {
+  pxs = new Array(256);
+  for (let i = 0; i <= 255; i++) pxs[i] = 0;
+  for (let i = 0; i <= img.width; i++) {
+    for (let j = 0; j <= img.height; j++) {
+      pxs[get(i, j)[0]] += 1;
     }
   }
-  newImg.updatePixels();
-  image(newImg, 0, 0);
+}
+
+function graph() {
+  strokeWeight(1);
+  stroke("red");
+  fill("blue");
+  let m = max(pxs);
+  for (let i = 0; i <= 255; i++) {
+    line(
+      width / 2 + 20 + i * 1,
+      height - 38,
+      width / 2 + 20 + i * 1,
+      height - 38 - (pxs[i] / m) * (200 - 38 - 10)
+    );
+  }
 }
