@@ -27,15 +27,6 @@ Kinegramas#Un kinegrama es un efecto de animación creado moviendo una superpo
     
     <item>
       <title></title>
-      <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/</guid>
-      <description>Pixelamos un video#1.Antecedentes#La técnica de pixelar imágenes ha sido utilizada desde hace décadas en diversos campos, como la fotografía, el cine, los videojuegos y el arte digital. Consiste en reducir la resolución de una imagen al agrupar los píxeles en bloques más grandes, dando como resultado una imagen con un aspecto más &#34;borroso&#34;.En los últimos años, ha surgido un enfoque denominado &#34;Spatial coherence&#34; (coherencia espacial), que se enfoca en preservar la información visual de la imagen original, mientras se reduce la resolución.</description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/coloraci%C3%B3n/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -45,11 +36,11 @@ Kinegramas#Un kinegrama es un efecto de animación creado moviendo una superpo
     
     <item>
       <title></title>
-      <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</link>
+      <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</guid>
-      <description>Pixelamos un video#1.Antecedentes#2. Método#3.Ejercicio#Exercise Develop a terrain visualization application. Check out the 3D terrain generation with Perlin noise coding trainl tutorial .4. Resultados#5. Fragmentos de código#</description>
+      <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/</guid>
+      <description>Pixelamos un video#1.Antecedentes#La técnica de pixelar imágenes ha sido utilizada desde hace décadas en diversos campos, como la fotografía, el cine, los videojuegos y el arte digital. Consiste en reducir la resolución de una imagen al agrupar los píxeles en bloques más grandes, dando como resultado una imagen con un aspecto más &#34;borroso&#34;.En los últimos años, ha surgido un enfoque denominado &#34;Spatial coherence&#34; (coherencia espacial), que se enfoca en preservar la información visual de la imagen original, mientras se reduce la resolución.</description>
     </item>
     
     <item>
@@ -59,6 +50,15 @@ Kinegramas#Un kinegrama es un efecto de animación creado moviendo una superpo
       
       <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/percepci%C3%B3n-de-profundidad/</guid>
       <description>Antecedentes#Percepción de la profundidad#La percepción de profundidad es la habilidad de nuestro sistema visual para percibir la distancia relativa entre los objetos en un espacio tridimensional. Esta habilidad es importante para la percepción espacial y la navegación en el mundo real.Pistas monoculares Las pistas monoculares son claves visuales que le permiten a nuestro sistema visual percibir la profundidad usando información de un solo ojo (a diferencia de las pistas binoculares, que facilitan la percepción de profundidad).</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/bandas-mach/</guid>
+      <description>Bandas Mach#1.Antecedentes#La técnica de Mach Band es un efecto óptico que se produce por la manera en que nuestro cerebro percibe diferentes tonalidades de color y luminosidad en los bordes de una . Fue descrita por primera vez por el fisiólogo Ernst Mach en 1865 y ha sido estudiada desde entonces por diversos investigadores en el campo de la percepción visual. El efecto consiste en la aparición de una banda oscura o clara a lo largo del borde entre dos áreas de diferentes niveles de luminosidad o color, lo que produce una apariencia de mayor contraste en la zona del borde.</description>
     </item>
     
   </channel>
