@@ -1,5 +1,5 @@
 ---
-weight: 2
+weight: 4
 ---
 
 # Pixelamos un video
@@ -74,10 +74,39 @@ Aquí un ejemplo de fragmento de código generado por ChatGPT que no se utilizó
 
 {{< details title="Función obtener color más frecuente " open=false >}}
 ``` javascript
+function getMostCommonColorInBlock(x, y, blockSize) {
+  let colorCounts = {};
+  for (let i = x; i < x + blockSize; i++) {
+    for (let j = y; j < y + blockSize; j++) {
+      let c = img.get(i, j);
+      let colorKey = c.toString();
+      if (!colorCounts[colorKey]) {
+        colorCounts[colorKey] = 1;
+      } else {
+        colorCounts[colorKey]++;
+      }
+    }
+  }
+  let maxCount = 0;
+  let mostCommonColor;
+  for (let colorKey in colorCounts) {
+    if (colorCounts[colorKey] > maxCount) {
+      maxCount = colorCounts[colorKey];
+      mostCommonColor = colorKey.split(",").map(Number);
+    }
+  }
+  return color(mostCommonColor);
+}
+```
 
 {{</details>}}
 <p align="justify">
-Como se puede notar la función tiene una comploejidad muy alta y casi no se podía ejectar nisiquiera con una imágen, adicional a esto el ejercicio de spatial coherence juega es con un color aleatorio del cuadro que representa y no con el más común por lo que ya con los cambios requeridos implementados quedó así:
+Esto por lo que Spathial_Coherence no busca el color más común en cada bloque de pixeles, sino que elige un color arbitrario para cada bloque. Y esta función hacía que la complejidad del algoritmo fuera muy alta, tanto que incluso se demoraba ejecutando para una sola imagen.
+</p>
+
+
+<p align="justify">
+Ya con los cambios requeridos y ajustes efectuados, la implementación del ejercicio quedó así:
 </p>
 
 {{< details title="Función spathialCoherence " open=false >}}
@@ -112,6 +141,41 @@ function pixelateSpatialCoherence(originalImg) {
 ```
 {{</details>}}
 
+<br>
+Para lo que sí fue de gran utilidad ChatGPT fue para generar pequeños componentes del programa como por ejemplo la descomposición de un video en imágenes,no fue utilizada exactamente igual pero en su momento fue de gran apoyo:
+  
+  {{< details title="Función para descomponer un video en imágenes " open=false >}}
+  ``` javascript
+  let video;
+let totalFrames = 100; // número total de fotogramas a extraer
+let currentFrame = 0; // fotograma actual
+
+function setup() {
+  createCanvas(640, 480);
+  video = createVideo('mi_video.mp4');
+  video.hide(); // oculta el elemento <video> en la página
+  video.play(); // comienza a reproducir el video
+}
+
+function draw() {
+  if (currentFrame < totalFrames) {
+    let filename = 'frame_' + nf(currentFrame, 4) + '.png'; // nombre del archivo de imagen
+    let x = 0;
+    let y = 0;
+    let w = width;
+    let h = height;
+    image(video, x, y, w, h); // dibuja el video en el lienzo
+    saveCanvas(filename); // guarda el fotograma actual como imagen
+    currentFrame++;
+    video.time(currentFrame / totalFrames * video.duration()); // cambia el tiempo del video
+  } else {
+    video.stop(); // detiene la reproducción del video
+    noLoop(); // detiene el bucle de dibujo
+  }
+}
+```
+{{</details>}}
+
 ## Conclusiones
 
 <br>
@@ -128,5 +192,17 @@ function pixelateSpatialCoherence(originalImg) {
 </p>
 <br>
 <p align="justify">
-4. ChatGPT es una herramienta muy útil para generar código, pero no es tan útil para generar código de manera automática, ya que el código generado no es muy útil y no se puede ejecutar, por lo que se debe hacer un proceso de limpieza y de adaptación del código generado para que sea útil y se pueda ejecutar.
+4. ChatGPT es una herramienta muy útil par explicar funciones y temas, pero no es tan útil para generar código de manera automática, ya que el código generado no es muy útil o no se puede ejecutar, por lo que se debe hacer un proceso de limpieza y de adaptación del código generado para que realice lo que se quiere.
 </p>
+
+## 7. Bibliografía
+
+<blockquote>
+
+1. [https://p5js.org/reference/](https://p5js.org/reference/)
+<br>
+
+2. [VisualComputing](https://visualcomputing.github.io/docs/visual_illusions/spatial_coherence/)
+<br>
+
+3. [ChatGPT](https://chat.openai.com/chat)

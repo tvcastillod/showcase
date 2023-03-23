@@ -10,13 +10,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://localhost:1313/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/" /><meta property="article:section" content="docs" />
 
-<meta property="article:modified_time" content="2023-03-20T20:49:48-05:00" />
+<meta property="article:modified_time" content="2023-03-21T17:50:28-05:00" />
 <title>Coherencia Espacial | Computación Visual</title>
 <link rel="manifest" href="/showcase/manifest.json">
 <link rel="icon" href="/showcase/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/showcase/book.min.4b35fed0bea034bbc19c89c71e14b73fb9c68cfcc586b9382adfb9b7b103ba06.css" integrity="sha256-SzX&#43;0L6gNLvBnInHHhS3P7nGjPzFhrk4Kt&#43;5t7EDugY=" crossorigin="anonymous">
   <script defer src="/showcase/flexsearch.min.js"></script>
-  <script defer src="/showcase/en.search.min.1c770f1ff7bcb866b709290d17553a431b3082bd42e788a792fc63e92635d1bb.js" integrity="sha256-HHcPH/e8uGa3CSkNF1U6Qxswgr1C54inkvxj6SY10bs=" crossorigin="anonymous"></script>
+  <script defer src="/showcase/en.search.min.51eb696d292a6664eaf23ecbdd6042335ac376bd3d112fb5de745e37c83ae31d.js" integrity="sha256-UetpbSkqZmTq8j7L3WBCM1rDdr09ES&#43;13nReN8g64x0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -123,19 +123,6 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/" class="active">Coherencia Espacial</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
     <a href="/showcase/docs/secciones/ilusiones-visuales/coloraci%C3%B3n/" class="">Coloración</a>
   
 
@@ -149,7 +136,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/showcase/docs/secciones/ilusiones-visuales/bandas-mach/" class="">Bandas Mach</a>
+    <a href="/showcase/docs/secciones/ilusiones-visuales/Coherencia-espacial/" class="active">Coherencia Espacial</a>
   
 
         </li>
@@ -163,6 +150,19 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/showcase/docs/secciones/ilusiones-visuales/percepci%C3%B3n-de-profundidad/" class="">Percepción De Profundidad</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/showcase/docs/secciones/ilusiones-visuales/bandas-mach/" class="">Bandas Mach</a>
   
 
         </li>
@@ -351,6 +351,7 @@ https://github.com/alex-shpak/hugo-book
         </li>
         <li><a href="#5-fragmentos-de-código">5. Fragmentos de código</a></li>
         <li><a href="#conclusiones">Conclusiones</a></li>
+        <li><a href="#7-bibliografía">7. Bibliografía</a></li>
       </ul>
     </li>
   </ul>
@@ -560,12 +561,38 @@ Para comparar los métodos se puede observar ambios programas con una imágen
 <p>Aquí un ejemplo de fragmento de código generado por ChatGPT que no se utilizó en el ejercicio:</p>
 <details ><summary>Función obtener color más frecuente</summary>
   <div class="markdown-inner">
-    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"></code></pre></div>
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getMostCommonColorInBlock</span>(<span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">blockSize</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">colorCounts</span> <span style="color:#f92672">=</span> {};
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">x</span>; <span style="color:#a6e22e">i</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">blockSize</span>; <span style="color:#a6e22e">i</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">y</span>; <span style="color:#a6e22e">j</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">blockSize</span>; <span style="color:#a6e22e">j</span><span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">c</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">img</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">i</span>, <span style="color:#a6e22e">j</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">colorKey</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">colorCounts</span>[<span style="color:#a6e22e">colorKey</span>]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">colorCounts</span>[<span style="color:#a6e22e">colorKey</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>      } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">colorCounts</span>[<span style="color:#a6e22e">colorKey</span>]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">maxCount</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">mostCommonColor</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">let</span> <span style="color:#a6e22e">colorKey</span> <span style="color:#66d9ef">in</span> <span style="color:#a6e22e">colorCounts</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">colorCounts</span>[<span style="color:#a6e22e">colorKey</span>] <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">maxCount</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">maxCount</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">colorCounts</span>[<span style="color:#a6e22e">colorKey</span>];
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">mostCommonColor</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">colorKey</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;,&#34;</span>).<span style="color:#a6e22e">map</span>(Number);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">color</span>(<span style="color:#a6e22e">mostCommonColor</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
   </div>
 </details>
 
 <p align="justify">
-Como se puede notar la función tiene una comploejidad muy alta y casi no se podía ejectar nisiquiera con una imágen, adicional a esto el ejercicio de spatial coherence juega es con un color aleatorio del cuadro que representa y no con el más común por lo que ya con los cambios requeridos implementados quedó así:
+Esto por lo que Spathial_Coherence no busca el color más común en cada bloque de pixeles, sino que elige un color arbitrario para cada bloque. Y esta función hacía que la complejidad del algoritmo fuera muy alta, tanto que incluso se demoraba ejecutando para una sola imagen.
+</p>
+<p align="justify">
+Ya con los cambios requeridos y ajustes efectuados, la implementación del ejercicio quedó así:
 </p>
 <details ><summary>Función spathialCoherence</summary>
   <div class="markdown-inner">
@@ -599,6 +626,41 @@ Como se puede notar la función tiene una comploejidad muy alta y casi no se pod
   </div>
 </details>
 
+<br>
+Para lo que sí fue de gran utilidad ChatGPT fue para generar pequeños componentes del programa como por ejemplo la descomposición de un video en imágenes,no fue utilizada exactamente igual pero en su momento fue de gran apoyo:
+<details ><summary>Función para descomponer un video en imágenes</summary>
+  <div class="markdown-inner">
+    <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">video</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">totalFrames</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">100</span>; <span style="color:#75715e">// número total de fotogramas a extraer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">currentFrame</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// fotograma actual
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setup</span>() {
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">createCanvas</span>(<span style="color:#ae81ff">640</span>, <span style="color:#ae81ff">480</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">video</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">createVideo</span>(<span style="color:#e6db74">&#39;mi_video.mp4&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">video</span>.<span style="color:#a6e22e">hide</span>(); <span style="color:#75715e">// oculta el elemento &lt;video&gt; en la página
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">video</span>.<span style="color:#a6e22e">play</span>(); <span style="color:#75715e">// comienza a reproducir el video
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">draw</span>() {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">currentFrame</span> <span style="color:#f92672">&lt;</span> <span style="color:#a6e22e">totalFrames</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">filename</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;frame_&#39;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">nf</span>(<span style="color:#a6e22e">currentFrame</span>, <span style="color:#ae81ff">4</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.png&#39;</span>; <span style="color:#75715e">// nombre del archivo de imagen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">x</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">y</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">w</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">width</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">h</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">height</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">image</span>(<span style="color:#a6e22e">video</span>, <span style="color:#a6e22e">x</span>, <span style="color:#a6e22e">y</span>, <span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">h</span>); <span style="color:#75715e">// dibuja el video en el lienzo
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">saveCanvas</span>(<span style="color:#a6e22e">filename</span>); <span style="color:#75715e">// guarda el fotograma actual como imagen
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">currentFrame</span><span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">video</span>.<span style="color:#a6e22e">time</span>(<span style="color:#a6e22e">currentFrame</span> <span style="color:#f92672">/</span> <span style="color:#a6e22e">totalFrames</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">video</span>.<span style="color:#a6e22e">duration</span>()); <span style="color:#75715e">// cambia el tiempo del video
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">video</span>.<span style="color:#a6e22e">stop</span>(); <span style="color:#75715e">// detiene la reproducción del video
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">noLoop</span>(); <span style="color:#75715e">// detiene el bucle de dibujo
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div>
+  </div>
+</details>
+
 <h2 id="conclusiones">
   Conclusiones
   <a class="anchor" href="#conclusiones">#</a>
@@ -617,8 +679,26 @@ Como se puede notar la función tiene una comploejidad muy alta y casi no se pod
 </p>
 <br>
 <p align="justify">
-4. ChatGPT es una herramienta muy útil para generar código, pero no es tan útil para generar código de manera automática, ya que el código generado no es muy útil y no se puede ejecutar, por lo que se debe hacer un proceso de limpieza y de adaptación del código generado para que sea útil y se pueda ejecutar.
+4. ChatGPT es una herramienta muy útil par explicar funciones y temas, pero no es tan útil para generar código de manera automática, ya que el código generado no es muy útil o no se puede ejecutar, por lo que se debe hacer un proceso de limpieza y de adaptación del código generado para que realice lo que se quiere.
 </p>
+<h2 id="7-bibliografía">
+  7. Bibliografía
+  <a class="anchor" href="#7-bibliograf%c3%ada">#</a>
+</h2>
+<blockquote>
+<ol>
+<li>
+<p><a href="https://p5js.org/reference/">https://p5js.org/reference/</a>
+<br></p>
+</li>
+<li>
+<p><a href="https://visualcomputing.github.io/docs/visual_illusions/spatial_coherence/">VisualComputing</a>
+<br></p>
+</li>
+<li>
+<p><a href="https://chat.openai.com/chat">ChatGPT</a></p>
+</li>
+</ol>
 </article>
  
       
@@ -628,9 +708,9 @@ Como se puede notar la función tiene una comploejidad muy alta y casi no se pod
   <div class="flex flex-wrap justify-between">
 
 
-  <div><a class="flex align-center" href="https://github.com/visualcomputing/showcase/commit/fa9a336b1c377433c5575c6a40bcaf710bf0ee54" title='Last modified by malejaj | March 20, 2023' target="_blank" rel="noopener">
+  <div><a class="flex align-center" href="https://github.com/visualcomputing/showcase/commit/8db786800a45729772d84b8a1303bc228b5f75d1" title='Last modified by malejaj | March 21, 2023' target="_blank" rel="noopener">
       <img src="/showcase/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>March 20, 2023</span>
+      <span>March 21, 2023</span>
     </a>
   </div>
 
@@ -680,6 +760,7 @@ Como se puede notar la función tiene una comploejidad muy alta y casi no se pod
         </li>
         <li><a href="#5-fragmentos-de-código">5. Fragmentos de código</a></li>
         <li><a href="#conclusiones">Conclusiones</a></li>
+        <li><a href="#7-bibliografía">7. Bibliografía</a></li>
       </ul>
     </li>
   </ul>
