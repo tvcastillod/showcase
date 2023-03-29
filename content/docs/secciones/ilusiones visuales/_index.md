@@ -8,7 +8,7 @@ weight: 2
 
 <blockquote>
 <p style='text-align: justify;'>
-En este primer informe académico se aborda el tema de ilusiones visuales, centrándose en cinco subtemas específicos: Coloración, Bandas de Mach, Enmascaramiento, Coherencia Espacial y Percepción de Profundidad. El objetivo principal de esta serie de ejercicios es explorar el proceso de percepción y representación de imágenes visuales en el cerebro humano y cómo ciertos patrones, colores y formas pueden engañar a nuestro sistema visual, generando ilusiones que no corresponden a la realidad.  
+En este primer informe académico se aborda el tema de ilusiones visuales, centrándose en seis subtemas específicos: Coloración, Bandas de Mach, Enmascaramiento, Coherencia Espacial, Percepción de Profundidad y Cuantificación del Color. El objetivo principal de esta serie de ejercicios es explorar el proceso de percepción y representación de imágenes visuales en el cerebro humano y cómo ciertos patrones, colores y formas pueden engañar a nuestro sistema visual, generando ilusiones que no corresponden a la realidad.  
 </p>
 <br>
 <p style='text-align: justify;'>
