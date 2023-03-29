@@ -1,5 +1,6 @@
 ---
 bookCollapseSection: true
+weight: 2
 ---
 ## Primer reporte académico - Ilusiones visuales
 
