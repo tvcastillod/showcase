@@ -10,7 +10,7 @@ La técnica de pixelar imágenes ha sido utilizada desde hace décadas en divers
 <br>
 En los últimos años, ha surgido un enfoque denominado "Spatial coherence" (coherencia espacial), que se enfoca en preservar la información visual de la imagen original, mientras se reduce la resolución. En lugar de simplemente promediar los colores de cada bloque de píxeles, como se hace en la técnica de "color averaging", la técnica de "spatial coherence" utiliza un solo color arbitrario para cada bloque, con el objetivo de mantener la coherencia visual en toda la imagen.
 <br>
-Esta técnica ha ganado popularidad en el ámbito del arte digital y la creación de gráficos por ordenador, ya que permite crear imágenes con un aspecto único y creativo, mientras se reduce la cantidad de información necesaria para representar la imagen. En esta página se tratará de comparar estas dos técnicas para una imagen o video
+Esta técnica ha ganado popularidad en el ámbito del arte digital y la creación de gráficos por ordenador, ya que permite crear imágenes con un aspecto único y creativo, mientras se reduce la cantidad de información necesaria para representar la imagen. En esta página se tratará de comparar estas dos técnicas para una imagen o video.
 </p>
 </blockquote>
 <br>
@@ -64,7 +64,7 @@ spatial coherence
 <blockquote>
 <p style = 'text-align: justify;'>
 En segundo lugar para esta parte del ejercicio no se ha logrado el programa con un video ya que es muy pesado y se queda sin recursos fácilmente,por lo que se ha hecho con una imagen, en la cual se puede observar que al aumentar el tamaño de los bloques de pixeles(disminuir la cantidad de bloques), la imagen se vuelve más borrosa, y al disminuir el tamaño de los bloques de pixeles(aumentar la cantidad de bloques), la imagen se vuelve más nítida.
-Para comparar los métodos se puede observar ambios programas con una imágen
+Para comparar los métodos se puede observar ambos programas con una imagen.
 </blockquote>
 </p>
 
@@ -101,7 +101,7 @@ function getMostCommonColorInBlock(x, y, blockSize) {
 
 {{</details>}}
 <p align="justify">
-Esto por lo que Spathial_Coherence no busca el color más común en cada bloque de pixeles, sino que elige un color arbitrario para cada bloque. Y esta función hacía que la complejidad del algoritmo fuera muy alta, tanto que incluso se demoraba ejecutando para una sola imagen.
+Esto por lo que Spatial_Coherence no busca el color más común en cada bloque de pixeles, sino que elige un color arbitrario para cada bloque. Y esta función hacía que la complejidad del algoritmo fuera muy alta, tanto que incluso se demoraba ejecutando para una sola imagen.
 </p>
 
 
@@ -109,7 +109,7 @@ Esto por lo que Spathial_Coherence no busca el color más común en cada bloque 
 Ya con los cambios requeridos y ajustes efectuados, la implementación del ejercicio quedó así:
 </p>
 
-{{< details title="Función spathialCoherence " open=false >}}
+{{< details title="Función spatialCoherence " open=false >}}
 ``` javascript
 
 function pixelateSpatialCoherence(originalImg) {
@@ -188,7 +188,7 @@ function draw() {
 </p>
 <br>
 <p align="justify">
-3. Para observar mejor la diferencia entre esos dos métodos se puede intentar palarelizar el proceso de spatial coherence, ya que el proceso es lineal es demasiado costoso computacionalmente, por lo que se puede intentar paralelizar el proceso para que sea más rápido y se pueda observar mejor la diferencia entre los dos métodos.
+3. Para observar mejor la diferencia entre esos dos métodos se puede intentar paralelizar el proceso de spatial coherence, ya que el proceso es lineal es demasiado costoso computacionalmente, por lo que se puede intentar paralelizar el proceso para que sea más rápido y se pueda observar mejor la diferencia entre los dos métodos.
 </p>
 <br>
 <p align="justify">

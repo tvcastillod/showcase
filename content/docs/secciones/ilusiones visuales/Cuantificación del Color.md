@@ -18,7 +18,7 @@ weight: 1
 
 #### Dithering aleatorio
 
-<p style="text-align: justify"> Este método es análogo al thresholding básico, la única diferencia es que en vez de tener un valor de umbral fijo, se tiene un valor aleatorio entre 1 y 256 para cada pixel. En este caso no tenemos el problema de hayar el valor indicado de umbral sin embargo el "ruido blanco" que se genera por la aleatoriedad hace que el detalle de la imagen se pierda.
+<p style="text-align: justify"> Este método es análogo al thresholding básico, la única diferencia es que en vez de tener un valor de umbral fijo, se tiene un valor aleatorio entre 1 y 256 para cada pixel. En este caso no tenemos el problema de hallar el valor indicado de umbral sin embargo el "ruido blanco" que se genera por la aleatoriedad hace que el detalle de la imagen se pierda.
 </p>
 
 #### Trabajo previo
@@ -40,9 +40,9 @@ Investigar e implementar algunas aplicaciones visuales de dither.
 <p align = "center"><img src = "/showcase/img/example_img_hist.png" alt="" width="450px"><br>Fig.1 - imagen ejemplo con su respectivo histograma de pixeles</p>
 <p style="text-align: justify"> Haciendo un análisis general del histograma, podemos notar que hay un pico en pixeles con un valor alrededor de 80, y podemos deducir que estos corresponde al fondo de la imagen, ya que es el color que predomina en la imagen. Con esta simple observación, podemos conjeturar que el valor óptimo de umbral está alrededor 100, pues es allí donde se marca una diferencia de valores en los pixeles. Veamos cómo se ve la imagen con diferentes valores de umbral, en particular en el rango de 100 a 150.
 <p align = "center"><img src = "/showcase/img/example_img_u.png" alt="" width="500px"><br>Fig.2 - imagen ejemplo con su respectivo histograma de pixeles</p>
-<p style="text-align: justify">Podemos evidenciar que el valor de umbral supuesto es adecuado. Ahora, si intentáramos realizar un análisis similar para una imágen que no cumple con las mismas condiciones sugeridas al inicio, el umbral ya no es tan evidente y de hecho, la imagen resultante en general no es tan clara(vease la figura 3).</p>
+<p style="text-align: justify">Podemos evidenciar que el valor de umbral supuesto es adecuado. Ahora, si intentáramos realizar un análisis similar para una imagen que no cumple con las mismas condiciones sugeridas al inicio, el umbral ya no es tan evidente y de hecho, la imagen resultante en general no es tan clara(véase la figura 3).</p>
 
-<p align = "center"><img src = "/showcase/img/example2_img_hist_u.png" alt="" width="500px"><br>Fig.3 - histograma de pixeles e imagenes con umbral igual a 100 125 y 150</p>
+<p align = "center"><img src = "/showcase/img/example2_img_hist_u.png" alt="" width="500px"><br>Fig.3 - histograma de pixeles e imágenes con umbral igual a 100 125 y 150</p>
 
 <p style="text-align: justify">Esto ocurre ya que los pixeles de la imagen son más homogéneos, lo cual hace que no se puedan diferencia tan fácilmente los objetos en la imagen, lo cual se puede evidenciar en el histograma, el cual no muestra un patrón que nos ayude a diferenciar las zonas de la imagen como en el anterior ejemplo.</p>
 
@@ -61,11 +61,11 @@ Investigar e implementar algunas aplicaciones visuales de dither.
 Ahora, veamos el algoritmo de dithering aleatorio. En este caso ya no tenemos control directo sobre el valor del umbral, ya que este depende únicamente de cómo se generen los números aleatorios para cada pixel. Al igual que el método anterior, este algoritmo es más conveniente para imágenes donde los objetos se distinguen fácilmente del fondo, pues de lo contrario, el ruido que se genera hace más difícil distinguir los objetos en la imagen. Veamos un primer ejemplo de esto:
 <p align = "center"><img src = "/showcase/img/img_dit_aleat.png" alt="" width="500px"><br>Fig.3 - imagen generado con dithering aleatorio</p>
 
-Podemos observar que la imagen se puede distinguir fácilmente y es bastante similar a la original, incluyendo detalles como las zonas oscuras al interior de los objetos. Es importante tener en cuenta que los valores aletorios se están generando en un rango de 0 a 255 pixeles, pero ¿qué pasa si este rango cambia? tal vez podríamos lograr un balance entre el primer método y el actual. Veamos qué sucede si cambiamos el rango en el que se genera el umbral aletorio, en una imagen con mayor detalle y rango de pixeles.
+Podemos observar que la imagen se puede distinguir fácilmente y es bastante similar a la original, incluyendo detalles como las zonas oscuras al interior de los objetos. Es importante tener en cuenta que los valores aleatorios se están generando en un rango de 0 a 255 pixeles, pero ¿qué pasa si este rango cambia? tal vez podríamos lograr un balance entre el primer método y el actual. Veamos qué sucede si cambiamos el rango en el que se genera el umbral aleatorio, en una imagen con mayor detalle y rango de pixeles.
 
-<p align = "center"><img src = "/showcase/img/img_dit_aleat2.png" alt="" width="400px"><br>Fig.3 - imagen con valores de umbral aletorio en distintos rangos</p>
+<p align = "center"><img src = "/showcase/img/img_dit_aleat2.png" alt="" width="400px"><br>Fig.3 - imagen con valores de umbral aleatorio en distintos rangos</p>
 
-Al limitar el rango de aleatoridad, se reduce la cantidad de ruido que se genera, por lo que podemos notar una mejora significativa en la imagen. Vemos que detalles como sombras o ciertos objetos que probablemente no se podrían ver con claridad usando thresholding. Aquí, lo interesante es identificar un rango ideal para lograr la mayor cantidad de detalles con la menor cantidad de ruido posible.
+Al limitar el rango de aleatoriedad, se reduce la cantidad de ruido que se genera, por lo que podemos notar una mejora significativa en la imagen. Vemos que detalles como sombras o ciertos objetos que probablemente no se podrían ver con claridad usando thresholding. Aquí, lo interesante es identificar un rango ideal para lograr la mayor cantidad de detalles con la menor cantidad de ruido posible.
 
 Notemos que para la primera imagen utilizada(figura 1), usando thresholding obtenemos un resultado adecuado, sin embargo, usando dithering aletorio y limitando el rango del umbral podemos obtener una imagen un poco más detallada.
 
@@ -331,8 +331,8 @@ let newImg; //imagen transformada
 let slider;
 let pxs = new Array(256); //arreglo de cantidad de cada pixel
 let modified = false;
-let rmin = 1; //rango minimo del umbral
-let rmax = 256; //rango maximo del umbral
+let rmin = 1; //rango mínimo del umbral
+let rmax = 256; //rango máximo del umbral
 
 function preload() {
   img = loadImage("/showcase/sketches/dithering/paleta_grises.png");
@@ -469,7 +469,7 @@ function mySelectEvent() {
 
 <div style='text-align: justify;'>
 
-Para el algoritmo de ditherind aletorio de reutilizó gran parte del código para thresholding. El único cambio significativo es en la variable del umbral `umb` la cual esta vez es generada de manera aleatoria en un rango entre `rmin` y `rmax`, valores que pueden ser modificadas por el usuario.
+Para el algoritmo de dithering aleatorio de reutilizó gran parte del código para thresholding. El único cambio significativo es en la variable del umbral `umb` la cual esta vez es generada de manera aleatoria en un rango entre `rmin` y `rmax`, valores que pueden ser modificadas por el usuario.
 
 ```javascript
 umb = random(rmin, rmax);
@@ -480,13 +480,13 @@ umb = random(rmin, rmax);
 ## Conclusión
 
 <div style='text-align: justify;'>
-La implementación del dithering es una buena manera de tener un primer acercamiento al concepto de cuantización de color. Este nos permite representar una imagen en escala de grises como una imagen formada únicamente con pixeles de colores blanco y negro. Existen diversos métodos de dithering, entre ellos están el thresholding o dithering promedio y el dithering aleatorio. Con ambos métodos podemos obtener una buena representación de imágenes con poco nivel de detalle y con alto contraste entre los objetos que la componen. Sin embargo, para imágenes donde los colores son más homogénemos y hay una mayor cantidad de detalles, estos algoritmos suelen fallar. Este problema se pueda solucionar parcialmente utilizando dithering aleatorio para un rango de valores limitado, lo cual ayuda a disminuir el ruido generado por la aleatoriedad, dando con resultado una imagen con más detalle del que se puede obtener con el algoritmo de thresholding.
+La implementación del dithering es una buena manera de tener un primer acercamiento al concepto de cuantización de color. Este nos permite representar una imagen en escala de grises como una imagen formada únicamente con pixeles de colores blanco y negro. Existen diversos métodos de dithering, entre ellos están el thresholding o dithering promedio y el dithering aleatorio. Con ambos métodos podemos obtener una buena representación de imágenes con poco nivel de detalle y con alto contraste entre los objetos que la componen. Sin embargo, para imágenes donde los colores son más homogéneos y hay una mayor cantidad de detalles, estos algoritmos suelen fallar. Este problema se pueda solucionar parcialmente utilizando dithering aleatorio para un rango de valores limitado, lo cual ayuda a disminuir el ruido generado por la aleatoriedad, dando con resultado una imagen con más detalle del que se puede obtener con el algoritmo de thresholding.
 </div>
 
 ### Trabajo Futuro
 
 <div style='text-align: justify;'>
-Debido a los diferentes inconvenientes que se generan con una u otra implementación de dithering, han surgido otro tipo de variaciones de este algoritmo, los cuales corrigen algunos problemas o tienen una mejora sustancial en el algoritmo para mejorar la representación de las imágenes. Por esta razón, como trabajo futuro se propone implementar otros tipod de dithering, algunos de los más conocidos incluyen: el dithering ordenado, que usa una matriz para modificar cada pixel y el dithering por difusión de error, que se retroalimenta de la información de los pixeles más cercanos a cada pixel particular. Además, se puede explorar el dithering aplicado en un rango mayor de colores, es decir, utilizar más de dos colores en la generación de una imagen.
+Debido a los diferentes inconvenientes que se generan con una u otra implementación de dithering, han surgido otro tipo de variaciones de este algoritmo, los cuales corrigen algunos problemas o tienen una mejora sustancial en el algoritmo para mejorar la representación de las imágenes. Por esta razón, como trabajo futuro se propone implementar otros tipos de dithering, algunos de los más conocidos incluyen: el dithering ordenado, que usa una matriz para modificar cada pixel y el dithering por difusión de error, que se retroalimenta de la información de los pixeles más cercanos a cada pixel particular. Además, se puede explorar el dithering aplicado en un rango mayor de colores, es decir, utilizar más de dos colores en la generación de una imagen.
 <p align = "center"><img src = "/showcase/img/ditheringmontage.png" alt="" width="400px"><br>Fig.3 - diferentes tipos de dithering</p>
 </div>
 

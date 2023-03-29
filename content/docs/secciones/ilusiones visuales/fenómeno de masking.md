@@ -6,15 +6,15 @@ weight: 2
 
 ## Introducción
 
-<p style="text-align: justify">El masking visual es un fenómeno de percepción visual que se produce cuando la visibilidad de una imagen (objetivo) se ve reducida por la presencia de otra imagen (máscara). A continuación se estudiarpa y realizará la implementación de un kinegrama como acercamiento al fenómeno visual de 'masking'.</p>
+<p style="text-align: justify">El masking visual es un fenómeno de percepción visual que se produce cuando la visibilidad de una imagen (objetivo) se ve reducida por la presencia de otra imagen (máscara). A continuación se estudiará y realizará la implementación de un kinegrama como acercamiento al fenómeno visual de 'masking'.</p>
 
 ### Antecedentes y trabajo previo
 
-<p style="text-align: justify">La palabra kinegrama proviene de "kine", que significa "en movimiento", y "-gram", que significa "dibujo". Consiste en un efecto de animación creado por el movimiento de una superposición transparente a rayas a través de una imagen entrelazada. Cuando la rejilla lineal superpuesta se desplaza por la imagen entrelazada, la imagen inferior parece animarse. Esta técnica se originó en la década de 1890 y la publicación más antigua conocida es un "Motograph Moving Picture Book" de Bliss, Sands & Co, la cual contiene patrones, que dan efecto moiré cuando la transparencia de la banda se mueve a través de la creación de una ilusión de movimiento como el movimiento ondulante del vapor o el giro de las ruedas de un engranaje, como se puede observar en la figura 1.
+<p style="text-align: justify">La palabra kinegrama proviene de "kine", que significa "en movimiento", y "-gram", que significa "dibujo". Consiste en un efecto de animación creado por el movimiento de una superposición transparente a rayas a través de una imagen entrelazada. Cuando la rejilla lineal superpuesta se desplaza por la imagen entrelazada, la imagen inferior parece animarse. Esta técnica se originó en la década de 1890 y la publicación más antigua conocida es un "Motograph Moving Picture Book" de Bliss, Sands & Co, la cual contiene patrones, que dan efecto Moiré cuando la transparencia de la banda se mueve a través de la creación de una ilusión de movimiento como el movimiento ondulante del vapor o el giro de las ruedas de un engranaje, como se puede observar en la figura 1.
 
 <p align = "center"><img src = "/showcase/img/kinegram_example.gif" alt="" width="300"><br>Fig.1 - ejemplo de kinegrama</p>
 
-<p style="text-align: justify">El efecto de Moiré es un patrón de interfecrencia visual que resulta de una distorsión geométrica causada por la superposición de dos patrones similares, dando como resultado un efecto visual oscilante.</p>
+<p style="text-align: justify">El efecto de Moiré es un patrón de interferencia visual que resulta de una distorsión geométrica causada por la superposición de dos patrones similares, dando como resultado un efecto visual oscilante.</p>
 
 <p align = "center"><img src = "/showcase/img/moire_patron.webp" alt="" width="550"><br>Fig.2 - patrón de Moiré resultante de la superposición de dos rejillas con diferentes inclinaciones</p>
 
@@ -22,7 +22,7 @@ weight: 2
 
 A continuación se listan algunos trabajos previos realizados sobre este tema:
 
-- [Kinegram (“Scanimation”)](https://michaelbach.de/ot/mot-scanimation/index.html) es un ejemplo de la implementación de un kinegrama, el programa muestra una única animación y permite modificar parámetros como el ancho de las líneas, el espaciado de las líneas, además de los colores de tanto de la imágen de la animación como de la rejilla.
+- [Kinegram (“Scanimation”)](https://michaelbach.de/ot/mot-scanimation/index.html) es un ejemplo de la implementación de un kinegrama, el programa muestra una única animación y permite modificar parámetros como el ancho de las líneas, el espaciado de las líneas, además de los colores de tanto de la imagen de la animación como de la rejilla.
 - [Kinegram app](https://kinegram.app/) es una aplicación online que nos permite subir nuestras propias imágenes para generar de forma automática el kinegrama, permitiendo modificar atributos como el color de las líneas y la velocidad de la animación.
 
 </div>
@@ -30,7 +30,7 @@ A continuación se listan algunos trabajos previos realizados sobre este tema:
 ## Ejercicio
 
 {{< hint info >}}
-Implementar un kinegrama y algunos de los patrones de Moirés los cuales se acercan al fenómeno visuak del masking.
+Implementar un kinegrama y algunos de los patrones de Moiré los cuales se acercan al fenómeno visual del masking.
 {{< /hint >}}
 
 ### Solución
@@ -45,7 +45,7 @@ Un kinegrama se compone de dos partes:
 
 <div style="text-align: justify"> Primero definimos un patrón de rayas con una orientación, un grosor y un espaciado entre líneas predeterminado, por ejemplo: 
 <p align = "center"><img src = "/showcase/img/grid_lines.png" alt="" width="300"><br>Fig.3 - patrón de rayas verticales, de grosor 4px y espaciado de 2px</p>
-Veamos que la rejilla y el movimiento que tiene son claves para la animación final. Esta está hecha de forma que al dezplazarse, en este caso horizontalmente, los espacios nos permitan ver una parte del patrón y ocultar otra. Veremos a continuación que la imágen que está por debajo consiste en intercalar los diferentes fotogramas que conforman la animación, por lo que el número de fotogramas y el grosor de las líneas de la rejilla está relacionado. Un análisis más detallado de esto se dará más adelante.
+Veamos que la rejilla y el movimiento que tiene son claves para la animación final. Esta está hecha de forma que al desplazarse, en este caso horizontalmente, los espacios nos permitan ver una parte del patrón y ocultar otra. Veremos a continuación que la imagen que está por debajo consiste en intercalar los diferentes fotogramas que conforman la animación, por lo que el número de fotogramas y el grosor de las líneas de la rejilla está relacionado. Un análisis más detallado de esto se dará más adelante.
 </div>
 
 #### Una imagen subyacente con un patrón de rayas
@@ -62,7 +62,7 @@ Veamos que la rejilla y el movimiento que tiene son claves para la animación fi
 
 <p align = "center"><img src="/showcase/img/anim1_paso2-5.png" alt= “” width="85%"><br>Fig.6 - imagen 1 dividida</p>
 
-<p style="text-align: justify">Para la segunda imagen tomaríamos las tiras 2,5,8,11,14,... y para el tercer fotograma las tiras 3,6,9,12,15,... lo cual nos da como resultado las imágnes de la figura 5. En general para el fotograma número k se toman las tiras j tales que j(mod n)=k, con n el número total de fotogramas. Finalmente, superponemos todos las imágenes con el patrón de líneas creado, obteniendo como resultado la figura 8. </p>
+<p style="text-align: justify">Para la segunda imagen tomaríamos las tiras 2,5,8,11,14,... y para el tercer fotograma las tiras 3,6,9,12,15,... lo cual nos da como resultado las imágenes de la figura 5. En general para el fotograma número k se toman las tiras j tales que j(mod n)=k, con n el número total de fotogramas. Finalmente, superponemos todos las imágenes con el patrón de líneas creado, obteniendo como resultado la figura 8. </p>
 
 <p align = "center"><img src="/showcase/img/animal_strip_sequence.png" alt= “” width="90%"><br>Fig.7 - fotogramas con el patrón de líneas</p>
 
@@ -74,7 +74,7 @@ Ahora, respecto al grosor de las líneas que se escogió inicialmente y su relac
 
 <p align = "center"><img src="/showcase/img/fotogramaylineas.png" alt= “” width="80%"><br>Fig.9 - imagen del kinegrama con la rejilla desplazada horizontalmente</p>
 
-Como observasión final, antes de ver la implementación del programa, es importante mencionar que otro factor que influye en la correcta visualización del kinegrama, es la velocidad con la que se desplaza la rejilla. Sin embargo, como este parámetro no se puede modificar en el programa realizado, se deja como algo para mejorar y discutir más adelante.</div>
+Como observación final, antes de ver la implementación del programa, es importante mencionar que otro factor que influye en la correcta visualización del kinegrama, es la velocidad con la que se desplaza la rejilla. Sin embargo, como este parámetro no se puede modificar en el programa realizado, se deja como algo para mejorar y discutir más adelante.</div>
 
 <blockquote>
 
@@ -95,7 +95,7 @@ Observe que en el ejemplo dado, para parámetros un grosor de línea de 10px, au
 </p>
 {{< /hint >}}
 <blockquote>
-<p style="text-align: justify">A continuación se muestran dos ejemplos adicionales de kinegramas generados desde cero, de una rueda girando y unos círculos en movimiento. El proceso en este caso es el mismo, solo que las imagenes en vez de ser cargadas por el usuario fueron generadas automáticamente, dibujando cada imagen y modificandola ligeramente para generar los diferentes fotogramas que conforman la animación completa.</p>
+<p style="text-align: justify">A continuación se muestran dos ejemplos adicionales de kinegramas generados desde cero, de una rueda girando y unos círculos en movimiento. El proceso en este caso es el mismo, solo que las imágenes en vez de ser cargadas por el usuario fueron generadas automáticamente, dibujando cada imagen y modificándola ligeramente para generar los diferentes fotogramas que conforman la animación completa.</p>
 
 {{<p5-iframe sketch="/showcase/sketches/kinegram/kinegram_autogenerated_.js" width="625" height="355">}}
 
@@ -234,7 +234,7 @@ function drawLines(beginX, beginY, strokeW, space) {
 {{< /details >}}
 </br>
 {{< details title="imagen subyacente" open=true >}}
-Las imágenes que carga el usuario se almacenan en un arreglo `frames`. Cuando hay por lo menos una imágen se realiza el proceso de división de los fotogramas con ayuda de `get` para tomar solo una sección de cada imagen. Las imágenes se van intercalando usando `frames[k % frames.length]` que con ayuda de `k` se itera el arreglo.
+Las imágenes que carga el usuario se almacenan en un arreglo `frames`. Cuando hay por lo menos una imagen se realiza el proceso de división de los fotogramas con ayuda de `get` para tomar solo una sección de cada imagen. Las imágenes se van intercalando usando `frames[k % frames.length]` que con ayuda de `k` se itera el arreglo.
 
 ```javascript
 if (frames.length > 0) {
@@ -474,14 +474,14 @@ function draw() {
 
 {{< /details >}}
 
-Un detalle importante a mencionar, es el rendimiento del programa. Debido a que todo el proceso de dibujar el patrón superpuesto y la imagen subyacente se realizan en la función `draw()` y requieren de varias funciones `for`, en ocasiones la visualización de la animación se interumpe, haciendo que no se vea siempre tan fluida. Esto se puede deber principalmente a elementos como los checkbox, los sliders y el menu dropdown que modifican parámetros de los dibujos o imagenes que se generan en la función principal de dibujar.
+Un detalle importante a mencionar, es el rendimiento del programa. Debido a que todo el proceso de dibujar el patrón superpuesto y la imagen subyacente se realizan en la función `draw()` y requieren de varias funciones `for`, en ocasiones la visualización de la animación se interrumpe, haciendo que no se vea siempre tan fluida. Esto se puede deber principalmente a elementos como los checkbox, los sliders y el menu dropdown que modifican parámetros de los dibujos o imágenes que se generan en la función principal de dibujar.
 
 </div>
 
 ## Conclusión
 
 <div style='text-align: justify;'>
-Los kinegramas son una forma interesante de generar animaciones, además de ser un efecto que nos da un acercamiento al fenómeno visual de masking y los patrones de Moiré. Este se compone de dos partes importantes: un patrón de líneas superpuesto y una imágen subyacente con un patrón similar. Los valores del espacio y el grosor de las líneas de la rejilla son determinantes para garantizar una buena animación, además de la velocidad con la que se desplaza la rejilla. Estos factores puede hacer que la animación se vea nítida y fluida, o que por el contrario falle y no se logre visualizar correctamente el movimiento, por lo que sería interesante trabajar más adelante en una forma de establecer una relación más exacta entre estos parámetros para lograr una animación perfecta.</div>
+Los kinegramas son una forma interesante de generar animaciones, además de ser un efecto que nos da un acercamiento al fenómeno visual de masking y los patrones de Moiré. Este se compone de dos partes importantes: un patrón de líneas superpuesto y una imagen subyacente con un patrón similar. Los valores del espacio y el grosor de las líneas de la rejilla son determinantes para garantizar una buena animación, además de la velocidad con la que se desplaza la rejilla. Estos factores puede hacer que la animación se vea nítida y fluida, o que por el contrario falle y no se logre visualizar correctamente el movimiento, por lo que sería interesante trabajar más adelante en una forma de establecer una relación más exacta entre estos parámetros para lograr una animación perfecta.</div>
 
 ### Trabajo Futuro
 
@@ -493,7 +493,7 @@ Un detalle interesante sobre los kinegramas es la forma del patrón superpuesto,
   <br>
   Fig.10 - Ejemplo de kinegramas con un patrón de líneas diferente
 </p>
-Con esto en mente, algo que se puede mejorar y trabajar más adelante es dar la posibilidad de escoger entre diferentes tipo de rejillas para generar la imágen del kinegrama. Para esto es conveniente volver a estudiar el cómo se realiza un kinegrama y ver si para otro tipo de rejillas el procedimiento es análogo o debe realizarce algún ajuste adicional.
+Con esto en mente, algo que se puede mejorar y trabajar más adelante es dar la posibilidad de escoger entre diferentes tipo de rejillas para generar la imagen del kinegrama. Para esto es conveniente volver a estudiar el cómo se realiza un kinegrama y ver si para otro tipo de rejillas el procedimiento es análogo o debe realizarse algún ajuste adicional.
 </div>
 
 ## Referencias

@@ -26,7 +26,7 @@ En cuanto a la observación, podemos notar la presencia de este efecto en nuestr
 <blockquote>
 <p style = 'text-align: justify;'>
 Para la realización de este ejercicio se utilizó el lenguaje de programación javascript , el cual permite la creación de gráficos y animaciones interactivas en 2D y 3D. Para la creación de la ilusión se utilizó la librería p5.js, con un decorador WEBGL que permite la creación de gráficos en 3D y se usó la técnica de Perlin noise para la generación de terrenos. <br>
-El ruido Perlin es una funcón matemática que utiliza la interpolación entre varios grqdientes de vectores para generar una función de ruido. Esta función se utiliza para generar texturas, efectos de movimiento, terrenos, etc. 
+El ruido Perlin es una función matemática que utiliza la interpolación entre varios gradientes de vectores para generar una función de ruido. Esta función se utiliza para generar texturas, efectos de movimiento, terrenos, etc. 
 </p>
 </blockquote>
 
@@ -43,7 +43,7 @@ Develop a terrain visualization application. Check out the 3D terrain generation
 El programa crea una malla de puntos que se ajustan a los valores generados por la función de ruido Perlin. Además permite al usuario controlarla apariencia del terreno incluyendo  el tamaño de los cuadrados de la malla, la velocidad de cambio del ruido Perlin y la capacidad de dibujar bandas de color para mejorar la percepción del relieve. También hay opciones para activar y desactivar el dibujo de líneas de contorno.
 El cuadro "Band" permite mostrar o no las delimitaciones de los cuadros entonces si está seleccionado se dibujan los triángulos con diferentes colores en cada vértice y si no lo está se dibujan tiras con un solo tono de color para cada fila de puntos en el terreno.
 El cuadro "stroke" permite mostrar o no las líneas de contorno del terreno.
-Los slider son el prmero para controlar la escala del terreno al cambiarlo se cambia el tamaño de los cuadros que conforman el terreno, a mayor tamaño menor será el detalle. Y el segundo slider controla la velocidad a la que el terreno cambia, la velocidad del ruiido Perlin se mueve en el eje Y.
+Los slider son el primero para controlar la escala del terreno al cambiarlo se cambia el tamaño de los cuadros que conforman el terreno, a mayor tamaño menor será el detalle. Y el segundo slider controla la velocidad a la que el terreno cambia, la velocidad del ruido Perlin se mueve en el eje Y.
 </blockquote>
 
 {{<p5-iframe sketch="/showcase/sketches/Mach_band/Mach.js" width="620" height="630" >}}
@@ -124,7 +124,7 @@ function verify_stroke(){
 </p>
 
 <p style = 'text-align: justify;'>
-3.Con el ejercicio realizado tyambién se demuestra una gran versatilidad que tiene la biblioteca de p5.js ya que permite la creación de gráficos en 2D y 3D, en la web. Además el hecho de estar basada en javascript permite que sea accesible para una amplia gama de desarrolladores.
+3.Con el ejercicio realizado también se demuestra una gran versatilidad que tiene la biblioteca de p5.js ya que permite la creación de gráficos en 2D y 3D, en la web. Además el hecho de estar basada en javascript permite que sea accesible para una amplia gama de desarrolladores.
 </p>
 </blockquote>
 

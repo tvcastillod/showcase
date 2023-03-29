@@ -419,7 +419,7 @@ Mediante este simple ejercicio de simulación se pudieron evidenciar las dificul
 <br>
 
 <p align="justify">
-Además, aunque esta herramienta permite la identificación del problema, no es una solución definitiva, ya que, el siquiente paso sería generar una herramienta que permita la transformación de las imágenes de manera automática, para que las personas con daltonismo puedan visualizarlas sin dificultades.
+Además, aunque esta herramienta permite la identificación del problema, no es una solución definitiva, ya que, el siguiente paso sería generar una herramienta que permita la transformación de las imágenes de manera automática, para que las personas con daltonismo puedan visualizarlas sin dificultades.
 </p>
 
 <br>
