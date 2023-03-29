@@ -91,7 +91,7 @@ Para ver en movimiento el patrón anterior, guarde la imagen y súbala como un f
 {{< hint info >}}
 
 <p style='text-align: justify;'>
-Observe que en el ejemplo dado, para parámetros (6, 3) de grosor y espaciado de las líneas, la animación también logra verse correctamente.
+Observe que en el ejemplo dado, para parámetros un grosor de línea de 10px, aunque no es tan clara, la animación también logra verse correctamente.
 </p>
 {{< /hint >}}
 <blockquote>
@@ -498,9 +498,9 @@ Con esto en mente, algo que se puede mejorar y trabajar más adelante es dar la 
 
 ## Referencias
 
-1. Enevoldsen, Keith. "Kinegrams". From https://thinkzone.wlonk.com/Kinegram/Kinegram.htm
-2. Bach, Michael. "Kinegram (“Scanimation”)" From https://michaelbach.de/ot/mot-scanimation/index.html
-3. Sarcone, Gianni A. "Kinegrams, Art in Motion." From Sarcone’s Studio -- A Sarcone & Waeber Web Resource. http://giannisarcone.com/Kinegrams.html
-4. Wikipedia contributors. "Barrier-grid animation and stereography". From https://en.wikipedia.org/wiki/Barrier-grid_animation_and_stereography
-5. Sacone, G. "Kinegrams: A New Way To Animate Still Images". https://www.behance.net/gallery/29805617/Kinegrams-A-New-Way-To-Animate-Still-Images
-6. Naturaprint. "¿Qué es el efecto Moiré o Muaré? y como evitarlo". https://imprentaonline-naturaprint.com/efecto-moire-muare
+1. Enevoldsen, Keith. "Kinegrams". Tomado de https://thinkzone.wlonk.com/Kinegram/Kinegram.htm
+2. Bach, Michael. "Kinegram (“Scanimation”)". Tomado de https://michaelbach.de/ot/mot-scanimation/index.html
+3. Sarcone, Gianni A. "Kinegrams, Art in Motion". Tomado de Sarcone’s Studio -- A Sarcone & Waeber Web Resource. http://giannisarcone.com/Kinegrams.html
+4. Wikipedia contributors. "Barrier-grid animation and stereography". Tomado de https://en.wikipedia.org/wiki/Barrier-grid_animation_and_stereography
+5. Sacone, G. "Kinegrams: A New Way To Animate Still Images". Tomado de https://www.behance.net/gallery/29805617/Kinegrams-A-New-Way-To-Animate-Still-Images
+6. Naturaprint. "¿Qué es el efecto Moiré o Muaré? y como evitarlo". Tomado de https://imprentaonline-naturaprint.com/efecto-moire-muare

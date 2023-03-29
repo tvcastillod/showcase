@@ -4,7 +4,6 @@ let slider;
 let pxs = new Array(256); //arreglo de cantidad de cada pixel
 let modified = false;
 let thr = 50; //valor del umbral
-let maxval = 255;
 let cur_thr;
 
 function preload() {
@@ -29,7 +28,7 @@ function dst(x, y) {
   //calcula el pixel destino
   if (src(x, y) > thr) {
     //condición thresholding
-    return color(maxval, maxval, maxval);
+    return color(255, 255, 255);
   } else {
     return color(0, 0, 0);
   }
@@ -43,7 +42,7 @@ function src(x, y) {
 
 function updateImg() {
   newImg = createGraphics(img.width, img.height);
-  newImg.loadPixels();
+  img.loadPixels();
   for (let i = 0; i <= img.width; i++) {
     for (let j = 0; j <= img.height; j++) {
       newImg.set(i, j, dst(i, j));

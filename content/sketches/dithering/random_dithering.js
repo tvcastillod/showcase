@@ -3,8 +3,8 @@ let newImg; //imagen transformada
 let slider;
 let pxs = new Array(256); //arreglo de cantidad de cada pixel
 let modified = false;
-let thr = 50; //valor del umbral
-let maxval = 255;
+let rmin = 1; //rango minimo del umbral
+let rmax = 256; //rango maximo del umbral
 
 function preload() {
   img = loadImage("/showcase/sketches/dithering/paleta_grises.png");
@@ -14,15 +14,25 @@ function setup() {
   createCanvas(600, 400);
   background("#C0DDEB");
   input = createFileInput(handleFile);
-  input.position(10, height - 40);
+  input.position(10, height - 80);
+  button = createButton("generar nueva imagen");
+  button.position(width / 2, height - 80);
+  button.mousePressed(generateNewImg);
+  sel = createSelect();
+  sel.position(width / 2 + 160, height - 80);
+  sel.option("0 - 255");
+  sel.option("50 - 200");
+  sel.option("100 - 255");
+  sel.selected("0 - 255");
+  sel.changed(mySelectEvent);
   modified = true;
 }
 
 function dst(x, y) {
   //calcula el pixel destino
-  if (src(x, y) > thr) {
-    //condición thresholding
-    return color(maxval, maxval, maxval);
+  if (src(x, y) > umb) {
+    //condición de dithering
+    return color(255, 255, 255);
   } else {
     return color(0, 0, 0);
   }
@@ -39,7 +49,7 @@ function updateImg() {
   newImg.loadPixels();
   for (let i = 0; i <= img.width; i++) {
     for (let j = 0; j <= img.height; j++) {
-      thr = random(0, 256);
+      umb = random(rmin, rmax);
       newImg.set(i, j, dst(i, j));
     }
   }
@@ -102,5 +112,26 @@ function getPixelInfo() {
     for (let j = 0; j <= img.height; j++) {
       pxs[get(i, j)[0]] += 1;
     }
+  }
+}
+
+function generateNewImg() {
+  modified = true;
+}
+
+function mySelectEvent() {
+  let item = sel.value();
+  if (item == "0 - 255") {
+    rmin = 1;
+    rmax = 256;
+  } else if (item == "100 - 255") {
+    rmin = 100;
+    rmax = 255;
+  } else if (item == "50 - 200") {
+    rmin = 50;
+    rmax = 200;
+  } else {
+    rmin = 50;
+    rmax = 200;
   }
 }
