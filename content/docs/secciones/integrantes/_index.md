@@ -4,4 +4,3 @@ weight: 1
 ---
 ## Integrantes del grupo
 
-{{<section>}}
