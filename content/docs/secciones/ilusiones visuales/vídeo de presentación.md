@@ -2,7 +2,7 @@
 weight: 1
 ---
 
-<h1> Vídeo de presentación: </h1>
+<h1> Video de presentación: </h1>
 
 <br>
 
