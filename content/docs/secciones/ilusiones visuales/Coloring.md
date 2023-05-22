@@ -8,9 +8,7 @@ weight: 2
 
 <blockquote>
 <div style="text-align: justify">
-Los modos de fusión se utilizan para controlar cómo se mezclan dos colores entre sí. En la edición de imágenes digitales, estos modos se utilizan para componer imágenes o generar efectos que permiten oscurecer, aclarar o resaltar ciertos colores de una imagen.<br>
-Un color en glsl se define como una variable vec4 de valores rgba float normalizados, es decir, cada uno está en el rango de [0.0, 1.0]. Con la ayuda de shaders, podemos modificar esta variable con base en ciertos parámetros.<br>
-A continuación se realizará la implementación de algunos de los modos de fusión de colores con el uso de shaders.
+Los modos de fusión se utilizan para controlar cómo se mezclan dos colores entre sí. En la edición de imágenes digitales, estos modos se utilizan para componer imágenes o generar efectos que permiten oscurecer, aclarar o resaltar ciertos colores de una imagen. Un color en glsl se define como una variable vec4 de valores rgba float normalizados, es decir, cada uno está en el rango de [0.0, 1.0]. Con la ayuda de shaders, podemos modificar esta variable con base en ciertos parámetros. A continuación se realizará la implementación de algunos de los modos de fusión de colores con el uso de shaders.
 </div>
 </blockquote>
 
@@ -19,9 +17,10 @@ A continuación se realizará la implementación de algunos de los modos de fusi
 <blockquote>
 
 <div style="text-align: justify">
-Los modos de fusión se originaron en la fotografía de cuarto oscuro y posteriormente se desarrollaron y mejoraron por programas de imagen digital como Adobe Photoshop. Los modos de fusión, que permiten combinar dos o más imágenes en una sola, fueron bien recibidos y se incorporaron rápidamente en otros programas de edición de imágenes [1]. Cuando se usan estos modos de fusión usualmente hay dos capas, una inferior que es la capa base, y una superior que es la capa de fusión. Cada uno de estos modos utiliza una operación matemática específica a los datos de color de cada píxel de la capa base y de fusión, lo cual resulta en una imagen compuesta.
+Los modos de fusión se originaron en la fotografía de cuarto oscuro y posteriormente se desarrollaron y mejoraron por programas de imagen digital como Adobe Photoshop. Los modos de fusión, que permiten combinar dos o más imágenes en una sola, fueron bien recibidos y se incorporaron rápidamente en otros programas de edición de imágenes [1]. Cuando se usan estos modos de fusión usualmente hay dos capas, una inferior que es la capa base, y una superior que es la capa de fusión. Cada uno de estos modos utiliza una operación matemática específica a los datos de color de cada píxel de la capa base y de fusión, lo cual resulta en una imagen compuesta. A continuación podemos ver algunos de los modos de fusión más conocidos
 
 </div>
+<p align = "center"><img src = "/showcase/img/blending_modes.png" alt="" width="450px"><br>Fig.1 - modos de fusión</p>
 
 #### Trabajo previo
 
@@ -87,18 +86,12 @@ Aquí, se usa el modo _multiply_ para valores más oscuros y _screen_ para valor
 
 </div>
 
-<br>
-
-<p align = "center"><img src = "/showcase/img/example_img_hist.png" alt="" width="450px"><br>Fig.1 - </p>
-
-<br>
-
 <blockquote>
 <p style="text-align: justify">
-
+A continuación, tenemos la implementación de los modos de fusión en colores. Se muestran dos modos al tiempo con el fin de observar las diferencias entre los resultados de cada modo.
 </p>
 
-{{<p5-iframe sketch="/showcase/sketches/dithering/thresholding.js" width="625" height="525">}}
+{{<p5-iframe sketch="/showcase/sketches/coloring/blend_color_modes.js" width="625" height="425">}}
 
 </blockquote>
 {{< hint info >}}
@@ -110,47 +103,231 @@ Aquí, se usa el modo _multiply_ para valores más oscuros y _screen_ para valor
 
 <div style='text-align: justify;'>
 
-<br>
-
-<p align = "center"><img src = "/showcase/img/img_dit_aleat.png" alt="" width="500px"><br>Fig.3 - </p>
-
-<br>
-
 </div>
-
-<blockquote>
-<p style="text-align: justify">
-
-</p>
-{{<p5-iframe sketch="/showcase/sketches/dithering/random_dithering.js" width="625" height="425">}}
-</blockquote>
 
 </blockquote>
 
 ### Código
 
 <blockquote>
-
-{{< details title="Código completo la implementación del algoritmo de thresholding" open=false >}}
+{{< details title="Código completo de la implementación de los modos de fusión" open=false >}}
 
 ```javascript
+let colorPicker1, colorPicker2;
+let sliderMode1, sliderMode2;
+let selectMode1, selectMode2;
+let shaderMode1, shaderMode2;
+let mode1 = 1;
+let mode2 = 2;
+let brightness1 = 1.0;
+let brightness2 = 1.0;
 
+function preload() {
+  shaderMode1 = loadShader(
+    "/showcase/sketches/coloring/shader.vert",
+    "/showcase/sketches/coloring/shader.frag"
+  );
+  shaderMode2 = loadShader(
+    "/showcase/sketches/coloring/shader.vert",
+    "/showcase/sketches/coloring/shader.frag"
+  );
+}
+
+function setup() {
+  createCanvas(600, 400);
+
+  colorPicker1 = createColorPicker("#F09A9A");
+  colorPicker1.position(width / 2 - 140, height - 60);
+  colorPicker2 = createColorPicker("#E2D98D");
+  colorPicker2.position(width / 2 + 80, height - 60);
+
+  selectMode1 = createSelect();
+  selectMode1.position(15, height / 2 - 70);
+  selectMode1.option("BLEND");
+  selectMode1.option("DARKEST");
+  selectMode1.option("LIGHTEST");
+  selectMode1.option("ADDITION");
+  selectMode1.option("PLUS DARKER");
+  selectMode1.option("SUBSTRACT");
+  selectMode1.option("MULTIPLY");
+  selectMode1.option("SCREEN");
+  selectMode1.option("OVERLAY");
+  selectMode1.selected("LIGHTEST");
+  selectMode1.changed(mySelectEvent);
+
+  selectMode2 = createSelect();
+  selectMode2.position(15, height / 2 + 50);
+  selectMode2.option("BLEND");
+  selectMode2.option("DARKEST");
+  selectMode2.option("LIGHTEST");
+  selectMode2.option("ADDITION");
+  selectMode2.option("PLUS DARKER");
+  selectMode2.option("SUBSTRACT");
+  selectMode2.option("MULTIPLY");
+  selectMode2.option("SCREEN");
+  selectMode2.option("OVERLAY");
+  selectMode2.selected("DARKEST");
+  selectMode2.changed(mySelectEvent);
+
+  sliderMode1 = createSlider(0, 255, 50);
+  sliderMode1.position(width - 110, height / 2 - 70);
+  sliderMode1.style("width", "80px");
+  sliderMode2 = createSlider(0, 255, 200);
+  sliderMode2.position(width - 110, height / 2 + 50);
+  sliderMode2.style("width", "80px");
+
+  colorMode1 = createGraphics(100, 120, WEBGL);
+  colorMode1.shader(shaderMode1);
+  colorMode2 = createGraphics(100, 120, WEBGL);
+  colorMode2.shader(shaderMode2);
+}
+
+function draw() {
+  background(220);
+  c1 = colorPicker1.color();
+  c2 = colorPicker2.color();
+
+  shaderMode1.setUniform("uMaterial1", c1._array);
+  shaderMode1.setUniform("uMaterial2", c2._array);
+  shaderMode1.setUniform("blendMode", mode1);
+  if (mode1 == 1 || mode1 == 2 || mode1 == 3) {
+    brightness_1 = sliderMode1.value() / 255;
+    sliderMode1.show();
+  } else {
+    brightness_1 = 1.0;
+    sliderMode1.hide();
+  }
+  shaderMode1.setUniform("brightness", brightness_1);
+  colorMode1.rect(0, 0, 100, 100);
+
+  shaderMode2.setUniform("uMaterial1", c1._array);
+  shaderMode2.setUniform("uMaterial2", c2._array);
+  shaderMode2.setUniform("blendMode", mode2);
+  if (mode2 == 1 || mode2 == 2 || mode2 == 3) {
+    brightness2 = sliderMode2.value() / 255;
+    sliderMode2.show();
+  } else {
+    brightness2 = 1.0;
+    sliderMode2.hide();
+  }
+  shaderMode2.setUniform("brightness", brightness2);
+  colorMode2.rect(0, 0, 100, 100);
+
+  imageMode(CENTER);
+  rectMode(CENTER);
+  image(colorMode1, width / 2, height / 2 - 65);
+  fill(colorPicker1.color());
+  rect(width / 2 - 110, height / 2, 100, 250);
+  noFill();
+  rect(width / 2, height / 2 - 65, 100, 120);
+  fill(colorPicker2.color());
+  rect(width / 2 + 110, height / 2, 100, 250);
+
+  colorMode2.rect(0, 0, 100, 100);
+  image(colorMode2, width / 2, height / 2 + 65);
+  noFill();
+  rect(width / 2, height / 2 + 65, 100, 120);
+}
+
+function mySelectEvent() {
+  if (selectMode1.value() == "BLEND") mode1 = 1;
+  if (selectMode1.value() == "DARKEST") mode1 = 2;
+  if (selectMode1.value() == "LIGHTEST") mode1 = 3;
+  if (selectMode1.value() == "ADDITION") mode1 = 4;
+  if (selectMode1.value() == "PLUS DARKER") mode1 = 5;
+  if (selectMode1.value() == "SUBSTRACT") mode1 = 6;
+  if (selectMode1.value() == "MULTIPLY") mode1 = 7;
+  if (selectMode1.value() == "SCREEN") mode1 = 8;
+  if (selectMode1.value() == "OVERLAY") mode1 = 9;
+  if (selectMode2.value() == "BLEND") mode2 = 1;
+  if (selectMode2.value() == "DARKEST") mode2 = 2;
+  if (selectMode2.value() == "LIGHTEST") mode2 = 3;
+  if (selectMode2.value() == "ADDITION") mode2 = 4;
+  if (selectMode2.value() == "PLUS DARKER") mode2 = 5;
+  if (selectMode2.value() == "SUBSTRACT") mode2 = 6;
+  if (selectMode2.value() == "MULTIPLY") mode2 = 7;
+  if (selectMode2.value() == "SCREEN") mode2 = 8;
+  if (selectMode2.value() == "OVERLAY") mode2 = 9;
+}
 ```
 
 {{< /details >}}
 </br>
-{{< details title="actualización de la imagen" open=true >}}
-Con el fin de evitar
+
+{{< details title="vertex shader (genérico)" open=false >}}
 
 ```javascript
+attribute vec3 aPosition;
 
+void main() {
+  vec4 positionVec4 = vec4(aPosition, 1.0);
+  positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+  gl_Position = positionVec4;
+}
 ```
 
 {{< /details >}}
 
+</br>
+
+{{< details title="fragment shader" open=false >}}
+
+```javascript
+precision mediump float;
+
+uniform float brightness;
+uniform vec4 uMaterial1;
+uniform vec4 uMaterial2;
+uniform int blendMode;
+
+void main() {
+  vec4 material;
+  if (blendMode == 1){
+    // BLEND
+    material = brightness * uMaterial1 + uMaterial2;
+  } else if (blendMode == 2) {
+    // DARKEST
+    material = min(brightness * uMaterial1, uMaterial2);
+  } else if (blendMode == 3){
+    // LIGHTEST
+    material = max(brightness * uMaterial1, uMaterial2);
+  } else if (blendMode == 4) {
+    // ADDITION
+    material = uMaterial1 + uMaterial2;
+  } else if (blendMode == 5) {
+    // PLUS DARKER
+    material = uMaterial1 + uMaterial2 - vec4(1.0);
+  } else if (blendMode == 6){
+    // SUBSTRACT
+    material = uMaterial1 - uMaterial2;
+  } else if (blendMode == 7){
+    // MULTIPLY
+    material = uMaterial1 * uMaterial2;
+  } else if (blendMode == 8){
+    // SCREEN
+    material = vec4(1.0)-(vec4(1.0)-uMaterial1)*(vec4(1.0)-uMaterial2);
+  } else if (blendMode == 9) {
+    material = vec4(1.0);
+    if (uMaterial1.r < 0.5) { material.r = 2.0 * uMaterial1.r * uMaterial1.r;
+    } else { material.r = 1.0-2.0*(1.0-uMaterial1.r)*(1.0-uMaterial2.r);}
+    if (uMaterial1.g < 0.5) { material.g = 2.0 * uMaterial1.g * uMaterial1.g;
+    } else { material.g = 1.0-2.0*(1.0-uMaterial1.g)*(1.0-uMaterial2.g);}
+    if (uMaterial1.b < 0.5) { material.b = 2.0 * uMaterial1.b * uMaterial1.b;
+    } else { material.b = 1.0-2.0*(1.0-uMaterial1.b)*(1.0-uMaterial2.b);}
+  } else {
+    material = vec4(1.0);
+  }
+  gl_FragColor = vec4(material.rgb, 1.0);
+}
+```
+
+{{< /details >}}
+
+<br>
+
 <div style='text-align: justify;'>
 
-Para el algoritmo
+A continuación se muestra de forma más detallada las partes claves del código anterior.
 
 ```javascript
 umb = random(rmin, rmax);
@@ -170,7 +347,7 @@ umb = random(rmin, rmax);
 ### Trabajo Futuro
 
 <div style='text-align: justify;'>
-<p align = "center"><img src = "/showcase/img/ditheringmontage.png" alt="" width="400px"><br>Fig.3 -</p>
+<p align = "center"><img src = "/showcase/img/blend-modes-add.png" alt="" width="400px"><br>Fig.3 - More blending modes with images</p>
 </div>
 
 </blockquote>
