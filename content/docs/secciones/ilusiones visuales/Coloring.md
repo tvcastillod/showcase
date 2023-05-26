@@ -105,21 +105,21 @@ Como ya sabemos a grandes rasgos cómo funcionan distintos modos de fusión, aho
 Primero, veamos el modo DARKEST. Sabemos que este modo toma el menor valor de cada color, haciendo que el resultado sea un color más oscuro. Además, la capa base es multiplicada por un factor que al disminuir hace que el color original se oscuresca, como podemos ver a continuación:
 </br>
 
-<p align = "center"><img src = "/showcase/img/ejemplomod1.png" alt="" width="600px"><br>Fig.2 - modo DARKEST con factores de 0.19, 0.58 y 1.0 aplicados a una imagen</p>
+<p align = "center"><img src = "/showcase/img/ejemplomod1.png" alt="" width="600px"><br>Fig.3 - modo DARKEST con factores de 0.19, 0.58 y 1.0 aplicados a una imagen</p>
 
 </br>
 
 Así, podemos oscurecer imágenes con este modo, cambiando el factor. Ahora, veamos los modos MULTIPLY, SCREEN y OVERLAY. Pero antes recordemos que _multiply_ también genera un efecto de oscurecimiento, esto se debe a que al multiplicar cualquier número por un número menor que uno, el producto es menor que el número multiplicado, y como los valores de los colores son menores o iguales a 1, el resultado son valores más pequeños, que corresponden a colores más oscuros. De la misma forma, el modo _screen_ tiene el efecto contrario ya que se invierten los colores, dando valores más altos, que corresponden a colores más claros.
 </br>
 
-<p align = "center"><img src = "/showcase/img/ejemplomod3.png" alt="" width="600px"><br>Fig.3 - modos multiply, screen y overlay aplicados a imágenes</p>
+<p align = "center"><img src = "/showcase/img/ejemplomod3.png" alt="" width="600px"><br>Fig.4 - modos multiply, screen y overlay aplicados a imágenes</p>
 
 </br>
 
 En este caso, es interesante ver el resultado del modo _overlay_ aplicado una imagen, pues al ser una combinación de los dos modos anteriores, se genera una imagen más vistosa, ya que los colores más claros resaltan más mientras que los oscuros se ven más marcados, logrando un contraste en la imagen que hace que ciertos detalles destaquen más. </br> Para el último ejemplo, tomamos dos imágenes diferentes como capas de fusión para la misma imagen base, con los modos LIGHTEST y ADDITON logramos el siguiente resultado:
 </br>
 
-<p align = "center"><img src = "/showcase/img/exampleflower.png" alt="" width="650px"><br>Fig.4 - modos lightest y addition con dos capas de fusión diferentes</p>
+<p align = "center"><img src = "/showcase/img/exampleflower.png" alt="" width="650px"><br>Fig.5 - modos lightest y addition con dos capas de fusión diferentes</p>
 </br>
 
 Vemos como logramos dos efectos interesantes, uno donde se combinan ambas imágenes con ayuda de lightest y otro donde logramos darle una forma a la imagen, usando una capa con una figura de un color sólido.
@@ -690,14 +690,95 @@ void main() {
 <div style='text-align: justify;'>
 
 A continuación se muestra de forma más detallada las partes claves del código anterior.
+{{< details title="crear dos canvas diferentes" open=true >}}
+
+Para cargar y modificar las imágenes por separado, se optó por crear dos canvas diferentes para cada imagen. De esta forma, podemos aplicar la capa de fusión sobre la capa base, de forma que el shader solo afecte a una de las imágenes. Para esto, la idea es crear una función sketch `s1` con la misma lógica aplicada a los colores, crear una nueva instancia de p5 con `new p5(s1)` y pasar esta función. El código base para lograr esto fué tomado del siguiente [sketch](https://editor.p5js.org/caminofarol/sketches/r609C2cs).
 
 ```javascript
-umb = random(rmin, rmax);
+var s1 = function (sketch) {
+  let img, myShader;
+  sketch.preload = function () {
+    // se carga el shader
+  };
+  sketch.setup = function () {
+    // se crea el canvas 1
+  };
+  sketch.draw = function () {
+    // se aplica el shader
+  };
+  function handleFile(file) {
+    // función para cargar los archivos de imagen
+  }
+};
+
+// codigo base para crear dos canvas diferentes: https://editor.p5js.org/caminofarol/sketches/r609C2cs
+// se crea una nueva instancia de p5 pasando la función para el sketch 1
+new p5(s1);
+
+var s2 = function (sketch) {
+  // código para cargar la segunda imagen.
+};
+
+new p5(s2);
 ```
 
-</div>
-
+De la misma forma se crea otra función para el segundo canvas con la imagen de la capa de fusión. En este caso lo único que se necesita es cargar la imagen y almacenarla en una variable para enviarla al shader que modifica la imagen base dentro del sketch 1.
+{{< /details >}}
 </br>
+{{< details title="código de shaders" open=true >}}
+
+Para el vertex shader el único cambio relevante es que debemos pasar información sobre las coordenadas de textura `aTexCoord`, que nos permite definir cómo se mapea una imagen en una superficie, en este caso la imagen base. Y pasamos este dato al fragment shader como `vTexCoord`.
+
+```javascript
+attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+
+varying vec2 vTexCoord;
+
+void main() {
+  vTexCoord = aTexCoord;
+  ...
+}
+```
+
+Para el fragment shader tenemos los mismos parámetros que en la implementación de colores. La única diferencia
+es que en vez de un vec4 de color, usamos `sampler2D` que es el tipo de variable que se usa para texturas. Luego,
+usamos `texture2D(base, uv)`, que recibe la textura y las coordenadas uv de textura, para obtener el color de cada imagen. Finalmente, realizamos el mismo procedimiento que con los colores para calcular el resultado final dependiendo el modo de fusión.
+
+```javascript
+precision mediump float;
+
+uniform float brightness;
+uniform int blendMode;
+
+varying vec2 vTexCoord;
+uniform sampler2D base;
+uniform sampler2D layer;
+
+void main() {
+  vec2 uv = vTexCoord;
+  vec4 color = vec4(1.0);
+  vec4 color2 = vec4(1.0);
+  uv.y = 1.0 - uv.y;
+  color = texture2D(base, uv);
+  color2 = texture2D(layer, uv);
+  vec4 uMaterial1 = color;
+  vec4 uMaterial2 = color2;
+  vec4 material;
+  if (blendMode == 1){
+    // operaciones para cada modo de fusión
+    ...
+    } else {
+    material = vec4(1.0);
+  }
+  gl_FragColor = vec4(material.rgb, 1.0);
+}
+```
+
+Se tomó como referencia el siguiente [video](https://youtu.be/q6nywvlhEFM) para entender e implementar correctamente el concepto de textura en los shaders de este ejercicio.
+{{< /details >}}
+
+</div>
 
 </blockquote>
 
@@ -706,6 +787,8 @@ umb = random(rmin, rmax);
 <blockquote>
 
 <div style='text-align: justify;'>
+Los modos de fusión permiten realizar composiciones interesantes con imágenes. Dependiendo el modo que se utilice se pueden lograr efectos para oscurecer, aclarar y resaltar ciertos colores en imágenes. Además, este tema nos permite entender cómo se representan los colores y cómo se pueden modificar, manipulando los valores que lo componen. Asimismo, el uso de shaders es de gran importancia para facilitar la manipulación de colores, principalmente en el uso de imágenes.
+
 </div>
 
 ### Trabajo Futuro
@@ -713,7 +796,7 @@ umb = random(rmin, rmax);
 <div style='text-align: justify;'>
 Debido a que solo se implementaron algunos modos de fusión, como trabajo futuro sería bueno ampliar la variedad de modos que se pueden usar. Además, se podría dar la opción de mezclar más de 2 colores/imágenes, con la posibilidad de modificar el parámetro de transparencia. También sería interesante dar la posibilidad al usuario de escoger entre una lista de capas predeterminadas, con formas y colores que permitan crear una composición diferente.
 </br>
-<p align = "center"><img src = "/showcase/img/blend-modes-add.png" alt="" width="400px"><br>Fig.5 - Más modos de fusión con imágenes</p>
+<p align = "center"><img src = "/showcase/img/blend-modes-add.png" alt="" width="400px"><br>Fig.6 - Más modos de fusión con imágenes</p>
 </div>
 
 </blockquote>

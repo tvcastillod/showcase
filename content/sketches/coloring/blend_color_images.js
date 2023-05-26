@@ -40,7 +40,8 @@ var s1 = function (sketch) {
   }
 };
 
-// create a new instance of p5 and pass in the function for sketch 1
+// codigo base para crear dos canvas diferentes: https://editor.p5js.org/caminofarol/sketches/r609C2cs
+// se crea una nueva instancia de p5 pasando la función para el sketch 1
 new p5(s1);
 
 var s2 = function (sketch) {
