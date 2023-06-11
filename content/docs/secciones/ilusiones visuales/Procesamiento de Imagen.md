@@ -6,14 +6,17 @@ weight: 2
 
 ## Introducción
 
+<blockquote>
 <div style="text-align: justify">
 
 Cuando hablamos de procesamiento de imágenes, nos referimos a un conjunto de técnicas aplicadas a imágenes con el propósito de mejorar la calidad o facilitar la búsqueda de información. En [webgl](https://en.wikipedia.org/wiki/OpenGL_Shading_Language) se utiliza la texturización en el procesamiento de imágenes. En este caso estamos interesados en explorar el uso de máscaras para modificar las imágenes con el fin de obtener resultados como una mayor nitidez en la imágen o detectar los bordes de los objetos que se encuentran dentro de esta.
 
 </div>
+</blockquote>
 
 ### Antecedentes y trabajo previo
 
+<blockquote>
 <div style="text-align: justify">
 
 El procesamiento de imágenes es ampliamente usado en distintos campos de estudio desde la industria del entretenimiento, hasta el campo de la medicina. Algunos de los usos más comunes son: el suavizado de imágenes, la eliminación de ruido, la detección de bordes, entre otros. Este procesamiento permite realzar los detalles de una imagen, lo cual permite obtener información adicional sobre esta. Con el uso de máscaras, herramientas de luminosidad y magnificación, podemos procesar imágenes. Y con el uso de shaders y texturización podemos facilitar aún más este proceso.
@@ -28,7 +31,6 @@ A continuación se listan algunos trabajos previos realizados sobre este tema:
 - [Photokako](https://www.photo-kako.com/en/convolution/) Es una herramienta que nos permite aplicar diferentes máscaras, con matrices definidas por el usuario, o predeterminados con efectos como detección de bordes.
 - [Planetcalc](https://planetcalc.com/9313/) Esta página ofrece numerosas herramientas y una de ellas permite procesar imágenes con los efectos más comunes como el suavizado y difuminado de imágenes.
 </div>
-
 </blockquote>
 
 ## Ejercicio
@@ -57,74 +59,61 @@ Para el procesamiento de imágenes, se utilizará el concepto de texturización,
 
 <div style="text-align: justify">
 
-Para crear diferentes efectos en las imágenes, utilizaremos máscaras. Una máscara, kernel o matriz de convolución es una matriz la cual se opera con la información de los pixeles de la imagen con el fin de lograr diferentes efectos de enfoque, desenfoque, nitidez, detección de bordes, entre otros.
+Para crear diferentes efectos en las imágenes, utilizaremos máscaras. Una máscara, kernel o matriz de convolución es una matriz la cual se opera con la información de los pixeles de la imagen con el fin de lograr diferentes efectos de enfoque, desenfoque, nitidez, detección de bordes, entre otros. El proceso se compone de 3 elementos:
+
+- Una imagen de entrada de dimensión igual o mayor a la de la máscara que se va a aplicar.
+- Una máscara de convolución, es decir, una matriz cuadrada de dimensión impar.
+- La imagen de salida del mismo tamaño que la imagen original.
+
+El procedimiento consiste en aplicar la máscara a cada uno de los pixeles de la imagen. La idea es multiplicar componente a componente la matriz de convolución por la matriz que contiene al pixel actual y los pixeles que lo rodean, para después sumar los valores y obtener el nuevo valor del pixel en la imagen procesada. En la figura 1 se puede ver una ilustración de este proceso.
+
+<p align = "center"><img src = "/showcase/img/convolution.png" alt="" width="400px"><br>Fig.1 - Operación de convolución</p>
+
+A continuación veremos algunos ejemplos de máscaras y los efectos que tienen sobre una imagen.
+
+<p align = "center"><img src = "/showcase/img/convol1.png" alt="" width="610px"><br>Fig.2 - Máscaras IDENTITY, RIDGE y SHARPEN</p>
+
+Primero tenemos la máscara `IDENTITY` o identidad, esta matriz solo le da peso al pixel del centro que es el pixel a modificar, por lo que no tiene ningún efecto sobre la imagen, ya que simplemente mapea cada pixel inicial a la imagen resultante. Segundo, tenemos la máscara `RIDGE` o de bordes, esta matriz le da un peso negativo a los pixeles que rodean al pixel principal **_p_**, esto con el fin de que para valores muy cercanos a **_p_** (es decir, cuando no hay bordes y la superficie es más bien homogénea), el resultado es pequeño tomando colores oscuros; mientras que para valores lejanos a **_p_** (es decir, cuando hay presencia de bordes y hay un contraste significativo de colores), el resultado es mayor y toma colores más claros, haciendo que estos bordes destaquen en la imagen final, por esta razón con esta máscara se pueden detectar los bordes de una imagen. Tercero, tenemos la máscara `SHARPEN`, esta matriz le da peso únicamente a los pixeles que están abyacentes al pixel principal **_p_**, esto da como resultado una imagen más nítida donde los detalles, como los borden, son resaltados.
+
+<p align = "center"><img src = "/showcase/img/convol2.png" alt="" width="610px"><br>Fig.3 - Máscaras SHARPEN2, GAUSSIAN BLUR y EMBOSS</p>
+
+Las máscaras mencionadas anteriormente pueden tener algunas variantes que generan resultados ligeramente distintos en la imagen final, por ejemplo, tenemos una segunda versión de la máscara de nitidez, la cual llamamos `SHARPEN2`, esta le da un poco más de peso al pixel **_p_** haciendo que la nitidez de la imagen sea mucho mayor que la de la otra máscara, en la figura 3 podemos ver cómo algunos detalles como el pelaje del animal es más notorio en ciertas zonas. También tenemos la máscara `GAUSSIAN BLUR` o de difuminado Gaussiano la cuál nos permise suavizar la imágenes generando un efecto de desenfoque que hace ver a la imagen un poco borrosa, aquí vemos que la matriz es más grande con un tamaño de 5x5 la cual determina el grado de desenfoque que se aplica (si tomaramos una matriz más grande la imagen final se vería aún más borrosa). Por último, tenemos la máscara `EMBOSS` o de relieve, en este caso la matriz le da un poco más de peso a los pixeles que hay alrededor de **_p_** resaltando aún más los bordes de la imagen, dando a la imagen un poco de relieve.
+
+Adicional a las máscaras existen otras herramientas que nos permiten ver detalles específicos de las imágenes, sin necesidad de aplicar el filtro a la imágen completa. Esto nos sirve para cuando solo estamos interesados en analizar solo una parte de la imagen o hacer comparaciones con la imagen original. A continuación hablaremos de 2 de estas herramientas.
 
 </div>
 
-<p style="text-align: justify">
+#### Herramienta de región de interés (ROI) y magnificación
 
-</p>
+<div style="text-align: justify">
 
-<br>
+<p align = "center"><img src = "/showcase/img/tools1.png" alt="" width="400px"><br>Fig.4 - Región de interés (ROI) y magnificación</p>
 
-<p align = "center"><img src = "/showcase/img/example_img_hist.png" alt="" width="450px"><br>Fig.1 - </p>
+Por un lado, tenemos la herramienta de región de interés o en inglés Region Of Interest (ROI). Esta consiste en tomar una sección de la imagen la cual se quiere detallar o analizar. Estas se suelen usar en distintos ámbitos, como por ejemplo en imágenes médicas cuando se quiere analizar los límites de un tumor. En la figura 4 podemos ver en la imagen izquierda que se aplicó la máscara de **_RIDGE_** únicamente en una parte de la imagen, en este caso, una parte de las alas del animal. Por otro lado, tenemos la herramienta de magnificación la cuál es básicamente una lupa que nos permite ver una parte de la imagen más de cerca (con más zoom). En la figura 4 podemos ver a la derecha que se hizo un acercamiento a la cabeza del pájaro, lo cual nos permite ver con más detalle a este además de ver mejor cómo actúa la máscara de **_difuminado Gaussiano_**.
 
-<br>
-
-<p style="text-align: justify">
-<br>
-
-<p align = "center"><img src = "/showcase/img/example_img_u.png" alt="" width="500px"><br>Fig.2 - </p>
-
-<br>
-
-<p style="text-align: justify">
-
-</p>
-
-<p align = "center"><img src = "/showcase/img/example2_img_hist_u.png" alt="" width="500px"><br>Fig.3 - </p>
-
-<br>
-
-<p style="text-align: justify">
-
-</p>
-
-<blockquote>
-<p style="text-align: justify">
-
-</p>
-
-</blockquote>
-{{< hint info >}}
-
-<p style='text-align: justify;'>
-
-</p>
-{{< /hint >}}
-
-<div style='text-align: justify;'>
-
-<br>
-
-<p align = "center"><img src = "/showcase/img/img_dit_aleat.png" alt="" width="500px"><br>Fig.3 - </p>
-
-<br>
-
-<p align = "center"><img src = "/showcase/img/img_dit_aleat2.png" alt="" width="400px"><br>Fig.3 -</p>
-
-<br>
-
-<p align = "center"><img src = "/showcase/img/img_dit_aleat3.png" alt="" width="500px"><br>Fig.3 - </p>
+Además de las herramientas mencionadas anteriormente, tenemos otras que nos permiten manipular el brillo de una imagen, esto con el fin de resaltar ciertar zonas de la imagen donde hay una mayor luminosidad. A continuación mencionamos 4 métodos para modificar el brillo de una imagen.
 
 </div>
 
-<blockquote>
-<p style="text-align: justify">
+#### Herramienta de brillo
 
-</p>
-{{<p5-iframe sketch="/showcase/sketches/dithering/random_dithering.js" width="625" height="425">}}
+<div style="text-align: justify">
+
+Es importante mencionar que existen representaciones alternas al modelo de color RGB, las cuales fueron diseñadas con el fin de ajustarse más a la forma en la que la visión humana percibe el color. Cada modelo destaca atributos diferentes de color, como la intensidad o luminosidad, algunos de los modelos más conocidos son el HSL (Hue, Saturation, Lightness) y el HSV (Hue, Saturation, Value). Veamos cómo está definido cada uno y qué efecto tiene en una imagen. Primero, tenemos la opción de `INTENSITY` o intensidad, esta se refiere al brillo u opacidad de un color, si es más brillante es más intenso,y si es más oscuro tiene menor intensidad. Esta se calcula tomando el promedio de los valores RGB `I = (R + G + B) / 3` lo cual nos dá como resultado una imagen donde la intensidad de los colores está balanceada como podemos ver en la primera imagen de la figura 5. Segundo, tenemos la opción de `VALUE` o valor, la cual nos dice que tan claro u oscuro es un color, este toma el valor máximo de los valores RGB `V = máx {R, G, B}`. Recordemos que entre mayor es el número el color es más claro y por ende más brillante, por lo cual esta opción nos permite hacer la imagen más brillante en las zonas donde los colores son más claros como se puede observar en la segunda imagen de la figura 5.
+
+<p align = "center"><img src = "/showcase/img/tools2.png" alt="" width="630px"><br>Fig.5 - Herramientas de brillo Intensity, Value, Lightness y Luma</p>
+
+Tercero, tenemos la opción de `LIGHTNESS` la cual se define como el promedio de la mayor y menor componente de los valores RGB, lo cual da como resultado los componentes medios de la paleta de colores, es decir, nos ayuda a balancear el brillo de una imagen al igual que el modelo **_INTENSITY_**. En la tercera imagen de la figura 5 podemos ver que el resultado es muy similar el de la primera imagen. Cuarto, tenemos la opción de `LUMA` la cual es definida como la media ponderada de los valores RGB con corrección gamma, es decir, esta se base en la contribución de cada canal a la luminosidad percibida. Los factores de cada componente pueden variar dependiendo el estándar que se utilice como referencia, en este caso se toma **_SDTV (Standard Definition Television)_** la cual se define como `Y = 0.2989 R + 0.5870 G + 0.1140 B`, y podemos ver el resultado en la última imagen de la figura 5, allí podemos notar que también se llogra un balance pero destacando ligeramente las zonas donde los colores son más claros y brillantes.
+
+<blockquote>
+
+A continuación tenemos la implementación de toda la información dada anteriormente. En primera instancia tenemos la opción de escoger entre 6 diferentes máscaras, incluyendo algunas con una tamaño diferente al usual de 3x3. Además, tenemos la opción de usar herramientas de magnificación y región de interés, a las cuales se les pueden modificar el tamaño de la región que se quiere observas y para el caso de la lupa también se puede ajustar el zoom. Finalmente, tenemos la opción de aplicar 4 modelos diferentes de iluminación, los cuales se muestra en escala de grises ya que el valor resultante se toma para los tres canales de color.
+
+{{<p5-iframe sketch="/showcase/sketches/image_processing/img_process.js" width="625" height="455" background="black">}}
+
 </blockquote>
+
+</div>
 
 </blockquote>
 
