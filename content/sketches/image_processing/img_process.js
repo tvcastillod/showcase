@@ -1,7 +1,7 @@
 let img, myShader;
-let mode = 1;
+let mode = 2;
 let mask5 = false;
-let tool = 1;
+let tool = 2;
 let btool = 1;
 let zoom = 0.3;
 
@@ -14,8 +14,6 @@ function preload() {
 }
 
 function setup() {
-  let u = createCanvas(500, 600);
-  u.background(255);
   createCanvas(400, 400, WEBGL);
   input = createFileInput(handleFile);
   input.position(10, height + 15);
@@ -28,14 +26,15 @@ function setup() {
   selectMode.option("GAUSSIAN BLUR");
   selectMode.option("EMBOSS");
   selectMode.changed(mySelectEvent);
-  //selectMode.selected('RIDGE');
+  selectMode.selected("RIDGE");
   selectTool = createSelect();
   selectTool.position(410, 90);
   selectTool.option("NONE");
   selectTool.option("ROI");
   selectTool.option("MAGNIFIER");
   selectTool.changed(mySelectEvent2);
-  slider = createSlider(20, 100, 50);
+  selectTool.selected("ROI");
+  slider = createSlider(20, 100, 80);
   slider.position(410, 140);
   slider.style("width", "100px");
   sliderZoom = createSlider(0.1, 0.6, 0.3, 0.05);
@@ -213,3 +212,27 @@ function mySelectEvent2() {
   if (selectTool.value() == "ROI") tool = 2;
   if (selectTool.value() == "MAGNIFIER") tool = 3;
 }
+
+var s1 = function (sketch) {
+  sketch.setup = function () {
+    let canvas1 = sketch.createCanvas(570, 50, sketch.WEBGL);
+    canvas1.position(0, 400);
+  };
+  sketch.draw = function () {
+    sketch.background(230);
+  };
+};
+
+new p5(s1);
+
+var s2 = function (sketch) {
+  sketch.setup = function () {
+    let canvas1 = sketch.createCanvas(170, 400, sketch.WEBGL);
+    canvas1.position(400, 0);
+  };
+  sketch.draw = function () {
+    sketch.background(230);
+  };
+};
+
+new p5(s2);
