@@ -156,11 +156,8 @@ function draw() {
   myShader.setUniform("radius", slider.value());
   myShader.setUniform("tool", tool);
   myShader.setUniform("btool", radio.value());
-  myShader.setUniform("iResolution", [
-    width * pixelDensity(),
-    height * pixelDensity(),
-  ]);
 
+  // valores adaptados de https://gamedevserj.github.io/godot-magnifying-glass-tutorial.html
   zoom = sliderZoom.value();
   xOffset = (zoom * mouseX) / width;
   yOffset = (zoom * mouseY) / height;

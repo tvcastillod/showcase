@@ -89,10 +89,13 @@ vec4 applyMask2(vec2 vTexCoord) {
 }
 
 vec4 applyMask(vec2 vTexCoord) {
+  // 1. Use offset to move along texture space.
+  // In this case to find the texcoords of the texel neighbours.
   vec2 tc0 = vTexCoord + vec2(-texOffset.s, -texOffset.t);
   vec2 tc1 = vTexCoord + vec2(         0.0, -texOffset.t);
   vec2 tc2 = vTexCoord + vec2(+texOffset.s, -texOffset.t);
   vec2 tc3 = vTexCoord + vec2(-texOffset.s,          0.0);
+  
   // origin (current fragment texcoords)
   vec2 tc4 = vTexCoord + vec2(         0.0,          0.0);
   vec2 tc5 = vTexCoord + vec2(+texOffset.s,          0.0);
@@ -177,6 +180,7 @@ void main() {
     color_base = applyMask(vTexCoord * tiling + offset);
   }
     
+  // cálculo de la distancia tomado de https://stackoverflow.com/questions/45270803/webgl-shader-to-color-the-texture-according-to-mouse-position
   float dist = distance(mousePos, gl_FragCoord.xy);
   float mixAmount = clamp((dist - radius) , 0., 1.);
   

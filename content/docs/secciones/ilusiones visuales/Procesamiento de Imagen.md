@@ -282,11 +282,8 @@ function draw() {
   myShader.setUniform("radius", slider.value());
   myShader.setUniform("tool", tool);
   myShader.setUniform("btool", radio.value());
-  myShader.setUniform("iResolution", [
-    width * pixelDensity(),
-    height * pixelDensity(),
-  ]);
 
+  // valores adaptados de https://gamedevserj.github.io/godot-magnifying-glass-tutorial.html
   zoom = sliderZoom.value();
   xOffset = (zoom * mouseX) / width;
   yOffset = (zoom * mouseY) / height;
@@ -365,55 +362,361 @@ new p5(s2);
 ```
 
 {{< /details >}}
+</br>
+{{< details title="vertex shader (genérico)" open=false >}}
+
+```javascript
+attribute vec3 aPosition;
+attribute vec2 aTexCoord;
+
+varying vec2 vTexCoord;
+
+void main() {
+  // flip the coordinates
+  vTexCoord = vec2(aTexCoord.s, 1.0 - aTexCoord.t);
+
+  vec4 positionVec4 = vec4(aPosition, 1.0);
+  positionVec4.xy = positionVec4.xy * 2.0 - 1.0;
+
+  gl_Position = positionVec4;
+}
+```
+
+{{< /details >}}
+</br>
+{{< details title="fragment shader" open=false >}}
+
+```javascript
+precision mediump float;
+
+uniform sampler2D texture;
+
+uniform vec2 texOffset;
+uniform float mask[9];
+uniform float mask2[25];
+uniform bool mask5;
+uniform vec2 mousePos;
+uniform int tool;
+uniform int btool;
+uniform float radius;
+uniform vec2 tiling;
+uniform vec2 offset;
+
+varying vec2 vTexCoord;
+
+vec4 color_mask;
+vec4 color_normal;
+vec4 color_base;
+
+vec4 applyMask2(vec2 vTexCoord) {
+  vec2 tc0 = vTexCoord + vec2(-2.0*texOffset.s, -2.0*texOffset.t);
+  vec2 tc1 = vTexCoord + vec2(-1.0*texOffset.s, -2.0*texOffset.t);
+  vec2 tc2 = vTexCoord + vec2(             0.0, -2.0*texOffset.t);
+  vec2 tc3 = vTexCoord + vec2(+1.0*texOffset.s, -2.0*texOffset.t);
+  vec2 tc4 = vTexCoord + vec2(+2.0*texOffset.s, -2.0*texOffset.t);
+
+  vec2 tc5 = vTexCoord + vec2(-2.0*texOffset.s, -1.0*texOffset.t);
+  vec2 tc6 = vTexCoord + vec2(-1.0*texOffset.s, -1.0*texOffset.t);
+  vec2 tc7 = vTexCoord + vec2(             0.0, -1.0*texOffset.t);
+  vec2 tc8 = vTexCoord + vec2(+1.0*texOffset.s, -1.0*texOffset.t);
+  vec2 tc9 = vTexCoord + vec2(+2.0*texOffset.s, -1.0*texOffset.t);
+
+  vec2 tc10 = vTexCoord + vec2(-2.0*texOffset.s,              0.0);
+  vec2 tc11 = vTexCoord + vec2(-1.0*texOffset.s,              0.0);
+  vec2 tc12 = vTexCoord + vec2(             0.0,              0.0);
+  vec2 tc13 = vTexCoord + vec2(+1.0*texOffset.s,              0.0);
+  vec2 tc14 = vTexCoord + vec2(+2.0*texOffset.s,              0.0);
+
+  vec2 tc15 = vTexCoord + vec2(-2.0*texOffset.s, +1.0*texOffset.t);
+  vec2 tc16 = vTexCoord + vec2(-1.0*texOffset.s, +1.0*texOffset.t);
+  vec2 tc17 = vTexCoord + vec2(             0.0, +1.0*texOffset.t);
+  vec2 tc18 = vTexCoord + vec2(+1.0*texOffset.s, +1.0*texOffset.t);
+  vec2 tc19 = vTexCoord + vec2(+2.0*texOffset.s, +1.0*texOffset.t);
+
+  vec2 tc20 = vTexCoord + vec2(-2.0*texOffset.s, +2.0*texOffset.t);
+  vec2 tc21 = vTexCoord + vec2(-1.0*texOffset.s, +2.0*texOffset.t);
+  vec2 tc22 = vTexCoord + vec2(             0.0, +2.0*texOffset.t);
+  vec2 tc23 = vTexCoord + vec2(+1.0*texOffset.s, +2.0*texOffset.t);
+  vec2 tc24 = vTexCoord + vec2(+2.0*texOffset.s, +2.0*texOffset.t);
+
+  // 2. Sample texel neighbours within the rgba array
+  vec4 rgba[25];
+  rgba[0] = texture2D(texture, tc0);
+  rgba[1] = texture2D(texture, tc1);
+  rgba[2] = texture2D(texture, tc2);
+  rgba[3] = texture2D(texture, tc3);
+  rgba[4] = texture2D(texture, tc4);
+  rgba[5] = texture2D(texture, tc5);
+  rgba[6] = texture2D(texture, tc6);
+  rgba[7] = texture2D(texture, tc7);
+  rgba[8] = texture2D(texture, tc8);
+  rgba[9] = texture2D(texture, tc9);
+  rgba[10] = texture2D(texture, tc10);
+  rgba[11] = texture2D(texture, tc11);
+  rgba[12] = texture2D(texture, tc12);
+  rgba[13] = texture2D(texture, tc13);
+  rgba[14] = texture2D(texture, tc14);
+  rgba[15] = texture2D(texture, tc15);
+  rgba[16] = texture2D(texture, tc16);
+  rgba[17] = texture2D(texture, tc17);
+  rgba[18] = texture2D(texture, tc18);
+  rgba[19] = texture2D(texture, tc19);
+  rgba[20] = texture2D(texture, tc20);
+  rgba[21] = texture2D(texture, tc21);
+  rgba[22] = texture2D(texture, tc22);
+  rgba[23] = texture2D(texture, tc23);
+  rgba[24] = texture2D(texture, tc24);
+
+  // 3. Apply convolution kernel
+  vec4 convolution;
+  for (int i = 0; i < 25; i++) {
+    convolution += rgba[i]*mask2[i];
+  }
+
+  vec4 color_mask = vec4(convolution.rgb, 1.0);
+  return color_mask;
+}
+
+vec4 applyMask(vec2 vTexCoord) {
+  // 1. Use offset to move along texture space.
+  // In this case to find the texcoords of the texel neighbours.
+  vec2 tc0 = vTexCoord + vec2(-texOffset.s, -texOffset.t);
+  vec2 tc1 = vTexCoord + vec2(         0.0, -texOffset.t);
+  vec2 tc2 = vTexCoord + vec2(+texOffset.s, -texOffset.t);
+  vec2 tc3 = vTexCoord + vec2(-texOffset.s,          0.0);
+  // origin (current fragment texcoords)
+  vec2 tc4 = vTexCoord + vec2(         0.0,          0.0);
+  vec2 tc5 = vTexCoord + vec2(+texOffset.s,          0.0);
+  vec2 tc6 = vTexCoord + vec2(-texOffset.s, +texOffset.t);
+  vec2 tc7 = vTexCoord + vec2(         0.0, +texOffset.t);
+  vec2 tc8 = vTexCoord + vec2(+texOffset.s, +texOffset.t);
+
+  // 2. Sample texel neighbours within the rgba array
+  vec4 rgba[9];
+  rgba[0] = texture2D(texture, tc0);
+  rgba[1] = texture2D(texture, tc1);
+  rgba[2] = texture2D(texture, tc2);
+  rgba[3] = texture2D(texture, tc3);
+  rgba[4] = texture2D(texture, tc4);
+  rgba[5] = texture2D(texture, tc5);
+  rgba[6] = texture2D(texture, tc6);
+  rgba[7] = texture2D(texture, tc7);
+  rgba[8] = texture2D(texture, tc8);
+
+  // 3. Apply convolution kernel
+  vec4 convolution;
+  for (int i = 0; i < 9; i++) {
+    convolution += rgba[i]*mask[i];
+  }
+
+  vec4 color_mask = vec4(convolution.rgb, 1.0);
+  return color_mask;
+}
+
+float intensity(vec3 texel) {
+  return (texel.r + texel.g + texel.b)/3.0;
+}
+
+float value(vec3 texel) {
+  return max(max(texel.r, texel.g), texel.b);
+}
+
+float lightness(vec3 texel) {
+  float mx = max(max(texel.r, texel.g), texel.b);
+  float mn = min(min(texel.r, texel.g), texel.b);
+  return (mx + mn)/2.0;
+}
+
+float luma(vec3 texel) {
+  return 0.299 * texel.r + 0.587 * texel.g + 0.114 * texel.b;
+}
+
+void main() {
+  if (mask5 == true) {
+    color_mask = applyMask2(vTexCoord);
+    color_normal = texture2D(texture, vTexCoord);
+    color_base = applyMask2(vTexCoord * tiling + offset);
+  } else {
+    color_mask = applyMask(vTexCoord);
+    color_normal = texture2D(texture, vTexCoord);
+    color_base = applyMask(vTexCoord * tiling + offset);
+  }
+
+  if (btool == 2) {
+    color_mask = vec4(vec3(intensity(color_mask.xyz)),1.0);
+    color_normal = vec4(vec3(intensity(color_normal.xyz)),1.0);
+    color_base = vec4(vec3(intensity(color_base.xyz)),1.0);
+  } else if (btool == 3) {
+    color_mask = vec4(vec3(value(color_mask.xyz)),1.0);
+    color_normal = vec4(vec3(value(color_normal.xyz)),1.0);
+    color_base = vec4(vec3(value(color_base.xyz)),1.0);
+  } else if (btool == 4) {
+    color_mask = vec4(vec3(lightness(color_mask.xyz)),1.0);
+    color_normal = vec4(vec3(lightness(color_normal.xyz)),1.0);
+    color_base = vec4(vec3(lightness(color_base.xyz)),1.0);
+  } else if (btool == 5) {
+    color_mask = vec4(vec3(luma(color_mask.xyz)),1.0);
+    color_normal = vec4(vec3(luma(color_normal.xyz)),1.0);
+    color_base = vec4(vec3(luma(color_base.xyz)),1.0);
+  } else if (mask5 == true){
+    color_mask = applyMask2(vTexCoord);
+    color_normal = texture2D(texture, vTexCoord);
+    color_base = applyMask2(vTexCoord * tiling + offset);
+  } else {
+    color_mask = applyMask(vTexCoord);
+    color_normal = texture2D(texture, vTexCoord);
+    color_base = applyMask(vTexCoord * tiling + offset);
+  }
+
+  // cálculo de la distancia tomado de https://stackoverflow.com/questions/45270803/webgl-shader-to-color-the-texture-according-to-mouse-position
+  float dist = distance(mousePos, gl_FragCoord.xy);
+  float mixAmount = clamp((dist - radius) , 0., 1.);
+
+  if (tool == 1) {
+    gl_FragColor = color_mask;
+  } else if (tool == 2) {
+    gl_FragColor = mix(color_mask, color_normal, mixAmount);
+  } else {
+    gl_FragColor = mix(color_base, color_mask, mixAmount);
+  }
+}
+```
+
+{{< /details >}}
 
 <div style='text-align: justify;'>
 
 A continuación se muestra de forma más detallada las partes claves del código anterior.
+{{< details title="parámetros que se envían a los shaders" open=true >}}
 
-{{< details title="algoritmo base de dithering" open=true >}}
-Como algoritmo...
+Veamos los parámetros que se necesitan enviar al fragment shader. Para aplicar las máscaras se necesita la imagen `texture` la cual es recibida en el shader como un elemento de tipo `sampler2D`, es decir una textura, la cual posteriormente es mapeada con la función `texture2D()`. Además, tenemos la matriz de convolución que corresponde a un vector de tamaño 9(3x3) `mask` o 25(5x5) `mask2`, estas son asignadas a dos variables diferentes. También es necesario definir `texOffset` la cual nos ayuda a obtener los pixeles vecinos del pixel principal cuando se aplica la máscara. Para las herramientas de ROI y magnificación necesitamos los datos de la posición del mouse `mousePos`, además del radio `radius` que indica el tamaño de la región que se quiere observar, y en el caso de la lupa se necesitan `tiling` y `offset` que ayudan a enfocar y hacer zoom a la región deseada. Finalmente se utiliza `tool` y `btool` para indicar qué herramienta de detalle y luminosidad se quiere utilizar.
 
 ```javascript
+// dentro de la función draw()
+shader(myShader);
+myShader.setUniform("texture", img);
+myShader.setUniform("mask5", mask5);
+myShader.setUniform("mask", mask_);
+myShader.setUniform("mask2", mask2);
+myShader.setUniform("texOffset", [1 / img.width, 1 / img.height]);
+myShader.setUniform("mousePos", [
+  mouseX * pixelDensity(),
+  (height - mouseY) * pixelDensity(),
+]);
+rect(0, 0, 100, 100);
+myShader.setUniform("radius", slider.value());
+myShader.setUniform("tool", tool);
+myShader.setUniform("btool", radio.value());
 
+// valores adaptados de https://gamedevserj.github.io/godot-magnifying-glass-tutorial.html
+zoom = sliderZoom.value();
+xOffset = (zoom * mouseX) / width;
+yOffset = (zoom * mouseY) / height;
+
+var tiling = [1 - zoom, 1 - zoom];
+var offset = [xOffset, yOffset];
+
+myShader.setUniform("tiling", tiling);
+myShader.setUniform("offset", offset);
 ```
 
 {{< /details >}}
 </br>
-{{< details title="actualización de la imagen" open=true >}}
-Con el fin de...
+{{< details title="código de shaders" open=true >}}
+
+Para el vertex shader el único dato relevante es que debemos pasar información sobre las coordenadas de textura `aTexCoord`, que nos permite definir cómo se mapea una imagen en una superficie. Y pasamos este dato al fragment shader como `vTexCoord`. Además, realizamos una operación que nos permite voltear la imagen, ya que si no se hace, la imagen se muestra al revéz.
 
 ```javascript
+attribute vec3 aPosition;
+attribute vec2 aTexCoord;
 
+varying vec2 vTexCoord;
+
+void main() {
+  // flip the coordinates
+  vTexCoord = vec2(aTexCoord.s, 1.0 - aTexCoord.t);
+  ...
+}
 ```
+
+Para el fragment shader tenemos tres secciones importantes:
+
+1. La función `vec4 applyMask2(vec2 vTexCoord)` la cual la operación entre los pixeles de la textura `texture` y la máscara `mask[9]`. El proceso consiste en: primero se hayan los valores de los pixeles que rodean al pixel principal, para esto usamos el parámetro de `texOffset` que nos permite movernos en el espacio de la textura, segundo almacemos estos datos en un array con los valores `rgba` de cada pixel, tercero aplicamos la máscara de convolución con ayuda de un for que recorre ambos arrays mientras opera los valores y almacena la suma en un vector de 4 posiciones `convolution` con el resultado final del color (RGBA) del pixel.
+
+```javascript
+vec4 applyMask(vec2 vTexCoord) {
+  // 1. Use offset to move along texture space.
+  // In this case to find the texcoords of the texel neighbours.
+  vec2 tc0 = vTexCoord + vec2(-texOffset.s, -texOffset.t);
+  ...
+
+  // origin (current fragment texcoords)
+  vec2 tc4 = vTexCoord + vec2(         0.0,          0.0);
+  ...
+  vec2 tc8 = vTexCoord + vec2(+texOffset.s, +texOffset.t);
+
+  // 2. Sample texel neighbours within the rgba array
+  vec4 rgba[9];
+  rgba[0] = texture2D(texture, tc0);
+  ...
+  rgba[8] = texture2D(texture, tc8);
+
+  // 3. Apply convolution kernel
+  vec4 convolution;
+  for (int i = 0; i < 9; i++) {
+    convolution += rgba[i]*mask[i];
+  }
+
+  vec4 color_mask = vec4(convolution.rgb, 1.0);
+  return color_mask;
+}
+```
+
+Se tomó como referencia el código de [image processing](https://visualcomputing.github.io/docs/shaders/image_processing/) con el procedimiento base para una máscara de 3x3. Este procedimiento se adaptó para una máscara de 5x5, la cual se puede detallar en el código completo del fragment shader.
+
+2. Las funciones para aplicar las herramientas de brillo. Estas son `intensity`, `value`, `lightness` y `luma`, cada una recibe como parámetro un vector `texel` de 3 posiciones que corresponden al color RGB del pixel de la textura o texel, luego se realiza la operación correspondiente y se devuelve un valor de tipo _float_.
+
+```javascript
+float intensity(vec3 texel) {
+  return (texel.r + texel.g + texel.b)/3.0;
+}
+
+float value(vec3 texel) {
+  return max(max(texel.r, texel.g), texel.b);
+}
+
+float lightness(vec3 texel) {
+  float mx = max(max(texel.r, texel.g), texel.b);
+  float mn = min(min(texel.r, texel.g), texel.b);
+  return (mx + mn)/2.0;
+}
+
+float luma(vec3 texel) {
+  return 0.299 * texel.r + 0.587 * texel.g + 0.114 * texel.b;
+}
+```
+
+Las fórmulas se tomaron de la sección [Lightness](https://en.wikipedia.org/wiki/HSL_and_HSV#Disadvantages) en la página con es tema de los modelos HSL y HSV.
+
+3. Para las herramientas de detalle tenemos por una lado la de magnificación, para este se usan los parámetros de `tiling` y `offset`, los cuales nos dan información sobre cuanto se debe agrandar la imagen (que corresponde al zoom) y cuando se debe desplazar para compensar en cambio de distancia al agrandar la imagen. Este último se calcula antes de pasar al shader, ya que se necesita el tamaño del canvas para calcular en _offset_ ideal. Con estos valores, simplemente en vez de pasar como parámetro `vTexCoord` a la función `applyMask`, se pasa la coordenada multiplicada por el _tiling_ y sumada con el _offset_.
+
+```javascript
+color_mask = applyMask(vTexCoord * tiling + offset);
+```
+
+Para entender lo anterior se tomó como referencia [Magnifying glass shader](https://gamedevserj.github.io/godot-magnifying-glass-tutorial.html). Por otro lado, tenemos la región de interés, para esta usamos una región circular de radio `radius` definida por el usuario y dada la posición `mousePos`. Para esto usamos la función `distance` para calcular la distancia entre el mouse y el la coordenada del pixel actual, luego restamos el radio y ajustamos el resultado a valores entre 0 y 1. Finalmente, utilizamos la función `mix(x, y, a)` de GLSL que realiza una interpolación lineal entre los pixeles de la textura original _x_ y los pixeles de la textura modificada _y_ utilizando un a peso dado por `mixAmount` _a_ entre ellas, el cual corresponde a la región de interés circular.
+
+```javascript
+// en el main()
+float dist = distance(mousePos, gl_FragCoord.xy);
+float mixAmount = clamp((dist - radius) , 0., 1.);
+...
+gl_FragColor = mix(color_mask, color_normal, mixAmount);
+```
+
+Este fragmento de código fué adaptado de [WebGL shader to color the texture according to mouse position](https://stackoverflow.com/questions/45270803/webgl-shader-to-color-the-texture-according-to-mouse-position).
 
 {{< /details >}}
-</br>
-{{< details title="gráfica de pixeles" open=true >}}
-Cada vez que...
-
-```javascript
-
-```
-
-{{< /details >}}
-
-</div>
-</br>
-{{< details title="Código completo de la implementación del algoritmo de dithering aleatorio" open=false >}}
-
-```javascript
-
-```
-
-{{< /details >}}
-
-<div style='text-align: justify;'>
-
-Para el algoritmo...
-
-```javascript
-
-```
 
 </div>
 
@@ -424,14 +727,15 @@ Para el algoritmo...
 <blockquote>
 
 <div style='text-align: justify;'>
-
+Existen numerosas herramientas para el procesamiento de imágenes. Entre estas algunas de las más conocidas incluyen las máscaras de convolución, que tiene funciones como mejorar la nitidez o detectar los bordes de una imagen. Herramientas de magnificación y región de interés que nos permine ver una sección de la imagen aumentada o aplicar la máscara solo en una parte de la imagen. Herramientas de brillo como la opción de _value_ basada en el modelo HSV que da la imagen más luminosidad en partes donde los colores son más claros/ brillantes o la opción de `luma` que da un mejor balance sobre el brillo de una imagen. Todas estas herramientas nos permiten tener imágenes más vistosas, nítidas, que nos permiten ver detalles que tal vez no se pueden ver en la imagen original. Estas son de gran utilidad en distintos campos como el de la medicina donde las imágenes que se obtienen no son tan claras como las imágenes que se toman con una cámara.
 </div>
 
 ### Trabajo Futuro
 
 <div style='text-align: justify;'>
-
-<p align = "center"><img src = "/showcase/img/ditheringmontage.png" alt="" width="400px"><br>Fig.3 - </p>
+Actualmente, existen muchas más herramientas para el procesamiento de imágen. Aunque se implementaron algunas de las máscaras más conocidas, existe una gran variedad de máscaras de convolución que permiten crear otros efectos que realzan otras características del color en una imagen, por lo cual sería bueno más adelante implementar más opciones de máscara, con matrices de tamaños mayores, y dar la posibilidad al usuario de definir sus propias máscaras. Por otro lado, en cuanto a las herramientas de detalla, sería bueno implementar otros tipos de lupa, además de dar opciones de escoger la forma del ROI, tal vez que el usuario pueda trazar manualmente la zona que desea modificar. Además, dentro de las herramientas de luminosidad existen otros modos que se pueden estudiar, además que la implementación que se realizó da una imagen en escala de grises, por lo que sería bueno investigar un poco más sobre cómo se pueden obtener un resultado para generar imágenes a color de forma que la luminosidad sea más evidente respecto a la imagen original.
+</br>
+<p align = "center"><img src = "/showcase/img/trabajofuturo.png" alt="" width="400px"><br>Fig.6 - más herramientas de procesamiento de imágenes</p>
 </div>
 
 </blockquote>
@@ -439,7 +743,5 @@ Para el algoritmo...
 ## Referencias
 
 1. Wikipedia contributors. "Digital image processing". Tomado de https://en.wikipedia.org/wiki/Digital_image_processing
-2. Bankhead, Pete. "Thresholding". Tomado de https://bioimagebook.github.io/chapters/2-processing/3-thresholding/thresholding.html
-3. Guruprasad, Prathima. "OVERVIEW OF DIFFERENT THRESHOLDING METHODS IN IMAGE PROCESSING". Tomado de https://www.researchgate.net/publication/342038946_OVERVIEW_OF_DIFFERENT_THRESHOLDING_METHODS_IN_IMAGE_PROCESSING
-4. Correia, A. Salgado, P. Blanco, W. "Random Dithering". Tomado de https://www.visgraf.impa.br/Courses/ip00/proj/Dithering1/random_dithering.html
-5. "Dithering". Tomado de https://imagej.net/plugins/dithering
+2. Poweel, Victor. "Image Kernels". Tomado de https://setosa.io/ev/image-kernels/
+3. Charalambos, Jean Pierre. "Procedural Texturing". Tomado de https://visualcomputing.github.io/docs/shaders/procedural_texturing/
