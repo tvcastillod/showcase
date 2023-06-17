@@ -62,7 +62,18 @@ function setup() {
 
 function draw() {
   if (img) {
-    if (currentShader === "woo") { // check currentShader value
+ 
+
+    quant_pg.background(125);
+    quant.setUniform("texture", pg);
+    quant.setUniform("uDivisor", quantization.value());
+    quant_pg.emitResolution(quant);
+    pg = quant_pg;
+    pg.quad(-1, 1, 1, 1, 1, -1, -1, -1);
+
+    
+
+       if (currentShader === "woo") { // check currentShader value
       scaleSlider.show(); // show slider when switching to "woo" shader
       woo_pg.background(125);
       woo.setUniform("texture", img);
@@ -81,14 +92,6 @@ function draw() {
       pg = bright_pg;
       pg.quad(-1, 1, 1, 1, 1, -1, -1, -1);
     }
-
-    quant_pg.background(125);
-    quant.setUniform("texture", pg);
-    quant.setUniform("uDivisor", quantization.value());
-    quant_pg.emitResolution(quant);
-    pg = quant_pg;
-    pg.quad(-1, 1, 1, 1, 1, -1, -1, -1);
-
     image(pg, 0, 0);
   }
 }
