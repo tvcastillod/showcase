@@ -68,19 +68,13 @@ function setup() {
 
 function draw() {
   if (img) {
-    quant_pg.background(125);
-    quant.setUniform("texture", img);
-    quant.setUniform("uDivisor", quantization.value());
-    quant_pg.emitResolution(quant);
-    pg = quant_pg;
-    pg.quad(-1, 1, 1, 1, 1, -1, -1, -1);
     if (currentShader === "woo") {
       // check currentShader value
       scaleSlider.show(); // show slider when switching to "woo" shader
       woo_pg.background(125);
-      woo.setUniform("texture", pg);
+      woo.setUniform("texture", img);
       woo_pg.emitPointerPosition(woo, mouseX, mouseY, "iMouse");
-      woo.setUniform("iChannel0", pg);
+      woo.setUniform("iChannel0", img);
       woo_pg.emitResolution(woo, "iResolution");
       woo.setUniform("radio", distanceThresholdSlider.value());
       woo.setUniform("scale", scaleSlider.value());
@@ -89,11 +83,18 @@ function draw() {
     } else {
       scaleSlider.hide(); // hide slider when switching to "bright" shader
       bright_pg.emitPointerPosition(bright, mouseX, mouseY, "iMouse");
-      bright.setUniform("texture", pg);
+      bright.setUniform("texture", img);
       bright.setUniform("distanceThreshold", distanceThresholdSlider.value());
       pg = bright_pg;
       pg.quad(-1, 1, 1, 1, 1, -1, -1, -1);
     }
+
+    quant_pg.background(125);
+    quant.setUniform("texture", pg);
+    quant.setUniform("uDivisor", quantization.value());
+    quant_pg.emitResolution(quant);
+    pg = quant_pg;
+    pg.quad(-1, 1, 1, 1, 1, -1, -1, -1);
 
     image(pg, 0, 0);
   }
