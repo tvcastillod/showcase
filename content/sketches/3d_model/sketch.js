@@ -4,6 +4,9 @@ let floorImg;
 let roofImg;
 let wallImg;
 let nasalizationFont;
+let controlsHud = true;
+let lastUpdate = 0;
+let fps = 0;
 
 let camera;
 
@@ -18,9 +21,9 @@ function preload() {
 
 function setup() {
   rectMode(CORNER);
-  createCanvas(800, 800, WEBGL);
+  createCanvas(1200, 800, WEBGL);
   textFont(nasalizationFont);
-  textureMode(REPEAT); // set texture mode to repeat
+  textSize(5);
 
   // create walls
   walls.push(new Wall(createVector(0, 0, 0), 3200, 600, 0, 0, wallImg));
@@ -39,7 +42,7 @@ function setup() {
 }
 
 function draw() {
-
+  lastUpdate++;
   
   for (let i = 0; i < walls.length; i++) {
     walls[i].display();
@@ -81,11 +84,46 @@ function draw() {
   rotateZ(PI)
   fill(0)
   push()
-    translate(-125, -65, 0)
-    text("HEALTH", 0, 0)
-  pop()
-  translate(125, -70, 0)
-  text("100", 0, 0)
+    translate(-170, -100, 0)
+
+    if(controlsHud){
+    // triangles indicating direction keys awsd
+    triangle(5, 5, 10, 10, 10, 0)
+    text("A", 0, 6)
+    triangle(10, 0, 15, -5, 20, 0)
+    text("W", 12.5, -6)
+    triangle(10, 10, 15, 15, 20, 10)
+    text("S", 13.5, 20)
+    triangle(20, 10, 25, 5, 20, 0)
+    text("D", 26, 6)
+
+    // text indicating arrow keys
+    text("Use arrow keys to rotate", 40, 0)
+    } else {
+      // text framerate
+        if (lastUpdate > 30) {
+            fps = frameRate().toFixed(2);
+            lastUpdate = 0;
+        }
+        text("Framerate: " + fps, 40, 0);
+
+      // text camera position
+
+      
+      text("Camera position: ", 0, -10);
+      text("x: " + camera.eyeX.toFixed(2), 0, 0);
+      text("y: " + camera.eyeY.toFixed(2), 0, 10);
+      text("z: " + camera.eyeZ.toFixed(2), 0, 20);
+      }
+        
+    let watchOption = controlsHud ? "scene statistics" : "controls";
+
+    // message to change hud mode
+    text("Press 'h' to see " + watchOption, 40, 10)
+    
+    
+
+  pop();
 }
 
 
@@ -115,6 +153,13 @@ class Wall {
     box(this.width, this.height, 20);
     pop();
   }
+}
+
+function keyReleased() {
+  if (keyCode === 72) {
+    controlsHud = !controlsHud;
+  }
+  return false; // prevent any default behavior
 }
 
 
