@@ -45,11 +45,14 @@ function setup() {
   // create walls
   walls.push(new Wall(createVector(0, 0, 0), 3200, 600, 0, 0, wallImg));
   walls.push(new Wall(createVector(0, 0, 1200), 3200, 600, 0, 0, wallImg));
-  walls.push(new Wall(createVector(1600, 0, 600), 1200, 600, PI / 2, 0, wallImg));
-  walls.push(new Wall(createVector(-1600, 0, 600), 1200, 600, PI / 2, 0, wallImg));
+  walls.push(new Wall(createVector(1600, 0, 600), 1200, 1300, PI / 2, 0, wallImg));
+  walls.push(new Wall(createVector(-1600, 0, 600), 1200, 1300, PI / 2, 0, wallImg));
 
   // create roof
-  walls.push(new Wall(createVector(0, -300, 600), 3200, 1200, 0, PI / 2, roofImg));
+  walls.push(new Wall(createVector(0, -500, 850), 3200, 800, 0, PI / 3, roofImg));
+  walls.push(new Wall(createVector(0, -500, 350), 3200, 800, 0, -(PI / 3), roofImg));
+  
+
 
   // create floor
   walls.push(new Wall(createVector(0, 300, 600), 3200, 1200, 0, PI / 2, floorImg));
