@@ -410,8 +410,8 @@ function movementControl() {
 function drawOrbitingEspheres(){
  
   sphereSegments = dist(camera.eyeX, camera.eyeY, camera.eyeZ, 0, 0, 1000) < 700 ? 3 : 32;
-  pointLight(0, 0, 30, 0, 300, 1000);
-  pointLight(0, 0, 30, 0, -300, 1000);
+  pointLight(0, 0, 40, 0, 300, 1000);
+  pointLight(0, 0, 40, 0, -300, 1000);
   
   //draw the orbiting espheres
   push();
@@ -539,6 +539,4 @@ function drawOrbitingOrbitingSpheres(){
   rotateX(millis() / 1000);
   sphere(5, 16, sphereSegments);
   pop();
-  
-
 }
