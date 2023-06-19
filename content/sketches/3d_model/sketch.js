@@ -7,6 +7,9 @@ let nasalizationFont;
 let controlsHud = true;
 let lastUpdate = 0;
 let fps = 0;
+let bend = false;
+let bendImage;
+let standImage;
 
 let camera;
 
@@ -16,6 +19,8 @@ function preload() {
   roofImg = loadImage("/showcase/sketches/3d_model/roof.jpg");
   wallImg = loadImage("/showcase/sketches/3d_model/wall.jpg");
   nasalizationFont = loadFont("/showcase/sketches/3d_model/nasalization-rg.otf");
+  bendImage = loadImage("/showcase/sketches/3d_model/bend.png");
+  standImage = loadImage("/showcase/sketches/3d_model/stand.png");
 }
 
 
@@ -24,6 +29,14 @@ function setup() {
   createCanvas(1200, 800, WEBGL);
   textFont(nasalizationFont);
   textSize(5);
+
+  // prevent scrolling with arrow keys
+  window.addEventListener("keydown", function(e) {
+    // space and arrow keys
+    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+      e.preventDefault();
+    }
+  }, false);
 
   // create walls
   walls.push(new Wall(createVector(0, 0, 0), 3200, 600, 0, 0, wallImg));
@@ -98,7 +111,7 @@ function draw() {
     text("D", 26, 6)
 
     // text indicating arrow keys
-    text("Use arrow keys to rotate", 40, 0)
+    text("Use arrow keys to rotate or crouch/stand", 40, 0)
     } else {
       // text framerate
         if (lastUpdate > 30) {
@@ -121,7 +134,11 @@ function draw() {
     // message to change hud mode
     text("Press 'h' to see " + watchOption, 40, 10)
     
-    
+    if(bend){
+      image(bendImage, 325, 200, 10, 10);
+    } else {
+      image(standImage, 325, 200, 10, 10);
+    }
 
   pop();
 }
@@ -156,9 +173,28 @@ class Wall {
 }
 
 function keyReleased() {
+  //hud control
   if (keyCode === 72) {
     controlsHud = !controlsHud;
   }
+
+  //crouch camera with down arrow
+  if (keyCode === DOWN_ARROW) {
+    if(!bend){
+      camera.move(0, 100, 0);
+      bend = true;
+    }
+  }
+
+  // stand with up arrow
+  if (keyCode === UP_ARROW) {
+    if(bend){
+      camera.move(0, -100, 0);
+      bend = false;
+    }
+  }
+ 
+
   return false; // prevent any default behavior
 }
 
