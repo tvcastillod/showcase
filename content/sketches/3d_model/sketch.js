@@ -12,6 +12,10 @@ let bendImage;
 let standImage;
 
 let camera;
+let initialY;
+let jumping = false;
+let jumpHeight = -100;
+let jumpDirection = 1;
 
 function preload() {
   // load images
@@ -52,6 +56,7 @@ function setup() {
   
   //camera = createCamera();
   camera = createCamera();
+  initialY = camera.eyeY;
 }
 
 function draw() {
@@ -83,6 +88,25 @@ function draw() {
   if (keyIsDown(RIGHT_ARROW)) {
     camera.pan(-0.1);
   }
+
+  // decrease y position if jumping and not at less than -100
+  if (jumping && camera.eyeY > -100 && jumpDirection == 1) {
+    camera.move(0, -10, 0);
+  }  else if (jumping && camera.eyeY < initialY && jumpDirection == -1) {
+    camera.move(0, 10, 0);
+  } 
+
+  // change jump direction if at max or min height
+  if (camera.eyeY <= -100) {
+    jumpDirection = -1;
+  }
+
+  // change jump to false if at initial height
+  if (camera.eyeY == 0) {
+    jumping = false;
+    jumpDirection = 1;
+  }
+
 
 
   // tomado de: https://editor.p5js.org/rjgilmour/sketches/DKDWmmvrm
@@ -143,7 +167,37 @@ function draw() {
   pop();
 }
 
+function keyReleased() {
+  //hud control
+  if (keyCode === 72) {
+    controlsHud = !controlsHud;
+  }
 
+  //crouch camera with down arrow
+  if (keyCode === DOWN_ARROW) {
+    if(!bend){
+      camera.move(0, 100, 0);
+      bend = true;
+    }
+  }
+
+  // stand with up arrow
+  if (keyCode === UP_ARROW) {
+    if(bend){
+      camera.move(0, -100, 0);
+      bend = false;
+    }
+  }
+  
+  // jump with spacebar
+  if (keyCode === 32) {
+    if (!bend && !jumping) {
+      jumping = true;
+    }
+  }
+
+  return false; // prevent any default behavior
+}
 
 class Wall {
   constructor(pos, width, height, Ydirection, Xdirection=0, img=null, [r, g, b] = [200, 200, 200]) {
@@ -171,32 +225,3 @@ class Wall {
     pop();
   }
 }
-
-function keyReleased() {
-  //hud control
-  if (keyCode === 72) {
-    controlsHud = !controlsHud;
-  }
-
-  //crouch camera with down arrow
-  if (keyCode === DOWN_ARROW) {
-    if(!bend){
-      camera.move(0, 100, 0);
-      bend = true;
-    }
-  }
-
-  // stand with up arrow
-  if (keyCode === UP_ARROW) {
-    if(bend){
-      camera.move(0, -100, 0);
-      bend = false;
-    }
-  }
- 
-
-  return false; // prevent any default behavior
-}
-
-
-
