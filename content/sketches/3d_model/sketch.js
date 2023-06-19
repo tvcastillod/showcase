@@ -25,6 +25,8 @@ let blackBedModel;
 let woolTexture;
 let windowModel;
 let monitorModel;
+let starsTexture;
+let sphereSegments = 20;
 
 function preload() {
   // load images
@@ -48,6 +50,8 @@ function preload() {
   woolTexture = loadImage("/showcase/sketches/3d_model/wool.jpg");
   windowModel = loadModel("/showcase/sketches/3d_model/window.obj", true);
   monitorModel = loadModel("/showcase/sketches/3d_model/monitor.obj", true);
+  starsTexture = loadImage("/showcase/sketches/3d_model/stars.jpg");
+
 }
 
 function setup() {
@@ -85,6 +89,8 @@ function draw() {
   pointLight(255, 255, 255, 1300, -400, 600);
   pointLight(255, 255, 255, -1300, -400, 600);
 
+  drawOrbitingEspheres();
+
   drawModels();
 
   for (let i = 0; i < walls.length; i++) {
@@ -94,6 +100,7 @@ function draw() {
   movementControl();
 
   drawHud();
+
 }
 
 function keyReleased() {
@@ -398,4 +405,140 @@ function movementControl() {
     jumping = false;
     jumpDirection = 1;
   }
+}
+
+function drawOrbitingEspheres(){
+ 
+  sphereSegments = dist(camera.eyeX, camera.eyeY, camera.eyeZ, 0, 0, 1000) < 700 ? 3 : 32;
+  pointLight(0, 0, 30, 0, 300, 1000);
+  pointLight(0, 0, 30, 0, -300, 1000);
+  
+  //draw the orbiting espheres
+  push();
+  noStroke();
+  translate(0, 0, 1000);
+  pointLight(0, 0, 150, 0, 0, 0);
+  texture(starsTexture);
+  
+  rotateY(millis() / 1000);
+  sphere(100, 16, sphereSegments);
+
+  //spheres rotating around the other
+  push();
+  translate(0, 0, 150);
+  rotateX(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  push();
+  translate(0, 0, 150);
+  rotateY(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  push();
+  translate(0, 0, -150);
+  rotateY(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  push();
+  translate(0, 0, -150);
+  rotateX(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  ///
+
+  push();
+  translate(0, 150, 0);
+  rotateX(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  push();
+  translate(0, 150, 0);
+  rotateY(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  push();
+  translate(0, -150, 0);
+  rotateY(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  push();
+  translate(0, -150, 0);
+  rotateX(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  ///
+
+   push();
+  translate(150, 0, 0);
+  rotateX(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  push();
+  translate(150, 0, 0);
+  rotateY(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  push();
+  translate(-150, 0, 0);
+  rotateY(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  push();
+  translate(-150, 0, 0);
+  rotateX(millis() / 1000);
+  sphere(20, 16, sphereSegments);
+  drawOrbitingOrbitingSpheres();
+  pop();
+
+  pop();
+}
+
+function drawOrbitingOrbitingSpheres(){
+  push();
+  translate(0, 0, -30);
+  rotateX(millis() / 1000);
+  sphere(5, 16, sphereSegments);
+  pop();
+
+  push();
+  translate(0, 0, 30);
+  rotateX(millis() / 1000);
+  sphere(5, 16, sphereSegments);
+  pop();
+
+  push();
+  translate(0, 30, 0);
+  rotateX(millis() / 1000);
+  sphere(5, 16, sphereSegments);
+  pop();
+
+  push();
+  translate(0, -30, 0);
+  rotateX(millis() / 1000);
+  sphere(5, 16, sphereSegments);
+  pop();
+  
+
 }
