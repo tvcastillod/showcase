@@ -1,12 +1,11 @@
 let ball;
 let walls = [];
-let camera;
 let floorImg;
 let roofImg;
 let wallImg;
 let nasalizationFont;
 
-let easycam;
+let camera;
 
 function preload() {
   // load images
@@ -36,15 +35,7 @@ function setup() {
   walls.push(new Wall(createVector(0, 300, 600), 3200, 1200, 0, PI / 2, floorImg));
   
   //camera = createCamera();
-  easycam = createEasyCam();
-   easycam.setState({
-      distance: 300, 
-      center:   [0, 0, 500],     
-      rotation: [0, 0, 100, 0]
-    }
-  );
-  initHud = createGraphics(width, height);  
- 
+  camera = createCamera();
 }
 
 function draw() {
@@ -54,52 +45,47 @@ function draw() {
     walls[i].display();
   }
 
-  beginHUD();
-  // clear background
-  initHud.clear();
-  // draw hud
-  initHud.background(0, 0, 0, 0);
-  initHud.fill(255);
-  initHud.textSize(20);
-
-  //instructions
-  initHud.text("Use WASD to move and arrow keys to rotate", 10, 20);
-
-  //camera position
-  let centerShow = easycam.getCenter().map(coord => coord.toFixed(3));
-  initHud.text("Camera position: " + centerShow[0] + ", " + centerShow[1] + ", " + centerShow[2], 10, 40);
-  
-  image(initHud, 0, 0);
-  endHUD();
-
-  let state = easycam.getState();
-  let center = easycam.getCenter();
-  let rotation = easycam.getRotation();
   // move person with awsd
   if (keyIsDown(65)) {
-    easycam.panX(-10);
+    camera.move(-10, 0, 0);
   }
   if (keyIsDown(68)) {
-    easycam.panX(10);
+    camera.move(10, 0, 0);
   }
   if (keyIsDown(87)) {
-    easycam.zoom(-10);
-    let newCenter = [center[0], center[1], center[2] + 10]
-    easycam.setCenter(newCenter, 0.1);
+    camera.move(0, 0, -10);
+  }
+  if (keyIsDown(83)) {
+    camera.move(0, 0, 10);
   }
 
-  if (keyIsDown(83)) {
-    easycam.zoom(10);
-  }
 
   // rotate person with arrow keys
   if (keyIsDown(LEFT_ARROW)) {
-    easycam.rotateY(0.1);
+    camera.pan(0.1);
   }
   if (keyIsDown(RIGHT_ARROW)) {
-    easycam.rotateY(-0.1);
+    camera.pan(-0.1);
   }
-  translate(center[0], center[1], center[2]);
+
+
+  // tomado de: https://editor.p5js.org/rjgilmour/sketches/DKDWmmvrm
+  let pan = atan2(camera.eyeZ - camera.centerZ, camera.eyeX - camera.centerX)
+  let tilt = atan2(camera.eyeY - camera.centerY, dist(camera.centerX, camera.centerZ, camera.eyeX, camera.eyeZ))
+  
+  translate(camera.eyeX, camera.eyeY, camera.eyeZ)
+  rotateY(-pan)
+  rotateZ(tilt + PI)
+  translate(200, 0, 0)
+  rotateY(-PI/2)
+  rotateZ(PI)
+  fill(0)
+  push()
+    translate(-125, -65, 0)
+    text("HEALTH", 0, 0)
+  pop()
+  translate(125, -70, 0)
+  text("100", 0, 0)
 }
 
 
