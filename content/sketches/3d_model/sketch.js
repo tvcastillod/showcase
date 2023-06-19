@@ -16,6 +16,15 @@ let initialY;
 let jumping = false;
 let jumpHeight = -100;
 let jumpDirection = 1;
+let lampModel;
+let glassBaseTexture;
+let basicDooorModel; 
+let doorTexture; 
+let deskModel;
+let blackBedModel;
+let woolTexture;
+let windowModel;
+let monitorModel;
 
 function preload() {
   // load images
@@ -25,6 +34,15 @@ function preload() {
   nasalizationFont = loadFont("/showcase/sketches/3d_model/nasalization-rg.otf");
   bendImage = loadImage("/showcase/sketches/3d_model/bend.png");
   standImage = loadImage("/showcase/sketches/3d_model/stand.png");
+  lampModel = loadModel("/showcase/sketches/3d_model/lamp.obj", true);
+  glassBaseTexture = loadImage("/showcase/sketches/3d_model/glass_base.jpg");
+  basicDooorModel = loadModel("/showcase/sketches/3d_model/basic_door.obj", true);
+  doorTexture = loadImage("/showcase/sketches/3d_model/door_texture.jpg");
+  deskModel = loadModel("/showcase/sketches/3d_model/desk.obj", true);
+  blackBedModel = loadModel("/showcase/sketches/3d_model/black_bed.obj", true);
+  woolTexture = loadImage("/showcase/sketches/3d_model/wool.jpg");
+  windowModel = loadModel("/showcase/sketches/3d_model/window.obj", true);
+  monitorModel = loadModel("/showcase/sketches/3d_model/monitor.obj", true);
 }
 
 
@@ -63,15 +81,123 @@ function setup() {
 }
 
 function draw() {
+  // free camera orbit
+  //orbitControl();
+
   lastUpdate++;
   
   //pointLight in side walls position
-  pointLight(255, 255, 255, 1400, -400, 600);
-  pointLight(255, 255, 255, -1400, -400, 600);
+  pointLight(255, 255, 255, 1300, -400, 600);
+  pointLight(255, 255, 255, -1300, -400, 600);
 
-  
+  push();
+  //translate to light position to put the lamp
+  translate(1510, -400, 600);
+  //rotate the lamp
+  rotateY(-PI/2);
+  noStroke();
+  texture(glassBaseTexture);
+  model(lampModel);
+  pop();
+
+  push();
+  //translate to light position to put the lamp
+  translate(-1510, -400, 600);
+  //rotate the lamp
+  rotateY(PI/2);
+  noStroke();
+  texture(glassBaseTexture);
+  model(lampModel);
+  pop();
+
+ //draw the door
+  push();
+  translate(0, 85, 10);
+  rotateY(PI/2);
+  rotateX(PI);
+  noStroke();
+  texture(doorTexture);
+  scale(2.5)
+  model(basicDooorModel);
+  pop();
+
+  //draw the desk
+  push();
+  translate(1320, 180, 420);
+  rotateY(PI/2);
+  rotateX(PI);
+  noStroke();
+  texture(doorTexture);
+  scale(4)
+  model(deskModel);
+
+  //draw the monitor
+  push();
+  translate(0, 45, -40);
+  rotateY(-PI/2);
+  //rotateX(PI/4);
+  noStroke();
+  fill('black');
+  scale(0.3)
+  model(monitorModel);
+  pop();
+
+  pop();
+
+  //draw the bed
+  push();
+  translate(-1200, 140, 800);
+  rotateX(PI);
+  noStroke();
+  texture(woolTexture);
+  scale(4)
+  model(blackBedModel);
+  pop();
+
+  //draw the windows 
+  push();
+  translate(600, 0, 25);
+  rotateY(-PI/2);
+  rotateX(PI);
+  noStroke();
+  texture(doorTexture);
+  scale(2)
+  model(windowModel);
+  pop();
+
+  push();
+  translate(-600, 0, 25);
+  rotateY(-PI/2);
+  rotateX(PI);
+  noStroke();
+  texture(doorTexture);
+  scale(2)
+  model(windowModel);
+  pop();
+
+  push();
+  translate(-600, 0, 1175);
+  rotateY(PI/2);
+  rotateX(PI);
+  noStroke();
+  texture(doorTexture);
+  scale(2)
+  model(windowModel);
+  pop();
+
+  push();
+  translate(600, 0, 1175);
+  rotateY(PI/2);
+  rotateX(PI);
+  noStroke();
+  texture(doorTexture);
+  scale(2)
+  model(windowModel);
+  pop();
+
 
  
+
 
 
   for (let i = 0; i < walls.length; i++) {
@@ -134,7 +260,7 @@ function draw() {
   fill(0)
   push()
     translate(-170, -100, 0)
-
+    fill(255)
     if(controlsHud){
     // triangles indicating direction keys awsd
     triangle(5, 5, 10, 10, 10, 0)
@@ -234,6 +360,7 @@ class Wall {
       fill(this.r, this.g, this.b, 255);
     }
     box(this.width, this.height, 20);
+    //clear();
     pop();
   }
 }
