@@ -65,6 +65,15 @@ function setup() {
 function draw() {
   lastUpdate++;
   
+  //pointLight in side walls position
+  pointLight(255, 255, 255, 1400, -400, 600);
+  pointLight(255, 255, 255, -1400, -400, 600);
+
+  
+
+ 
+
+
   for (let i = 0; i < walls.length; i++) {
     walls[i].display();
   }
