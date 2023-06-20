@@ -80,6 +80,7 @@ A lo largo de esta experimentación  se aprendieron muchas cosas interesantes de
 Se explotaron diferentes técnicas como el ruido fractal, el mapeo de colores y el uso de patrones Truchet.Cada técnica  ofrece una amplia gama de posibilidades para desarrollar la creatividad en campos de videojuegos, la animación y la simulación y cada técnica tiene sus características propias y efectos visuales diferentes 
 <br>
 Finalmente se tiene la interacción con el usuario gracias al uso de shaders que permite pasar datos de javascript a .frag para dinamizar y generar una experiencia más participativa mediante el uso de algoritmos que a diferencia del trabajo anterior, en ilusiones visuales, se usa la GPU para agilizar los cálculos y generar figuras dinámicas 
+</blockquote>
 
 ## Referencias
 1. https://visualcomputing.github.io/docs/shaders/procedural_texturing/
