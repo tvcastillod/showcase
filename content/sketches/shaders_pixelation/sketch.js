@@ -1,7 +1,7 @@
 let image_src;
 let video_src;
 let mosaic;
-// ui
+
 let resolution;
 let video_on;
 let mode;
@@ -9,9 +9,6 @@ let font;
 let fps;
 
 function preload() {
-  // paintings are stored locally in the /sketches/shaders/paintings dir
-  // and named sequentially as: p1.jpg, p2.jpg, ... p30.jpg
-  // so we pick up one randomly just for fun:
   image_src = loadImage("/showcase/sketches/shaders_pixelation/peinture.jpg");
   video_src = createVideo(["/showcase/sketches/shaders_pixelation/wagon.webm"]);
   video_src.hide();

@@ -31,6 +31,13 @@ Además, se han desarrollado otros algoritmos y técnicas para generar texturas 
 <br>
 
 ## Ejercicio 
+{{< hint info >}}
+
+<p style='text-align: justify;'>
+Adaptar otros patrones del libro de shader y mapear las texturas en diferentes figuras 3D.
+</p>
+
+{{< /hint >}}
 ## Resultados
 ### Ejercicio 1
 
@@ -74,5 +81,8 @@ Se explotaron diferentes técnicas como el ruido fractal, el mapeo de colores y 
 <br>
 Finalmente se tiene la interacción con el usuario gracias al uso de shaders que permite pasar datos de javascript a .frag para dinamizar y generar una experiencia más participativa mediante el uso de algoritmos que a diferencia del trabajo anterior, en ilusiones visuales, se usa la GPU para agilizar los cálculos y generar figuras dinámicas 
 
-
-
+## Referencias
+1. https://visualcomputing.github.io/docs/shaders/procedural_texturing/
+2. https://thebookofshaders.com/09/
+3. https://www.shadertoy.com
+ 4. https://www.youtube.com/watch?v=TaluaAD9MKA

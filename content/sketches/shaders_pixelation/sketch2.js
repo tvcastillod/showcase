@@ -14,6 +14,7 @@ function preload() {
 
     video = createVideo(["/showcase/sketches/shaders_pixelation/wagon.webm"]);
     video.hide();
+    video.loop();
 }
 
 function setup() {
@@ -27,14 +28,24 @@ function setup() {
     slider = createSlider(1, 50, 10);
     slider.position(10, 30);
     slider.style('width', '80px');
+    //quitarle el sonido al video
+    video.volume(0);
 }
 
 function draw() {
     background(255);
     pixelSize = slider.value();
+    useVideo = checkbox.checked();
     if (useVideo) {
-        img(video.get())
+        //mostrar el video
+        image(video, 0, 0, width, height);
+        img =
+        video.get();
+        Pixelar(img);
+        
     } else {
+        img= img.get();
+        image(img, 0, 0, width, height);
         img.loadPixels();
         Pixelar(img);
     }
